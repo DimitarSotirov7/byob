@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { FireService } from '../services/fire.service';
+import { Router } from '@angular/router';
+import { IQuizModel } from '../interfaces/quiz-model';
+import { QuizService } from '../services/quiz/quiz.service';
 
 @Component({
   selector: 'app-home',
@@ -8,11 +10,19 @@ import { FireService } from '../services/fire.service';
 })
 export class HomeComponent {
 
-  categories: any = [];
+  quizzes: IQuizModel[] = [];
 
-  constructor(private fireService: FireService) {
-    this.fireService.getCategories().get().subscribe(res => {
-      this.categories = res.docs.map(c => c.data());
+  constructor(private quizService: QuizService, private router: Router) {
+    this.getQuizzes();
+  }
+
+  getQuizzes() {
+    this.quizService.getAll().get().subscribe(res => {
+      this.quizzes = res.docs.map(c => ({ ...c.data(), id: c.id })) as IQuizModel[];
     });
+  }
+
+  openQuiz(id: string) {
+    this.router.navigate(['/quiz', id]);
   }
 }

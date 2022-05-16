@@ -1,3 +1,6 @@
-<div *ngFor="let category of categories">
-    <div>{{category.name}}</div>
+<div *ngFor="let quiz of quizzes">
+    <div routerLink="/quiz/{{quiz.id}}">
+        <div>{{quiz.name}}</div>
+        <div>{{quiz.categoryId}}</div>
+    </div>
 </div>

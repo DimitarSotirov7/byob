@@ -6,21 +6,29 @@ import { AppComponent } from './app.component';
 
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from 'src/environments/environment';
-import { FireService } from './services/fire.service';
 import { HomeComponent } from './home/home.component';
+import { CategoryService } from './services/category/category.service';
+import { CategoryComponent } from './category/category.component';
+import { CoreModule } from './core/core.module';
+import { QuizComponent } from './quiz/quiz.component';
+import { QuizService } from './services/quiz/quiz.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    CategoryComponent,
+    QuizComponent,
   ],
   imports: [
+    CoreModule,
     BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase.config),
   ],
   providers: [
-    FireService,
+    CategoryService,
+    QuizService,
   ],
   bootstrap: [AppComponent]
 })
