@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { getDatabase } from 'firebase/database';
+import { Component } from '@angular/core';
 import { FireService } from '../services/fire.service';
 
 @Component({
@@ -9,9 +8,11 @@ import { FireService } from '../services/fire.service';
 })
 export class HomeComponent {
 
-  database = getDatabase();
+  categories: any = [];
 
   constructor(private fireService: FireService) {
+    this.fireService.getCategories().get().subscribe(res => {
+      this.categories = res.docs.map(c => c.data());
+    });
   }
-
 }

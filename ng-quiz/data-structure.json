@@ -1,0 +1,16 @@
+data: {
+	categories: [
+		{ id: 1, name:'movie'},
+		{ id: 2, name:'football' },
+	],
+	questions: [
+		{ id: 1, content: 'test', categorieId: 1, answers: [] },
+		{ id: 2, content: 'test2', categorieId: 2 },
+	],
+	answers: [
+		{ id: 1, content: 'demo', questionId: 1 },
+		{ id: 2, content: 'demo2', questionId: 1 },
+		{ id: 3, content: 'demo3', questionId: 1 },
+		{ id: 4, content: 'demo4', questionId: 1 },
+	],
+}

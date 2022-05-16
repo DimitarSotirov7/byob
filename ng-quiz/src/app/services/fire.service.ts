@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -8,12 +8,12 @@ import { environment } from 'src/environments/environment';
 export class FireService {
 
   url: string = environment.firebase.dbUrl;
+  
+  categoriesColl: string = 'categories';
 
-  constructor(private database: AngularFirestore) { }
+  constructor(private firestore: AngularFirestore) { }
 
-  get(coll: string) {
-    fetch(this.url).then(res => res.json).then(data => {
-      console.log(data)
-    });
+  getCategories(): AngularFirestoreCollection {
+    return this.firestore.collection(this.categoriesColl);
   }
 }
