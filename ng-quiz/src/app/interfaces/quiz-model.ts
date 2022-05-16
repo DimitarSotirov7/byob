@@ -1,6 +1,8 @@
+import { IQuestionModel } from "./question-model";
+
 export interface  IQuizModel {
     id: string,
     name: string,
-    categoryId: string,
-    questions: string[],
+    category: string,
+    questions: IQuestionModel[],
 }

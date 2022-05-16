@@ -15,8 +15,8 @@ export class CategoryService {
     return this.firestore.collection(this.categoriesColl);
   }
 
-  get(doc: string): AngularFirestoreDocument {
-    return this.firestore.collection(this.categoriesColl).doc(doc);
+  get(doc: string): Observable<any> {
+    return this.firestore.collection(this.categoriesColl).doc(doc).get();
   }
 
   add(data: any): void {

@@ -12,6 +12,7 @@ import { CategoryComponent } from './category/category.component';
 import { CoreModule } from './core/core.module';
 import { QuizComponent } from './quiz/quiz.component';
 import { QuizService } from './services/quiz/quiz.service';
+import { QuestionService } from './services/question/question.service';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { QuizService } from './services/quiz/quiz.service';
   providers: [
     CategoryService,
     QuizService,
+    QuestionService,
   ],
   bootstrap: [AppComponent]
 })

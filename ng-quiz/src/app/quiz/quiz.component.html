@@ -1,1 +1,11 @@
-<p>quiz works!</p>
+<div>
+    <div>{{quiz.name}}</div>
+    <div>{{quiz.category}}</div>
+
+    <div>Question 1</div>
+
+    <div>{{currQuestion?.text}}</div>
+    <div *ngFor="let answer of currQuestion?.answers">
+        <div>{{answer.text}}</div>
+    </div>
+</div>
