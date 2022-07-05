@@ -3,8 +3,15 @@
         {{question?.text}}
     </header>
     <section>
-        <div *ngFor="let answer of question.answers">
-            {{answer?.text}}
-        </div>
+        <form #f="ngForm">
+            <div *ngFor="let answer of question.answers">
+                <input type="checkbox" [name]="answer.id" ngModel>
+                <span>{{answer?.text}}</span>
+            </div>
+            <div>
+                <button (click)="previous(f.value)" [disabled]="f.invalid">Previous</button>
+                <button (click)="next(f.value)" [disabled]="f.invalid">Next</button>
+            </div>
+        </form>
     </section>
 </div>

@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { IAnswerModel } from '../interfaces/answer-model';
 import { IQuestionModel } from '../interfaces/question-model';
 
 @Component({
@@ -12,5 +13,13 @@ export class QuestionComponent {
 
   constructor() {
     this.question = {} as IQuestionModel;
+  }
+
+  next(answer: IAnswerModel) {
+    console.log(answer)
+  }
+
+  previous(answer: IAnswerModel) {
+    console.log(answer)
   }
 }

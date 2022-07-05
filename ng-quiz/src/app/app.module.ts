@@ -14,6 +14,7 @@ import { QuizComponent } from './quiz/quiz.component';
 import { QuizService } from './services/quiz/quiz.service';
 import { QuestionService } from './services/question/question.service';
 import { QuestionComponent } from './question/question.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { QuestionComponent } from './question/question.component';
     CoreModule,
     BrowserModule,
     AppRoutingModule,
-    AngularFireModule.initializeApp(environment.firebase.config)
+    AngularFireModule.initializeApp(environment.firebase.config),
+    FormsModule
   ],
   exports: [
     QuestionComponent
