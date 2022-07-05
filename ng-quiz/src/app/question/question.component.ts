@@ -22,4 +22,9 @@ export class QuestionComponent {
   previous(answer: IAnswerModel) {
     console.log(answer)
   }
+
+  select(answer: IAnswerModel) {
+    this.question.selected = answer;
+    console.log(this.question)
+  }
 }

@@ -1,17 +1,14 @@
-<div class="container">
-    <header>
-        {{question?.text}}
-    </header>
-    <section>
-        <form #f="ngForm">
-            <div *ngFor="let answer of question.answers">
-                <input type="checkbox" [name]="answer.id" ngModel>
-                <span>{{answer?.text}}</span>
-            </div>
-            <div>
-                <button (click)="previous(f.value)" [disabled]="f.invalid">Previous</button>
-                <button (click)="next(f.value)" [disabled]="f.invalid">Next</button>
-            </div>
-        </form>
-    </section>
-</div>
+<header>
+    {{question?.text}}
+</header>
+<section>
+    <form #f="ngForm">
+        <div *ngFor="let answer of question.answers">
+            <div [ngClass]="{'my_class': question.selected?.id === answer.id}" class="answer" (click)="select(answer)">{{answer?.text}}</div>
+        </div>
+        <div>
+            <button (click)="previous(f.value)" [disabled]="f.invalid">Previous</button>
+            <button (click)="next(f.value)" [disabled]="f.invalid">Next</button>
+        </div>
+    </form>
+</section>
