@@ -15,11 +15,11 @@ export class QuizComponent {
 
   id: string = this.route.snapshot.params.id;
   quiz: IQuizModel;
-  currQuestion: IQuestionModel | undefined;
+  currQuestion: IQuestionModel;
 
   constructor(private route: ActivatedRoute, private quizService: QuizService, private categoryService: CategoryService, private questionService: QuestionService) { 
     this.quiz = {} as IQuizModel;
-    this.currQuestion = undefined;
+    this.currQuestion = {} as IQuestionModel;
     this.load();
   }
 

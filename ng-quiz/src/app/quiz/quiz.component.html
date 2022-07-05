@@ -4,8 +4,5 @@
 
     <div>Question 1</div>
 
-    <div>{{currQuestion?.text}}</div>
-    <div *ngFor="let answer of currQuestion?.answers">
-        <div>{{answer.text}}</div>
-    </div>
+    <app-question [input]="currQuestion"></app-question>
 </div>

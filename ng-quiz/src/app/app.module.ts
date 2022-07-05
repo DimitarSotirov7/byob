@@ -29,6 +29,9 @@ import { QuestionComponent } from './question/question.component';
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase.config),
   ],
+  exports: [
+    QuestionComponent
+  ],
   providers: [
     CategoryService,
     QuizService,
