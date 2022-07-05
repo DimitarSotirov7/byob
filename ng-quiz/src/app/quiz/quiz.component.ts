@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IQuestionModel } from '../interfaces/question-model';
+import { IAnswerModel } from '../interfaces/answer-model';
 import { IQuizModel } from '../interfaces/quiz-model';
 import { CategoryService } from '../services/category/category.service';
 import { QuestionService } from '../services/question/question.service';
@@ -15,9 +16,9 @@ export class QuizComponent {
 
   id: string = this.route.snapshot.params.id;
   quiz: IQuizModel;
-  currQuestion: IQuestionModel;
+  @Output() currQuestion: IQuestionModel;
 
-  constructor(private route: ActivatedRoute, private quizService: QuizService, private categoryService: CategoryService, private questionService: QuestionService) { 
+  constructor(private route: ActivatedRoute, private quizService: QuizService, private categoryService: CategoryService, private questionService: QuestionService) {
     this.quiz = {} as IQuizModel;
     this.currQuestion = {} as IQuestionModel;
     this.load();
@@ -34,6 +35,24 @@ export class QuizComponent {
       if (res.data()?.questions) {
         this.questionService.get(res.data()?.questions[0]).subscribe(res => {
           this.currQuestion = res.data();
+
+          const answers = res.data().answers;
+          const correct = res.data().correct;
+          this.questionService.getAnswers().get().subscribe(res => {
+            this.currQuestion.answers = res.docs.filter(a => answers.includes(a.id)).map(a => {
+              return {
+                id: a.id,
+                text: a.data().text
+              };
+            });
+
+            this.currQuestion.correct = res.docs.filter(a => correct === a.id).map(a => {
+              return {
+                id: a.id,
+                text: a.data().text
+              };
+            })[0];
+          });
         });
       }
     });

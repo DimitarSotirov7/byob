@@ -1,10 +1,10 @@
 <div class="container">
     <header>
-        {{question.text}}
+        {{question?.text}}
     </header>
     <section>
         <div *ngFor="let answer of question.answers">
-            {{answer.text}}
+            {{answer?.text}}
         </div>
     </section>
 </div>

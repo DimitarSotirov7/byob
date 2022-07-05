@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 export class QuestionService {
 
   questionsColl: string = 'questions';
+  answersColl: string = 'answers';
 
   constructor(private firestore: AngularFirestore) { }
 
@@ -17,5 +18,9 @@ export class QuestionService {
 
   get(doc: string): Observable<any> {
     return this.firestore.collection(this.questionsColl).doc(doc).get();
+  }
+
+  getAnswers(): AngularFirestoreCollection {
+    return this.firestore.collection(this.answersColl);
   }
 }

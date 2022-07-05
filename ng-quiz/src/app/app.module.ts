@@ -27,7 +27,7 @@ import { QuestionComponent } from './question/question.component';
     CoreModule,
     BrowserModule,
     AppRoutingModule,
-    AngularFireModule.initializeApp(environment.firebase.config),
+    AngularFireModule.initializeApp(environment.firebase.config)
   ],
   exports: [
     QuestionComponent
