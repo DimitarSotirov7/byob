@@ -13,4 +13,7 @@ export const environment = {
     },
     dbUrl: 'https://ng-quiz-7-default-rtdb.europe-west1.firebasedatabase.app/',
   },
+  admin: {
+    email: 'dimitarsotirov7@gmail.com',
+  }
 };
