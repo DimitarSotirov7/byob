@@ -1,0 +1,10 @@
+<div class="container">
+    <header>
+        {{question.text}}
+    </header>
+    <section>
+        <div *ngFor="let answer of question.answers">
+            {{answer.text}}
+        </div>
+    </section>
+</div>
