@@ -29,6 +29,7 @@ export class QuizComponent {
 
   load() {
     this.quizService.get(this.id).subscribe(quizRes => {
+      this.quiz.name = quizRes.data()?.name;
       const questions = quizRes.data()?.questions;
 
       if (quizRes.data()?.categoryId) {

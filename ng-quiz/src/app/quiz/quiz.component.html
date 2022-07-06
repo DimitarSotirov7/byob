@@ -1,13 +1,15 @@
 <div>
-    <div>{{quiz.name}}</div>
-    <div>{{quiz.category}}</div>
+    <header>
+        <div>{{quiz.name}}</div>
+        <div>{{quiz.category}}</div>
+    </header>
 
     <div>Question {{number}}</div>
 
     <app-question [question]="quiz.currQuestion"></app-question>
 
-    <div>
-        <button (click)="getQuestion(-1)" [disabled]="">Previous</button>
-        <button (click)="getQuestion(1)" [disabled]="">Next</button>
+    <div class="arrows">
+        <img (click)="getQuestion(-1)" src="../../assets/icons/left-arrow.svg">
+        <img (click)="getQuestion(1)" src="../../assets/icons/right-arrow.svg">
     </div>
 </div>
