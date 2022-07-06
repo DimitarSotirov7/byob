@@ -81,23 +81,14 @@ export class QuizComponent {
               } as IAnswerModel;
             })[0];
 
-            // this.quiz.questions.map(q => {
-            //   console.log(q)
-            // });
-
-            // questRes.docs.map(q => {
-            //   const entity = questionToAnswer.filter(qa => qa.questionId === q.id);
-            //   if (entity.length === 1) {
-            //     entity[0].answers.map(a => {
-            //       return {
-
-            //       }
-            //     });
-            //     console.log(entity)
-            //   }
-            // });
-
-            console.log(this.quiz)
+            this.quiz.questions.forEach(q => {
+              q.answers = q.answers.map(a => {
+                return {
+                  id: a.id,
+                  text: answRes.docs.find(ar => ar.id === a.id)?.data().text
+                } as IAnswerModel;
+              });
+            });
           });
         });
       }
