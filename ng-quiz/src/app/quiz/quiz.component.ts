@@ -1,4 +1,4 @@
-import { Component, Output } from '@angular/core';
+import { Component, DoCheck, Output, SimpleChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IQuestionModel } from '../interfaces/question-model';
 import { IAnswerModel } from '../interfaces/answer-model';
@@ -12,7 +12,7 @@ import { QuizService } from '../services/quiz/quiz.service';
   templateUrl: './quiz.component.html',
   styleUrls: ['./quiz.component.css']
 })
-export class QuizComponent {
+export class QuizComponent implements DoCheck {
 
   id: string = this.route.snapshot.params.id;
   number: number = 1;
@@ -25,6 +25,16 @@ export class QuizComponent {
     private questionService: QuestionService) {
     this.quiz = {} as IQuizModel;
     this.load();
+  }
+
+  ngDoCheck(): void {
+    if (this.quiz.currQuestion?.selected) {
+      this.quiz.questions.forEach(q => {
+        if (q.id === this.quiz.currQuestion.id) {
+          q.selected = this.quiz.currQuestion?.selected;
+        }
+      });
+    }
   }
 
   load() {

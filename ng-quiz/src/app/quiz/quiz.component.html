@@ -1,10 +1,12 @@
 <div>
     <header>
-        <div>{{quiz.name}}</div>
-        <div>{{quiz.category}}</div>
+        <div>Quiz category: {{quiz.category}}</div>
+        <div>Quiz name: {{quiz.name}}</div>
     </header>
 
-    <div>Question {{number}}</div>
+    <div class="lines" *ngFor="let question of quiz.questions">
+        <div [ngClass]="{'completed-line': question.selected != undefined}" class="line"></div>
+    </div>
 
     <app-question [question]="quiz.currQuestion"></app-question>
 

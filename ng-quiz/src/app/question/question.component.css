@@ -13,3 +13,7 @@ header {
    background-color: blanchedalmond;     
    cursor: pointer;
 }
+
+.answer:hover {
+    padding-left: 14px;
+ }

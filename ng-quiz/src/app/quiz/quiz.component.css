@@ -3,3 +3,30 @@
     justify-content: space-between;
     padding: 20px;
 }
+
+img:hover {
+    cursor: pointer;
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 5px;
+}
+
+.lines {
+    display: flex;
+    justify-content: center;
+    gap: 2px;
+    margin: 20px;
+}
+
+.line {
+    border-bottom: 5px solid rgb(161, 236, 161);
+    width: 20px;
+}
+
+.completed-line {
+    border-bottom: 5px solid rgb(1, 102, 1);
+}

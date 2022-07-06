@@ -1,0 +1,16 @@
+.container {
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+    background-color: aquamarine;
+    padding: 10px 20px;
+}
+
+a {
+    text-decoration: none;
+    padding: 5px;
+}
+
+a:hover {
+    border-bottom: 1px black solid;
+}
