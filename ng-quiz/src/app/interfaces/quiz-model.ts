@@ -5,4 +5,5 @@ export interface  IQuizModel {
     name: string,
     category: string,
     questions: IQuestionModel[],
+    currQuestion: IQuestionModel,
 }

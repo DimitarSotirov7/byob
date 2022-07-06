@@ -15,6 +15,7 @@ import { QuizService } from './services/quiz/quiz.service';
 import { QuestionService } from './services/question/question.service';
 import { QuestionComponent } from './question/question.component';
 import { FormsModule } from '@angular/forms';
+import { QuizResolverService } from './services/quiz/quiz-resolver.service';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { FormsModule } from '@angular/forms';
     CategoryService,
     QuizService,
     QuestionService,
+    QuizResolverService,
   ],
   bootstrap: [AppComponent]
 })

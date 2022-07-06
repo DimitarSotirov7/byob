@@ -2,6 +2,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { CategoryComponent } from './category/category.component';
 import { HomeComponent } from './home/home.component';
 import { QuizComponent } from './quiz/quiz.component';
+import { QuizResolverService } from './services/quiz/quiz-resolver.service';
 
 const routes: Routes = [
   {
@@ -18,6 +19,7 @@ const routes: Routes = [
     path: 'quiz/:id',
     pathMatch: 'full',
     component: QuizComponent,
+    resolve: { quiz: QuizResolverService },
   },
 ];
 

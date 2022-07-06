@@ -5,4 +5,9 @@
     <div>Question 1</div>
 
     <app-question [question]="currQuestion"></app-question>
+
+    <div>
+        <button (click)="previous()" [disabled]="">Previous</button>
+        <button (click)="next()" [disabled]="">Next</button>
+    </div>
 </div>

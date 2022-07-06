@@ -15,14 +15,6 @@ export class QuestionComponent {
     this.question = {} as IQuestionModel;
   }
 
-  next(answer: IAnswerModel) {
-    console.log(answer)
-  }
-
-  previous(answer: IAnswerModel) {
-    console.log(answer)
-  }
-
   select(answer: IAnswerModel) {
     this.question.selected = answer;
     console.log(this.question)
