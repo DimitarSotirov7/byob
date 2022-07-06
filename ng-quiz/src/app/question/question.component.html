@@ -2,9 +2,9 @@
     {{question?.text}}
 </header>
 <section>
-    <form #f="ngForm">
-        <div *ngFor="let answer of question?.answers">
-            <div [ngClass]="{'my_class': question.selected?.id === answer.id}" class="answer" (click)="select(answer)">{{answer?.text}}</div>
+    <div *ngFor="let answer of question?.answers">
+        <div [ngClass]="{'my_class': question.selected?.id === answer.id}" class="answer" (click)="select(answer)">
+            {{answer?.text}}
         </div>
-    </form>
+    </div>
 </section>

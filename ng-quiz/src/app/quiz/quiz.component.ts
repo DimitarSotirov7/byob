@@ -15,8 +15,7 @@ import { QuizService } from '../services/quiz/quiz.service';
 export class QuizComponent {
 
   id: string = this.route.snapshot.params.id;
-  quiz: IQuizModel;
-  @Output() currQuestion: IQuestionModel;
+  @Output() quiz: IQuizModel;
 
   constructor(
     private route: ActivatedRoute,
@@ -24,7 +23,6 @@ export class QuizComponent {
     private categoryService: CategoryService,
     private questionService: QuestionService) {
     this.quiz = {} as IQuizModel;
-    this.currQuestion = {} as IQuestionModel;
     this.load();
   }
 
@@ -89,22 +87,20 @@ export class QuizComponent {
                 } as IAnswerModel;
               });
             });
+
+            
+            console.log(this.quiz)
           });
         });
       }
     });
   }
-
-  next() {
-    console.log(this.currQuestion)
-  }
-
-  previous() {
-    console.log(this.currQuestion)
-  }
-
-  getQuestion(page: number | undefined = undefined) {
-    const index = page ? page - 1 : 0;
-    return this.quiz?.questions[index];
+  
+  getQuestion(goto: number) {
+    const currIndex = this.quiz.questions.findIndex(q => q.id === this.quiz.currQuestion.id);
+    if (currIndex + goto < 0 || this.quiz.questions.length <= currIndex + goto || currIndex === -1) {
+      return this.quiz.currQuestion;
+    }
+    return this.quiz.questions[currIndex + goto];
   }
 }

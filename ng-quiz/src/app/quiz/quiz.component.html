@@ -7,7 +7,7 @@
     <app-question [question]="quiz.currQuestion"></app-question>
 
     <div>
-        <button (click)="previous()" [disabled]="">Previous</button>
-        <button (click)="next()" [disabled]="">Next</button>
+        <button (click)="getQuestion(-1)" [disabled]="">Previous</button>
+        <button (click)="getQuestion(1)" [disabled]="">Next</button>
     </div>
 </div>
