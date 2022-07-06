@@ -57,6 +57,7 @@ export class QuizComponent {
             this.quiz.questions.push({
               id: q.id,
               text: q.data().text,
+              answers: (q.data().answers as string[]).map(a => { return { id: a }}),
             } as IQuestionModel); 
 
             questionToAnswer.push({
@@ -65,34 +66,39 @@ export class QuizComponent {
             });
           });
 
-          if (firstQuestionAnswers) {
-            this.questionService.getAnswers().get().subscribe(answRes => {
-              this.quiz.currQuestion.answers = answRes.docs.filter(a => firstQuestionAnswers.includes(a.id)).map(a => {
-                return {
-                  id: a.id,
-                  text: a.data().text
-                } as IAnswerModel;
-              });
-
-              this.quiz.currQuestion.correct = answRes.docs.filter(a => firstQuestionCorrect === a.id).map(a => {
-                return {
-                  id: a.id,
-                  text: a.data().text
-                } as IAnswerModel;
-              })[0];
-
-              // answRes.docs.forEach(a => {
-              //   const entity = questionToAnswer.filter(qa => qa.answers.includes(a.id));
-              //   console.log(entity)
-              //   if (questionToAnswer) {
-                  
-              //   }
-              // });
-
-              console.log(questionToAnswer)
-              console.log(this.quiz)
+          this.questionService.getAnswers().get().subscribe(answRes => {
+            this.quiz.currQuestion.answers = answRes.docs.filter(a => firstQuestionAnswers.includes(a.id)).map(a => {
+              return {
+                id: a.id,
+                text: a.data().text
+              } as IAnswerModel;
             });
-          }
+
+            this.quiz.currQuestion.correct = answRes.docs.filter(a => firstQuestionCorrect === a.id).map(a => {
+              return {
+                id: a.id,
+                text: a.data().text
+              } as IAnswerModel;
+            })[0];
+
+            // this.quiz.questions.map(q => {
+            //   console.log(q)
+            // });
+
+            // questRes.docs.map(q => {
+            //   const entity = questionToAnswer.filter(qa => qa.questionId === q.id);
+            //   if (entity.length === 1) {
+            //     entity[0].answers.map(a => {
+            //       return {
+
+            //       }
+            //     });
+            //     console.log(entity)
+            //   }
+            // });
+
+            console.log(this.quiz)
+          });
         });
       }
     });
