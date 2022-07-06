@@ -15,6 +15,7 @@ import { QuizService } from '../services/quiz/quiz.service';
 export class QuizComponent {
 
   id: string = this.route.snapshot.params.id;
+  number: number = 1;
   @Output() quiz: IQuizModel;
 
   constructor(
@@ -87,20 +88,18 @@ export class QuizComponent {
                 } as IAnswerModel;
               });
             });
-
-            
-            console.log(this.quiz)
           });
         });
       }
     });
   }
-  
+
   getQuestion(goto: number) {
     const currIndex = this.quiz.questions.findIndex(q => q.id === this.quiz.currQuestion.id);
     if (currIndex + goto < 0 || this.quiz.questions.length <= currIndex + goto || currIndex === -1) {
       return this.quiz.currQuestion;
     }
+    this.number + goto;
     return this.quiz.questions[currIndex + goto];
   }
 }

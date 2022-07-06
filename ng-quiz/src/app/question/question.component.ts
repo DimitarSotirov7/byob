@@ -17,6 +17,5 @@ export class QuestionComponent {
 
   select(answer: IAnswerModel) {
     this.question.selected = answer;
-    console.log(this.question)
   }
 }
