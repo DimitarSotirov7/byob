@@ -59,3 +59,19 @@ button:disabled {
     max-width: 10rem;
     color: rgb(143, 12, 12);
 }
+
+.toggle-button {
+    padding: 5px 10px;
+}
+
+.toggle-button.selected {
+    background-color: rgb(27, 41, 161);
+}
+
+.left {
+    border-radius: 25% 0 0 25%;
+}
+
+.right {
+    border-radius: 0 25% 25% 0;
+}

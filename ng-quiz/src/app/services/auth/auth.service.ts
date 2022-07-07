@@ -11,9 +11,13 @@ import { environment } from 'src/environments/environment';
 export class AuthService {
 
   authState: Observable<any> = this.fireAuth.authState;
+  uid: string | undefined;
 
   constructor(private fireAuth: AngularFireAuth, private firestore: AngularFirestore) {
-
+    this.authState.subscribe(res => {
+      this.uid = res?.auth?.lastNotifiedUid;
+      console.log(this.uid)
+    });
   }
 
   login(input: IFormModel): Promise<any> {

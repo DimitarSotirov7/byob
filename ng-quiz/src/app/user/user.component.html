@@ -1,6 +1,10 @@
-<div class="form" *ngIf="!logged">
+<div class="form" *ngIf="!uid">
+    <div class="toggle">
+        <button [ngClass]="{'selected': formToggle}" class="toggle-button left" (click)="formToggle = true">SingUn</button>
+        <button [ngClass]="{'selected': !formToggle}" class="toggle-button right" (click)="formToggle = false">SignIn</button>
+    </div>
     <form #f="ngForm" (ngSubmit)="submit(f.value)">
-        <div class="title">Sign up</div>
+        <div class="title">{{formToggle ? 'Sign Up' : 'Sign In'}}</div>
         <div class="field">
             <label>Email</label>
             <input #emailInput="ngModel" type="text" name="email" ngModel required email>
@@ -32,7 +36,7 @@
         </div>
     </form>
 </div>
-<div *ngIf="logged">
+<div *ngIf="uid">
     You are logged in!
     <div class="button-wrapper">
         <button (click)="logout()">Log Out</button>
