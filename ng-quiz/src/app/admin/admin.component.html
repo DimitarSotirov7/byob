@@ -1,7 +1,11 @@
 <div class="form">
-    <form #f="ngForm" (ngSubmit)="submit(f.value)">
+    <form #f="ngForm" (ngSubmit)="add(f.value)">
         <div class="title">Creation</div>
-        <div class="field">
+        <div class="toggle">
+            <button [ngClass]="{'selected': categToggle}" class="toggle-button left" (click)="categToggle = true">New</button>
+            <button [ngClass]="{'selected': !categToggle}" class="toggle-button right" (click)="categToggle = false">Existing</button>
+        </div>
+        <div class="field" *ngIf="categToggle">
             <label>Category</label>
             <input #categoryInput="ngModel" type="text" name="category" ngModel required minlength="3">
             <p class="validation" *ngIf="categoryInput.errors?.required && categoryInput.touched">
@@ -10,6 +14,16 @@
             <p class="validation" *ngIf="categoryInput.errors?.minlength && categoryInput.touched">
                 Category name must be 3 characters at least!
             </p>
+        </div>
+
+        <div *ngIf="!categToggle">
+            <label>All categories</label>
+            <div class="field exist" *ngFor="let category of categories">
+                <div (click)="category.selected = !category.selected">{{category.name}}</div>
+                <div class="icon">
+                    <img *ngIf="category.selected" src="../../assets/icons/tick-image.png" alt="">
+                </div>
+             </div>
         </div>
 
         <div class="field">

@@ -1,0 +1,13 @@
+.exist:hover {
+    padding-bottom: 4px;
+    cursor: pointer;
+    border-bottom: 2px solid greenyellow;
+}
+
+.marked {
+    text-align: right;
+}
+
+.icon {
+    width: 15px;
+}
