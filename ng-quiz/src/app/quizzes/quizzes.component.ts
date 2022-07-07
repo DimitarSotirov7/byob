@@ -15,7 +15,6 @@ export class QuizzesComponent {
 
   constructor(private quizService: QuizService, private router: Router, private route: ActivatedRoute) {
     this.getQuizzes();
-    console.log(this.categoryId)
   }
   
   getQuizzes() {

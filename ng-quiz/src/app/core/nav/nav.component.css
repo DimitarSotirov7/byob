@@ -14,3 +14,9 @@ a {
 a:hover {
     border-bottom: 3px rgb(0, 105, 88) solid;
 }
+
+.notify {
+    background-color: rgb(243, 243, 183);
+    padding: 4px 0;
+    text-align: center;
+}

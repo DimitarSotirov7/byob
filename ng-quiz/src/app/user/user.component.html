@@ -1,4 +1,4 @@
-<div class="form" *ngIf="!uid">
+<div class="form" *ngIf="!authService.uid">
     <div class="toggle">
         <button [ngClass]="{'selected': formToggle}" class="toggle-button left" (click)="formToggle = true">SingUn</button>
         <button [ngClass]="{'selected': !formToggle}" class="toggle-button right" (click)="formToggle = false">SignIn</button>
@@ -36,7 +36,7 @@
         </div>
     </form>
 </div>
-<div *ngIf="uid">
+<div *ngIf="authService.uid">
     You are logged in!
     <div class="button-wrapper">
         <button (click)="logout()">Log Out</button>

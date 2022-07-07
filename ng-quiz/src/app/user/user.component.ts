@@ -9,10 +9,9 @@ import { AuthService } from '../services/auth/auth.service';
 })
 export class UserComponent {
   serverError: string | undefined;
-  uid: string | undefined = this.authService.uid;
   formToggle: boolean = true; //Register
 
-  constructor(private authService: AuthService) {
+  constructor(public authService: AuthService) {
   }
 
   submit(input: IFormModel) {
@@ -27,7 +26,7 @@ export class UserComponent {
   register(input: IFormModel) {
     this.authService.register(input)
       .then(res => {
-        this.uid = res.user.uid;
+        this.authService.authMsg.emit('You are sign up successfully!');
       })
       .catch(err => {
         this.serverError = err.message;
@@ -38,7 +37,7 @@ export class UserComponent {
   login(input: IFormModel) {
     this.authService.login(input)
       .then(res => {
-        this.uid = res.user.uid;
+        this.authService.authMsg.emit('You are sign in successfully!');
       })
       .catch(err => {
         this.serverError = err.message;
@@ -49,7 +48,7 @@ export class UserComponent {
   logout() {
     this.authService.logout()
     .then(res => {
-      console.log(res)
+      this.authService.authMsg.emit('You are sign out successfully!');
     })
     .catch(err => {
       this.serverError = err.message;

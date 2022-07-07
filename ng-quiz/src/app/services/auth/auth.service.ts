@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
@@ -12,6 +12,7 @@ export class AuthService {
 
   authState: Observable<any> = this.fireAuth.authState;
   uid: string | undefined;
+  authMsg: EventEmitter<string> = new EventEmitter();
 
   constructor(private fireAuth: AngularFireAuth, private firestore: AngularFirestore) {
     this.authState.subscribe(res => {
