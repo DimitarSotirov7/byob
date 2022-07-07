@@ -56,14 +56,14 @@ export class QuizComponent implements DoCheck {
       if (questions) {
         this.questionService.getAll().get().subscribe(questRes => {
           const questionsRes = questRes.docs.filter(q => questions.includes(q.id.toString()));
-          const firstQuestionData = questionsRes[0].data();
-          const firstQuestionAnswers = firstQuestionData.answers;
-          const firstQuestionCorrect = firstQuestionData.correct;
+          const firstQuestionData = questionsRes[0]?.data();
+          const firstQuestionAnswers = firstQuestionData?.answers;
+          const firstQuestionCorrect = firstQuestionData?.correct;
 
           this.quiz.currQuestion = { 
-            id: questionsRes[0].id,
-            text: firstQuestionData.text,
-            correct: firstQuestionData.correct,
+            id: questionsRes[0]?.id,
+            text: firstQuestionData?.text,
+            correct: firstQuestionData?.correct,
           } as IQuestionModel;
 
           const questionToAnswer = [] as { questionId: string, answers: string[] }[];
@@ -82,7 +82,7 @@ export class QuizComponent implements DoCheck {
           });
 
           this.questionService.getAnswers().get().subscribe(answRes => {
-            this.quiz.currQuestion.answers = answRes.docs.filter(a => firstQuestionAnswers.includes(a.id)).map(a => {
+            this.quiz.currQuestion.answers = answRes.docs.filter(a => firstQuestionAnswers?.includes(a.id)).map(a => {
               return {
                 id: a.id,
                 text: a.data().text

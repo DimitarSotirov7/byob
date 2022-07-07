@@ -4,14 +4,20 @@
         <div>Quiz name: {{quiz.name}}</div>
     </header>
 
-    <div class="lines">
+    <div class="lines" *ngIf="quiz?.questions?.length !== 0">
         <div *ngFor="let question of quiz.questions">
             <div class="line" [ngClass]="{'completed-line': question.selected != undefined}"></div>
         </div>
     </div>
     
+    <app-question [question]="quiz.currQuestion" *ngIf="quiz?.questions?.length !== 0"></app-question>
 
-    <app-question [question]="quiz.currQuestion"></app-question>
+    <div class="no-questions" *ngIf="quiz?.questions?.length === 0">
+        <span class="icon">
+            <img src="../../assets/icons/warning-image.png" alt="warning">
+        </span>
+        <span>There is still no questions. Please check later.</span>
+    </div>
 
     <div class="arrows">
         <button [disabled]="!back" (click)="getQuestion(-1)">Previous</button>
