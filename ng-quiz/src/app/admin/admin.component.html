@@ -15,23 +15,36 @@
                 Category name must be 3 characters at least!
             </p>
         </div>
-
         <div *ngIf="!categToggle">
             <label>All categories</label>
             <div class="field exist" *ngFor="let category of categories">
-                <div (click)="category.selected = !category.selected">{{category.name}}</div>
+                <div (click)="selectItem(category.id)">{{category.name}}</div>
                 <div class="icon">
                     <img *ngIf="category.selected" src="../../assets/icons/tick-image.png" alt="">
                 </div>
              </div>
         </div>
 
-        <div class="field">
+        <div class="toggle">
+            <button [ngClass]="{'selected': quizToggle}" class="toggle-button left" (click)="quizToggle = true">New</button>
+            <button [ngClass]="{'selected': !quizToggle}" class="toggle-button right" (click)="quizToggle = false">Existing</button>
+        </div>
+
+        <div class="field" *ngIf="quizToggle">
             <label>Quiz</label>
             <input #quizInput="ngModel" type="text" name="quiz" ngModel minlength="3">
             <p class="validation" *ngIf="quizInput.errors?.minlength && quizInput.touched">
                 Quiz name length must be 3 characters at least!
             </p>
+        </div>
+        <div *ngIf="!quizToggle">
+            <label>All quizzes</label>
+            <div class="field exist" *ngFor="let quiz of quizzes">
+                <div (click)="selectItem(quiz.id)">{{quiz.name}}</div>
+                <div class="icon">
+                    <img *ngIf="quiz.selected" src="../../assets/icons/tick-image.png" alt="">
+                </div>
+             </div>
         </div>
 
         <!-- <div *ngIf="serverError">

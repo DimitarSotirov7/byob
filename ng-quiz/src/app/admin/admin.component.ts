@@ -13,8 +13,10 @@ import { AuthService } from '../services/auth/auth.service';
 })
 export class AdminComponent {
 
-  categories: { name: string, id: string, selected: boolean }[] | undefined;
   categToggle: boolean = true; //New
+  categories: { name: string, id: string, selected: boolean }[] | undefined;
+  quizToggle: boolean = true; //New
+  quizzes: { name: string, id: string, selected: boolean }[] | undefined;
 
   constructor(
     private authService: AuthService,
@@ -24,6 +26,7 @@ export class AdminComponent {
     private questionService: QuestionService
   ) {
     this.loadCategories();
+    this.loadQuizzes();
   }
 
   add(input: any) {
@@ -42,10 +45,36 @@ export class AdminComponent {
     }
   }
 
-  loadCategories() {
+  private loadCategories() {
     this.categoryService.getAll().get().subscribe(res => {
       this.categories = res.docs.map(c => ({ ...c.data(), id: c.id })) as { name: string, id: string, selected: boolean }[];
     });
+  }
+
+  private loadQuizzes() {
+    this.quizService.getAll().get().subscribe(res => {
+      this.quizzes = res.docs.map(c => ({ ...c.data(), id: c.id })) as { name: string, id: string, selected: boolean }[];
+    });
+  }
+
+  selectItem(id: string) {
+    this.categories = this.categories?.map(c => {
+      if (c.id === id) {
+        c.selected = !c.selected;
+      } else {
+        c.selected = false;
+      }
+      return c;
+    })
+
+    this.quizzes = this.quizzes?.map(q => {
+      if (q.id === id) {
+        q.selected = !q.selected;
+      } else {
+        q.selected = false;
+      }
+      return q;
+    })
   }
 
   capitalize(text: string): string {
