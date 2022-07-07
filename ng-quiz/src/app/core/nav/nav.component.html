@@ -1,13 +1,28 @@
 <div class="container">
-    <div class="home">
-        <a routerLink="/">Home</a>
+    <div class="icon" (click)="navigate('/')">
+        <img src="../../../assets/icons/quiz-logo-image.png" alt="logo">
     </div>
-    <div class="other">
-        <a routerLink="/quizzes">Quizzes</a>
-        <a routerLink="/category">Categories</a>
-        <a routerLink="/user">User</a>
+    <div class="icon" (click)="menuOn = !menuOn">
+        <img src="../../../assets/icons/hamburger-image.png" alt="hamburger">
+    </div>
+
+    <div class="menu" *ngIf="menuOn">
+        <div class="menu-item" (click)="navigate('/quizzes')">
+            <a>Quizzes</a>
+        </div>
+        <div class="menu-item" (click)="navigate('/category')">
+            <a>Categories</a>
+        </div>
+        <div class="menu-item" (click)="navigate('/user')" *ngIf="!authService.uid">
+            <a>User</a>
+        </div>
+        <div class="menu-item" (click)="logout()" *ngIf="authService.uid">
+            <a>Sign Out</a>
+        </div>
     </div>
 </div>
+
+
 
 <div class="notify" *ngIf="notify">
     <span>{{notify}}</span>

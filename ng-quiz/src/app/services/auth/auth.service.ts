@@ -1,6 +1,6 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
 import { IFormModel } from 'src/app/interfaces/form-model';
 import { environment } from 'src/environments/environment';

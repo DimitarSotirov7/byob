@@ -44,15 +44,4 @@ export class UserComponent {
         console.error(err);
     });
   }
-
-  logout() {
-    this.authService.logout()
-    .then(res => {
-      this.authService.authMsg.emit('You are sign out successfully!');
-    })
-    .catch(err => {
-      this.serverError = err.message;
-      console.error(err);
-  });
-  }
 }

@@ -4,10 +4,25 @@
     gap: 10px;
     background-color: aquamarine;
     padding: 10px 20px;
+    position: relative;
+}
+
+.icon {
+    width: 30px;
+}
+
+img {
+    width: 100%;
+    width: 100%;
+}
+
+img:hover {
+    cursor: pointer;
 }
 
 a {
     text-decoration: none;
+    cursor: pointer;
     padding: 7px;
 }
 
@@ -19,4 +34,18 @@ a:hover {
     background-color: rgb(243, 243, 183);
     padding: 4px 0;
     text-align: center;
+}
+
+.menu {
+    position: absolute;
+    left: 0;
+    top: 54px;
+    background-color: aquamarine;
+    width: 100%;
+    text-align: center;
+}
+
+.menu-item {
+    padding: 15px;
+    margin: 0 auto;
 }
