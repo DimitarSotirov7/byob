@@ -14,9 +14,9 @@ import { QuizService } from '../services/quiz/quiz.service';
 })
 export class QuizComponent implements DoCheck {
 
-  id: string = this.route.snapshot.params.id;
-  number: number = 1;
   @Output() quiz: IQuizModel;
+  id: string = this.route.snapshot.params.id;
+  back: boolean = false; next: boolean = true;
 
   constructor(
     private route: ActivatedRoute,
@@ -107,10 +107,31 @@ export class QuizComponent implements DoCheck {
 
   getQuestion(goto: number) {
     const currIndex = this.quiz.questions.findIndex(q => q.id === this.quiz.currQuestion.id);
-    if (currIndex + goto < 0 || this.quiz.questions.length <= currIndex + goto || currIndex === -1) {
+    if (currIndex === -1) {
+      throw 'page is out of range!'
+      this.quiz.currQuestion = this.quiz.questions[0];
+    }
+
+    const nextIndex = currIndex + goto;
+    if (!this.validPage(nextIndex)) {
       return;
     }
-    this.number + goto;
+
+    this.back = nextIndex === 0 ? false : true;
+    this.next = nextIndex === this.quiz.questions.length - 1 ? false : true;
+
     this.quiz.currQuestion = this.quiz.questions[currIndex + goto];
+  }
+
+  validPage(nextIndex: number | undefined = undefined): boolean {
+    if (!nextIndex) {
+      return true;
+    }
+    
+    if (nextIndex < 0 || this.quiz.questions?.length <= nextIndex) {
+      return false;
+    }
+
+    return true;
   }
 }
