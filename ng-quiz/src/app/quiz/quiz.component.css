@@ -4,8 +4,18 @@
     padding: 20px;
 }
 
-img:hover {
+button {
+    width: 80px;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 20%;
+    background-color: rgb(89, 104, 240);
+    color: aliceblue;
+}
+
+button:hover {
     cursor: pointer;
+    background-color: rgb(42, 62, 240);
 }
 
 header {

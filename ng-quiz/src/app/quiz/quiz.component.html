@@ -5,8 +5,8 @@
     </header>
 
     <div class="lines">
-        <div class="line" *ngFor="let question of quiz.questions">
-            <div [ngClass]="{'completed-line': question.selected != undefined}"></div>
+        <div *ngFor="let question of quiz.questions">
+            <div class="line" [ngClass]="{'completed-line': question.selected != undefined}"></div>
         </div>
     </div>
     
@@ -14,7 +14,7 @@
     <app-question [question]="quiz.currQuestion"></app-question>
 
     <div class="arrows">
-        <img (click)="getQuestion(-1)" src="../../assets/icons/left-arrow.svg">
-        <img (click)="getQuestion(1)" src="../../assets/icons/right-arrow.svg">
+        <button (click)="getQuestion(-1)">Previous</button>
+        <button (click)="getQuestion(1)">Next</button>
     </div>
 </div>
