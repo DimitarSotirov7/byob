@@ -108,9 +108,9 @@ export class QuizComponent implements DoCheck {
   getQuestion(goto: number) {
     const currIndex = this.quiz.questions.findIndex(q => q.id === this.quiz.currQuestion.id);
     if (currIndex + goto < 0 || this.quiz.questions.length <= currIndex + goto || currIndex === -1) {
-      return this.quiz.currQuestion;
+      return;
     }
     this.number + goto;
-    return this.quiz.questions[currIndex + goto];
+    this.quiz.currQuestion = this.quiz.questions[currIndex + goto];
   }
 }

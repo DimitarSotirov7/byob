@@ -17,6 +17,7 @@ header {
 
 .lines {
     display: flex;
+    flex-direction: row;
     justify-content: center;
     gap: 2px;
     margin: 20px;

@@ -4,9 +4,12 @@
         <div>Quiz name: {{quiz.name}}</div>
     </header>
 
-    <div class="lines" *ngFor="let question of quiz.questions">
-        <div [ngClass]="{'completed-line': question.selected != undefined}" class="line"></div>
+    <div class="lines">
+        <div class="line" *ngFor="let question of quiz.questions">
+            <div [ngClass]="{'completed-line': question.selected != undefined}"></div>
+        </div>
     </div>
+    
 
     <app-question [question]="quiz.currQuestion"></app-question>
 
