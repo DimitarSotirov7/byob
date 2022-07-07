@@ -16,6 +16,9 @@
         <div class="menu-item" (click)="navigate('/user')" *ngIf="!authService.uid">
             <a>User</a>
         </div>
+        <div class="menu-item" (click)="navigate('/admin')" *ngIf="authService.uid">
+            <a>Dashboard</a>
+        </div>
         <div class="menu-item" (click)="logout()" *ngIf="authService.uid">
             <a>Sign Out</a>
         </div>

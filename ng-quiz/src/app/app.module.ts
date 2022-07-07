@@ -19,6 +19,7 @@ import { QuizResolverService } from './services/quiz/quiz-resolver.service';
 import { UserComponent } from './user/user.component';
 import { AuthService } from './services/auth/auth.service';
 import { QuizzesComponent } from './quizzes/quizzes.component';
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { QuizzesComponent } from './quizzes/quizzes.component';
     QuestionComponent,
     UserComponent,
     QuizzesComponent,
+    AdminComponent,
   ],
   imports: [
     CoreModule,

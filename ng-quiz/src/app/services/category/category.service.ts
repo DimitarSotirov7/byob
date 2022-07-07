@@ -19,8 +19,8 @@ export class CategoryService {
     return this.firestore.collection(this.categoriesColl).doc(doc).get();
   }
 
-  add(data: any): void {
-    this.firestore.collection(this.categoriesColl).add(data);
+  add(data: any): Promise<any> {
+    return this.firestore.collection(this.categoriesColl).add(data);
   }
 
   update(doc: string, data: any): void {

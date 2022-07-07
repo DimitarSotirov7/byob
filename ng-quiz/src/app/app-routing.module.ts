@@ -1,4 +1,5 @@
 import { RouterModule, Routes } from '@angular/router';
+import { AdminComponent } from './admin/admin.component';
 import { CategoryComponent } from './category/category.component';
 import { HomeComponent } from './home/home.component';
 import { QuizComponent } from './quiz/quiz.component';
@@ -32,6 +33,15 @@ const routes: Routes = [
     path: 'user',
     pathMatch: 'full',
     component: UserComponent,
+  },
+  {
+    path: 'admin',
+    pathMatch: 'full',
+    component: AdminComponent,
+    canActivate: [AuthGuard],
+    data: {
+      authRequired: true,
+    },
   },
   {
     path: 'quizzes',
