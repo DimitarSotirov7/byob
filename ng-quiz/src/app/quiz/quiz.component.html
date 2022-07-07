@@ -17,4 +17,8 @@
         <button [disabled]="!back" (click)="getQuestion(-1)">Previous</button>
         <button [disabled]="!next" (click)="getQuestion(1)">Next</button>
     </div>
+
+    <div class="complete-wrapper" *ngIf="completed">
+        <button class="complete" [disabled]="!completed" (click)="complete()">Complete</button>
+    </div>
 </div>

@@ -17,6 +17,7 @@ export class QuizComponent implements DoCheck {
   @Output() quiz: IQuizModel;
   id: string = this.route.snapshot.params.id;
   back: boolean = false; next: boolean = true;
+  completed: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -34,6 +35,10 @@ export class QuizComponent implements DoCheck {
           q.selected = this.quiz.currQuestion?.selected;
         }
       });
+    }
+
+    if (this.quiz.questions?.every(q => q.selected)) {
+      this.completed = true;
     }
   }
 
@@ -133,5 +138,9 @@ export class QuizComponent implements DoCheck {
     }
 
     return true;
+  }
+
+  complete() {
+    console.log('wow')
   }
 }
