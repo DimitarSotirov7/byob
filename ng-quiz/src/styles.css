@@ -7,6 +7,26 @@ img {
     width: 30px;
 }
 
+header {
+    text-align: center;
+}
+
+.items {
+    display: flex;
+    flex-flow: column;
+}
+
+.item, .no-items {
+    padding: 15px 50px;
+    background-color: bisque;
+    margin-bottom: 10px;
+}
+
+.item:hover{
+    background-color: rgb(231, 188, 136);
+    cursor: pointer;
+}
+
 @media only screen and (max-width: 900px) {
     body {
         width: 80%;

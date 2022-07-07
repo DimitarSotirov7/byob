@@ -1,10 +1,13 @@
 <header>
     <p>Quizzes</p>
 </header>
-<div class="quizzes">
+<div class="items">
     <div *ngFor="let quiz of quizzes">
-        <div class="quiz" routerLink="/quiz/{{quiz.id}}">
+        <div class="item" routerLink="/quiz/{{quiz.id}}">
             <div>{{quiz.name}}</div>
         </div>
     </div>
+</div>
+<div class="no-items" *ngIf="quizzes?.length === 0">
+    No items
 </div>

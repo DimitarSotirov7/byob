@@ -23,6 +23,10 @@ const routes: Routes = [
     pathMatch: 'full',
     component: QuizComponent,
     // resolve: { quiz: QuizResolverService },
+    canActivate: [AuthGuard],
+    data: {
+      authRequired: true,
+    },
   },
   {
     path: 'user',
@@ -33,10 +37,10 @@ const routes: Routes = [
     path: 'quizzes',
     pathMatch: 'full',
     component: QuizzesComponent,
-    canActivate: [AuthGuard],
-    data: {
-      authRequired: true,
-    },
+  },
+  {
+    path: 'quizzes/:id',
+    component: QuizzesComponent,
   },
 ];
 
