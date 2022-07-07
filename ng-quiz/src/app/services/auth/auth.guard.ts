@@ -19,7 +19,10 @@ export class AuthGuard implements CanActivate {
     if (authRequired === undefined) { return true; } 
 
     // Denied: must be logged but NOT
-    else if (authRequired === true && !this.authService.uid) { this.url = redirectUrl ? redirectUrl : ''; }
+    else if (authRequired === true && !this.authService.uid) { 
+      this.url = redirectUrl ? redirectUrl : '';
+      this.authService.authMsg.emit('You must sign in first!');
+    }
 
     // Success: no role restriction
     else if (roleRequired === undefined) { return true; }
