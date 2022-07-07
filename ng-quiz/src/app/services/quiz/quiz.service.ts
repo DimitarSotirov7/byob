@@ -18,4 +18,8 @@ export class QuizService {
   get(doc: string): Observable<any> {
     return this.firestore.collection(this.quizzesColl).doc(doc).get();
   }
+
+  add(data: any): Promise<any> {
+    return this.firestore.collection(this.quizzesColl).add(data);
+  }
 }

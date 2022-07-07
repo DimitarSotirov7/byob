@@ -1,5 +1,5 @@
 <div class="form">
-    <form #f="ngForm" (ngSubmit)="add(f.value)">
+    <form #f="ngForm" (ngSubmit)="submit(f.value)">
         <div class="title">Creation</div>
         <div class="toggle">
             <button [ngClass]="{'selected': categToggle}" class="toggle-button left" (click)="categToggle = true">New</button>
@@ -7,10 +7,10 @@
         </div>
         <div class="field" *ngIf="categToggle">
             <label>Category</label>
-            <input #categoryInput="ngModel" type="text" name="category" ngModel required minlength="3">
-            <p class="validation" *ngIf="categoryInput.errors?.required && categoryInput.touched">
+            <input #categoryInput="ngModel" type="text" name="category" ngModel minlength="3">
+            <!-- <p class="validation" *ngIf="categoryInput.errors?.required && categoryInput.touched">
                 Category is required!
-            </p>
+            </p> -->
             <p class="validation" *ngIf="categoryInput.errors?.minlength && categoryInput.touched">
                 Category name must be 3 characters at least!
             </p>

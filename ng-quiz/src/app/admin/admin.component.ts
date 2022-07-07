@@ -5,6 +5,8 @@ import { QuestionService } from '../services/question/question.service';
 import { QuizService } from '../services/quiz/quiz.service';
 import { ICategoryModel } from '../interfaces/category-model';
 import { AuthService } from '../services/auth/auth.service';
+import { IQuizModel } from '../interfaces/quiz-model';
+import { IQuestionModel } from '../interfaces/question-model';
 
 @Component({
   selector: 'app-admin',
@@ -29,20 +31,8 @@ export class AdminComponent {
     this.loadQuizzes();
   }
 
-  add(input: any) {
-    if (input?.category) {
-      const name = this.capitalize(input.category);
-      const categoryExists = this.categories?.some(c => c.name === name);
-      if (!categoryExists) {
-        this.categoryService.add({ name } as ICategoryModel).then(data => {
-          if (data.id) {
-            this.authService.authMsg.emit('Category has been added successfully!');
-          }
-        });
-      } else {
-        this.authService.authMsg.emit('Category exists!');
-      }
-    }
+  submit(input: any) {
+    this.addCategory(input);
   }
 
   private loadCategories() {
@@ -84,5 +74,47 @@ export class AdminComponent {
 
     const firstChar = text.charAt(0).toUpperCase();
     return firstChar + text.slice(1);
+  }
+
+  addCategory(input: any) {
+    // Use category from input    
+    if (input?.category) {
+      const categName = this.capitalize(input.category);
+      let categoryExists = this.categories?.some(c => c.name === categName);
+      if (!categoryExists) {
+        this.categoryService.add({ name: categName } as ICategoryModel)
+          .then(data => {
+            if (data.id) {
+              this.authService.authMsg.emit('Category has been added successfully!');
+              if (input?.quiz) {
+                this.addQuiz(input.quiz, data.id);
+              }
+              return;
+            }
+        });
+      }
+    }
+
+    // Use selected category
+    const category = this.categories?.find(c => c.selected);
+    if (category && input?.quiz) {
+      this.addQuiz(input.quiz, category.id);
+    } else {
+      this.authService.authMsg.emit('You must choose category first');
+    }
+  }
+
+  addQuiz(name: string, categoryId: string) {
+    const quizName = this.capitalize(name);
+    const quizExists = this.quizzes?.some(c => c.name === quizName);
+    if (!quizExists) {
+      this.quizService.add({ name: quizName, categoryId, questions: [] as IQuestionModel[] } as IQuizModel).then(data => {
+        if (data.id) {
+          this.authService.authMsg.emit('Quiz has been added successfully!');
+        }
+      });
+    } else {
+      this.authService.authMsg.emit('Quiz exists!');
+    }
   }
 }
