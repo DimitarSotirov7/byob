@@ -1,6 +1,6 @@
 .container {
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     gap: 10px;
     background-color: aquamarine;
     padding: 10px 20px;
@@ -8,9 +8,9 @@
 
 a {
     text-decoration: none;
-    padding: 5px;
+    padding: 7px;
 }
 
 a:hover {
-    border-bottom: 1px black solid;
+    border-bottom: 3px rgb(0, 105, 88) solid;
 }

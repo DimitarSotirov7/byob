@@ -3,6 +3,7 @@ import { CategoryComponent } from './category/category.component';
 import { HomeComponent } from './home/home.component';
 import { QuizComponent } from './quiz/quiz.component';
 import { QuizResolverService } from './services/quiz/quiz-resolver.service';
+import { UserComponent } from './user/user.component';
 
 const routes: Routes = [
   {
@@ -19,7 +20,12 @@ const routes: Routes = [
     path: 'quiz/:id',
     pathMatch: 'full',
     component: QuizComponent,
-    resolve: { quiz: QuizResolverService },
+    // resolve: { quiz: QuizResolverService },
+  },
+  {
+    path: 'user',
+    pathMatch: 'full',
+    component: UserComponent,
   },
 ];
 

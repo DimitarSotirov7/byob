@@ -1,0 +1,27 @@
+<div class="form">
+    <form #f="ngForm" (ngSubmit)="submit(f.value)">
+        <div class="title">Sign up</div>
+        <div class="field">
+            <label>Username</label>
+            <input #usernameInput="ngModel" type="text" name="username" ngModel required>
+            <p class="validation" *ngIf="usernameInput.errors?.required && usernameInput.touched">
+                Username is required
+            </p>
+        </div>
+
+        <div class="field">
+            <label>Password</label>
+            <input #passwordInput="ngModel" type="password" name="password" ngModel required minlength="4">
+            <p class="validation" *ngIf="passwordInput.errors?.required && passwordInput.touched">
+                Password is required
+            </p>
+            <p class="validation" *ngIf="passwordInput.errors?.minlength && passwordInput.touched">
+                Password length must be 4 characters at least
+            </p>
+        </div>
+
+        <div class="button-wrapper">
+            <button type="submit" [disabled]="f.invalid">Submit</button>
+        </div>
+    </form>
+</div>
