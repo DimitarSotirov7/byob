@@ -1,0 +1,10 @@
+<header>
+    <p>Quizzes</p>
+</header>
+<div class="quizzes">
+    <div *ngFor="let quiz of quizzes">
+        <div class="quiz" routerLink="/quiz/{{quiz.id}}">
+            <div>{{quiz.name}}</div>
+        </div>
+    </div>
+</div>

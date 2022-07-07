@@ -18,6 +18,7 @@ import { FormsModule } from '@angular/forms';
 import { QuizResolverService } from './services/quiz/quiz-resolver.service';
 import { UserComponent } from './user/user.component';
 import { AuthService } from './services/auth/auth.service';
+import { QuizzesComponent } from './quizzes/quizzes.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { AuthService } from './services/auth/auth.service';
     QuizComponent,
     QuestionComponent,
     UserComponent,
+    QuizzesComponent,
   ],
   imports: [
     CoreModule,
