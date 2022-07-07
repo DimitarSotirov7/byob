@@ -1,11 +1,14 @@
-<div class="form">
+<div class="form" *ngIf="!logged">
     <form #f="ngForm" (ngSubmit)="submit(f.value)">
         <div class="title">Sign up</div>
         <div class="field">
-            <label>Username</label>
-            <input #usernameInput="ngModel" type="text" name="username" ngModel required>
-            <p class="validation" *ngIf="usernameInput.errors?.required && usernameInput.touched">
-                Username is required
+            <label>Email</label>
+            <input #emailInput="ngModel" type="text" name="email" ngModel required email>
+            <p class="validation" *ngIf="emailInput.errors?.required && emailInput.touched">
+                Email is required
+            </p>
+            <p class="validation" *ngIf="emailInput.errors?.email && emailInput.touched">
+                Email is invalid
             </p>
         </div>
 
@@ -20,8 +23,18 @@
             </p>
         </div>
 
+        <div *ngIf="serverError">
+            <p class="validation">{{serverError}}</p>
+        </div>
+
         <div class="button-wrapper">
             <button type="submit" [disabled]="f.invalid">Submit</button>
         </div>
     </form>
+</div>
+<div *ngIf="logged">
+    You are logged in!
+    <div class="button-wrapper">
+        <button (click)="logout()">Log Out</button>
+    </div>
 </div>
