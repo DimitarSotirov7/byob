@@ -1,41 +1,43 @@
-<div class="form" *ngIf="!authService.uid">
-    <div class="toggle">
-        <button [ngClass]="{'selected': formToggle}" class="toggle-button left" (click)="formToggle = true">SingUn</button>
-        <button [ngClass]="{'selected': !formToggle}" class="toggle-button right" (click)="formToggle = false">SignIn</button>
+<div class="container">
+    <div class="form" *ngIf="!authService.uid">
+        <div class="toggle">
+            <button [ngClass]="{'selected': formToggle}" class="toggle-button left" (click)="formToggle = true">SingUn</button>
+            <button [ngClass]="{'selected': !formToggle}" class="toggle-button right" (click)="formToggle = false">SignIn</button>
+        </div>
+        <form #f="ngForm" (ngSubmit)="submit(f.value)">
+            <div class="title">{{formToggle ? 'Sign Up' : 'Sign In'}}</div>
+            <div class="field">
+                <label>Email</label>
+                <input #emailInput="ngModel" type="text" name="email" ngModel required email>
+                <p class="validation" *ngIf="emailInput.errors?.required && emailInput.touched">
+                    Email is required
+                </p>
+                <p class="validation" *ngIf="emailInput.errors?.email && emailInput.touched">
+                    Email is invalid
+                </p>
+            </div>
+    
+            <div class="field">
+                <label>Password</label>
+                <input #passwordInput="ngModel" type="password" name="password" ngModel required minlength="4">
+                <p class="validation" *ngIf="passwordInput.errors?.required && passwordInput.touched">
+                    Password is required
+                </p>
+                <p class="validation" *ngIf="passwordInput.errors?.minlength && passwordInput.touched">
+                    Password length must be 4 characters at least
+                </p>
+            </div>
+    
+            <div *ngIf="serverError">
+                <p class="validation">{{serverError}}</p>
+            </div>
+    
+            <div class="button-wrapper">
+                <button type="submit" [disabled]="f.invalid">Submit</button>
+            </div>
+        </form>
     </div>
-    <form #f="ngForm" (ngSubmit)="submit(f.value)">
-        <div class="title">{{formToggle ? 'Sign Up' : 'Sign In'}}</div>
-        <div class="field">
-            <label>Email</label>
-            <input #emailInput="ngModel" type="text" name="email" ngModel required email>
-            <p class="validation" *ngIf="emailInput.errors?.required && emailInput.touched">
-                Email is required
-            </p>
-            <p class="validation" *ngIf="emailInput.errors?.email && emailInput.touched">
-                Email is invalid
-            </p>
-        </div>
-
-        <div class="field">
-            <label>Password</label>
-            <input #passwordInput="ngModel" type="password" name="password" ngModel required minlength="4">
-            <p class="validation" *ngIf="passwordInput.errors?.required && passwordInput.touched">
-                Password is required
-            </p>
-            <p class="validation" *ngIf="passwordInput.errors?.minlength && passwordInput.touched">
-                Password length must be 4 characters at least
-            </p>
-        </div>
-
-        <div *ngIf="serverError">
-            <p class="validation">{{serverError}}</p>
-        </div>
-
-        <div class="button-wrapper">
-            <button type="submit" [disabled]="f.invalid">Submit</button>
-        </div>
-    </form>
-</div>
-<div *ngIf="authService.uid">
-    You are logged in!
+    <div *ngIf="authService.uid">
+        You are logged in!
+    </div>
 </div>

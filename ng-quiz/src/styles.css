@@ -1,6 +1,11 @@
 body {
     margin: 0;
     width: 50%;
+    position: relative;
+}
+
+.container {
+    min-height: 50vh;
 }
 
 header {

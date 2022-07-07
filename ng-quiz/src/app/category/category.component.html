@@ -1,8 +1,10 @@
-<header>
-    <p>Category</p>
-</header>
-<div class="items">
-    <div *ngFor="let category of categories">
-        <div class="item" routerLink="/quizzes/{{category.id}}">{{category.name}}</div>
+<div class="container">
+    <header>
+        <p>Category</p>
+    </header>
+    <div class="items">
+        <div *ngFor="let category of categories">
+            <div class="item" routerLink="/quizzes/{{category.id}}">{{category.name}}</div>
+        </div>
     </div>
 </div>
