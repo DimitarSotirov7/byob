@@ -35,9 +35,9 @@
 
             <div class="field" *ngIf="fullForm">
                 <label>Answers</label>
-                <textarea #questionInput="ngModel" type="text" name="answers" ngModel minlength="20"></textarea>
+                <textarea #questionInput="ngModel" type="text" name="answers" ngModel minlength="4"></textarea>
                 <p class="validation" *ngIf="questionInput.errors?.minlength && questionInput.touched">
-                    Answers length must be 10 characters at least!
+                    Answers length must be 4 characters at least!
                 </p>
             </div>
 
