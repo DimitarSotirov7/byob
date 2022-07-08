@@ -16,7 +16,7 @@
 }
 
 .large-icon {
-    width: 30px;
+    width: 25px;
 }
 
 .large-icon:hover {
@@ -28,9 +28,10 @@
 }
 
 .title {
+    padding-left: 20px;
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 10px;
 }
 
 .wrapper {

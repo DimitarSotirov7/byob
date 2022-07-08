@@ -33,7 +33,7 @@
     <div class="loader">
         <div class="title">
             <span>Load categories</span>
-            <div class="large-icon" (click)="loadCategories()">
+            <div class="large-icon rotate" (click)="loadCategories()" [ngClass]="{'rotate': rotateCateg === true}">
                 <img src="../../assets/icons/refresh.png" alt="refresh">
             </div>
         </div>
@@ -47,7 +47,7 @@
         </div>
         <div class="title">
             <span>Load quizzes</span>
-            <div class="large-icon" (click)="loadQuizzes()">
+            <div class="large-icon" (click)="loadQuizzes()" [ngClass]="{'rotate': rotateQuiz === true}">
                 <img src="../../assets/icons/refresh.png" alt="refresh">
             </div>
         </div>

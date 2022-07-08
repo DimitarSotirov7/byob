@@ -19,6 +19,7 @@ export class AdminComponent {
   categories: { name: string, id: string, selected: boolean }[] | undefined;
   quizToggle: boolean = true; //New
   quizzes: { name: string, id: string, selected: boolean }[] | undefined;
+  rotateCateg: boolean = false; rotateQuiz: boolean = false;
 
   constructor(
     private authService: AuthService,
@@ -34,14 +35,18 @@ export class AdminComponent {
   }
 
   loadCategories() {
+    this.rotateCateg = true;
     this.categoryService.getAll().get().subscribe(res => {
       this.categories = res.docs.map(c => ({ ...c.data(), id: c.id })) as { name: string, id: string, selected: boolean }[];
+      this.rotateCateg = false;
     });
   }
 
   loadQuizzes() {
+    this.rotateQuiz = true;
     this.quizService.getAll().get().subscribe(res => {
       this.quizzes = res.docs.map(c => ({ ...c.data(), id: c.id })) as { name: string, id: string, selected: boolean }[];
+      this.rotateQuiz = false;
     });
   }
 
