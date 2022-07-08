@@ -10,6 +10,9 @@ body {
 
 header {
     text-align: center;
+    position: relative;
+    gap: 10px;
+    margin: 20px;
 }
 
 .items {

@@ -23,12 +23,6 @@ button:disabled {
     background-color: rgb(71, 71, 71);
 }
 
-header {
-    position: relative;
-    gap: 10px;
-    margin: 20px;
-}
-
 .back {
     width: 40px;
     position: absolute;
