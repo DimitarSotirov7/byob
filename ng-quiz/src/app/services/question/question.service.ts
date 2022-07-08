@@ -23,4 +23,8 @@ export class QuestionService {
   getAnswers(): AngularFirestoreCollection {
     return this.firestore.collection(this.answersColl);
   }
+
+  add(data: any): Promise<any> {
+    return this.firestore.collection(this.questionsColl).add(data);
+  }
 }

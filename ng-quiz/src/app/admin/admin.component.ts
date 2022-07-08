@@ -7,6 +7,7 @@ import { ICategoryModel } from '../interfaces/category-model';
 import { AuthService } from '../services/auth/auth.service';
 import { IQuizModel } from '../interfaces/quiz-model';
 import { IQuestionModel } from '../interfaces/question-model';
+import { IAnswerModel } from '../interfaces/answer-model';
 
 @Component({
   selector: 'app-admin',
@@ -35,7 +36,7 @@ export class AdminComponent {
     } else if (input?.quiz?.length > 0) {
       this.addQuiz(input.quiz);
     } else if (input?.question?.length > 0) {
-      // Add question
+      this.addQuestion(input.question);
     } else {
       this.authService.authMsg.emit('All the fields are empty!');
     }
@@ -113,7 +114,7 @@ export class AdminComponent {
     name = this.capitalize(name);
     const categoryId = this.categories?.find(c => c.selected)?.id;
     if (!categoryId) {
-      this.authService.authMsg.emit('You should select category first!');
+      this.authService.authMsg.emit('You should select a category first!');
       return;
     }
     this.quizService.getAll().get().subscribe(res => {
@@ -133,6 +134,32 @@ export class AdminComponent {
           });
       } else {
         this.authService.authMsg.emit('Quiz already exists!');
+      }
+    });
+  }
+
+  addQuestion(text: string) {
+    text = this.capitalize(text);
+    const quizId = this.quizzes?.find(c => c.selected)?.id;
+    if (!quizId) {
+      this.authService.authMsg.emit('You should select a quiz first!');
+      return;
+    }
+    this.questionService.getAll().get().subscribe(res => {
+      const questions = res.docs.map(q => ({ text: q.data().text }));
+      const questionExists = questions?.some(q => q.text === text); // Check for quiz as well!
+      if (!questionExists) {
+        this.questionService.add({ text, correct: {} as IAnswerModel , answers: [] as IAnswerModel[] } as IQuestionModel)
+          .then(data => {
+            if (data.id) {
+              this.authService.authMsg.emit('Question has been added successfully!');
+              this.quizService.addQuestion(quizId, data.id);
+            }
+          }).catch(err => {
+            this.serverError = err.message;
+          });
+      } else {
+        this.authService.authMsg.emit('Question already exists!');
       }
     });
   }
