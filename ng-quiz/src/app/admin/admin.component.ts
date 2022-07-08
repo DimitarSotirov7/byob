@@ -66,7 +66,7 @@ export class AdminComponent {
     this.rotateQuest = true;
     const quizQuestions = this.quizzes?.find(q => q.selected)?.questions;
     if (!quizQuestions) {
-      this.authService.authMsg.emit('You should select a quiz first!');
+      this.sendMsg('You should select a quiz first!');
       this.questions = undefined;
       this.rotateQuest = false;
       return;
@@ -126,7 +126,7 @@ export class AdminComponent {
         this.categoryService.add({ name } as ICategoryModel)
           .then(data => {
             if (data.id) {
-              this.authService.authMsg.emit('Category has been added successfully!');
+              this.sendMsg('Category has been added successfully!');
               if (this.categories) {
                 this.loadCategories();
               }
@@ -135,7 +135,7 @@ export class AdminComponent {
             this.serverError = err.message;
           });
       } else {
-        this.authService.authMsg.emit('Category already exists!');
+        this.sendMsg('Category already exists!');
       }
     });
   }
@@ -144,7 +144,7 @@ export class AdminComponent {
     name = this.capitalize(name);
     const categoryId = this.categories?.find(c => c.selected)?.id;
     if (!categoryId) {
-      this.authService.authMsg.emit('You should select a category first!');
+      this.sendMsg('You should select a category first!');
       return;
     }
     this.quizService.getAll().get().subscribe(res => {
@@ -154,7 +154,7 @@ export class AdminComponent {
         this.quizService.add({ name, categoryId, questions: [] as IQuestionModel[] } as IQuizModel)
           .then(data => {
             if (data.id) {
-              this.authService.authMsg.emit('Quiz has been added successfully!');
+              this.sendMsg('Quiz has been added successfully!');
               if (this.quizzes) {
                 this.loadQuizzes();
               }
@@ -163,7 +163,7 @@ export class AdminComponent {
             this.serverError = err.message;
           });
       } else {
-        this.authService.authMsg.emit('Quiz already exists!');
+        this.sendMsg('Quiz already exists!');
       }
     });
   }
@@ -196,8 +196,33 @@ export class AdminComponent {
 
   addAnswers(input: string) {
     const answers = input.split(/\r?\n/).map(a => this.capitalize(a));
-    
-    
-    console.log(answers);
+    const question = this.questions?.find(q => q.selected);
+    if (!question) {
+      this.sendMsg('You should select a question first!');
+    }
+    if (question?.answers.length !== 0) {
+      this.questionService.deleteAnswers(question?.answers as string[]);
+    }
+    this.questionService.addAnswers(answers)
+      .then(res => {
+        console.log(res)
+        const answerIds = (res as { id: string }[]).map(a => a.id);
+        if (answerIds) {
+          this.questionService.updateAnswers(question?.id as string, answerIds);
+        }
+        if (question?.answers.length !== 0) {
+          console.log(question?.answers)
+          this.questionService.deleteAnswers(question?.answers as string[])
+            .then(res => {
+              console.log(res)
+            })
+            .catch(err => console.log(err.message));
+        }
+      })
+      .catch(err => console.log(err.message));
+  }
+
+  sendMsg(msg: string = 'Attention') {
+    this.authService.authMsg.emit(msg);
   }
 }
