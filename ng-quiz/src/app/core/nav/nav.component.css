@@ -6,14 +6,6 @@
     padding: 10px 20px;
 }
 
-.icon {
-    width: 30px;
-}
-
-img:hover {
-    cursor: pointer;
-}
-
 a {
     text-decoration: none;
     cursor: pointer;

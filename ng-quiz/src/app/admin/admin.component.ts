@@ -204,7 +204,7 @@ export class AdminComponent {
       .then(res => {
         const answerIds = (res as { id: string }[]).map(a => a.id);
         if (answerIds) {
-          this.sendMsg('Answers are added succesfully!');
+          this.sendMsg('Answers are added successfully!');
           this.questionService.updateAnswers(question?.id as string, answerIds);
         }
         if (question?.answers.length !== 0) {

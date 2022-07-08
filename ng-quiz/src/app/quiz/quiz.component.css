@@ -26,23 +26,16 @@ button:disabled {
 header {
     position: relative;
     gap: 10px;
-    margin: 5px;
+    margin: 20px;
 }
 
-.icon {
-    width: 10%;
+.back {
+    width: 40px;
     position: absolute;
-    top: 10px;
-    left: 10px;
 }
 
-img {
-    width: 100% !important;
-    height: 100%;
-}
-
-.icon:hover {
-    cursor: pointer;
+.warning {
+    width: 20px;
 }
 
 .lines {
@@ -80,11 +73,9 @@ img {
 }
 
 .no-questions {
+    display: flex;
+    align-items: center;
+    gap: 5px;
     padding: 10px;
     background-color: rgb(238, 247, 225);
-}
-
-img {
-    width: 13px;
-    margin-right: 5px;
 }

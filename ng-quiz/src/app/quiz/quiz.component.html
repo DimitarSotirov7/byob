@@ -1,6 +1,6 @@
 <div class="container">
     <header>
-        <div class="icon" (click)="navigate('/quizzes')">
+        <div class="back" (click)="navigate('/quizzes')">
             <img src="../../assets/icons/back.png" alt="back">
         </div>
         <div>Quiz category: {{quiz.category}}</div>
@@ -16,8 +16,8 @@
     <app-question [question]="quiz.currQuestion" *ngIf="quiz?.questions?.length !== 0"></app-question>
 
     <div class="no-questions" *ngIf="quiz?.questions?.length === 0">
-        <span class="icon">
-            <img src="../../assets/icons/warning-image.png" alt="warning">
+        <span>
+            <img class="warning" src="../../assets/icons/warning-image.png" alt="warning">
         </span>
         <span>There is no question yet. Please check later.</span>
     </div>

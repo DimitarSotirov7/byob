@@ -25,7 +25,7 @@ export class QuestionService {
   }
 
   updateAnswers(questionId: string, answerIds: string[]): void {
-    this.firestore.collection(this.questionsColl).doc(questionId).update({ answers: answerIds });
+    this.firestore.collection(this.questionsColl).doc(questionId).update({ correct: answerIds[0], answers: answerIds });
   }
 
   // Answers
