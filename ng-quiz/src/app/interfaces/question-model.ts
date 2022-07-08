@@ -5,5 +5,6 @@ export interface  IQuestionModel {
     text: string,
     correct: IAnswerModel,
     answers: IAnswerModel[],
-    selected: IAnswerModel | undefined
+    selected: string | undefined,
+    users: { uid: string, selected: string }[]
 }

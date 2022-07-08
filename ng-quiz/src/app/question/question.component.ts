@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, DoCheck, Input } from '@angular/core';
 import { IAnswerModel } from '../interfaces/answer-model';
 import { IQuestionModel } from '../interfaces/question-model';
 import { AuthService } from '../services/auth/auth.service';
@@ -9,16 +9,23 @@ import { QuestionService } from '../services/question/question.service';
   templateUrl: './question.component.html',
   styleUrls: ['./question.component.css']
 })
-export class QuestionComponent {
+export class QuestionComponent implements DoCheck {
 
   @Input() question: IQuestionModel;
 
-  constructor(private authService: AuthService, private questionService: QuestionService) {
+  constructor(public authService: AuthService, private questionService: QuestionService) {
     this.question = {} as IQuestionModel;
   }
 
+  ngDoCheck(): void {
+  //  if (this.question?.users && !this.question?.selected) {
+  //   this.question.selected = this.question?.users.find(q => q.uid === this.authService?.uid )?.selected;
+  //   console.log(this.question.selected)
+  //  }
+  }
+
   select(answer: IAnswerModel) {
-    this.question.selected = answer;
+    this.question.selected = answer.id;
     this.questionService.addUser(this.question.id, this.authService?.uid as string, answer.id);
   }
 }

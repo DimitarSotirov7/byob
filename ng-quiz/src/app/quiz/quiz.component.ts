@@ -71,6 +71,7 @@ export class QuizComponent implements DoCheck {
             id: questionsRes[0]?.id,
             text: firstQuestionData?.text,
             correct: firstQuestionData?.correct,
+            users: firstQuestionData?.users
           } as IQuestionModel;
 
           const questionToAnswer = [] as { questionId: string, answers: string[] }[];
@@ -80,6 +81,7 @@ export class QuizComponent implements DoCheck {
               id: q.id,
               text: q.data().text,
               answers: (q.data().answers as string[]).map(a => { return { id: a }}),
+              users: q.data()?.users
             } as IQuestionModel); 
 
             questionToAnswer.push({
@@ -111,7 +113,7 @@ export class QuizComponent implements DoCheck {
                 } as IAnswerModel;
               });
             });
-            
+
             this.addUser();
           });
         });

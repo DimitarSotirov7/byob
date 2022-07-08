@@ -3,7 +3,7 @@
 </header>
 <section>
     <div *ngFor="let answer of question?.answers">
-        <div [ngClass]="{'selected': question.selected?.id === answer.id}" class="answer" (click)="select(answer)">
+        <div [ngClass]="{'selected': question?.selected === answer.id}" class="answer" (click)="select(answer)">
             {{answer?.text}}
         </div>
     </div>
