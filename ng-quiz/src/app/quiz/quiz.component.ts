@@ -1,5 +1,5 @@
 import { Component, DoCheck, Output, SimpleChanges } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IQuestionModel } from '../interfaces/question-model';
 import { IAnswerModel } from '../interfaces/answer-model';
 import { IQuizModel } from '../interfaces/quiz-model';
@@ -21,6 +21,7 @@ export class QuizComponent implements DoCheck {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private quizService: QuizService,
     private categoryService: CategoryService,
     private questionService: QuestionService) {
@@ -142,5 +143,9 @@ export class QuizComponent implements DoCheck {
 
   complete() {
     console.log('wow')
+  }
+  
+  navigate(url: string = '/') {
+    this.router.navigateByUrl(url);
   }
 }

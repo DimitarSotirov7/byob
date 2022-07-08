@@ -24,10 +24,25 @@ button:disabled {
 }
 
 header {
-    display: flex;
-    flex-direction: column;
+    position: relative;
     gap: 10px;
     margin: 5px;
+}
+
+.icon {
+    width: 10%;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+img {
+    width: 100% !important;
+    height: 100%;
+}
+
+.icon:hover {
+    cursor: pointer;
 }
 
 .lines {
