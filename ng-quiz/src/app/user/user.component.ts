@@ -20,7 +20,6 @@ export class UserComponent {
     } else {
       this.login(input);
     }
-
   }
 
   register(input: IFormModel) {
@@ -30,7 +29,6 @@ export class UserComponent {
       })
       .catch(err => {
         this.serverError = err.message;
-        console.error(err);
     });
   }
 
@@ -41,7 +39,6 @@ export class UserComponent {
       })
       .catch(err => {
         this.serverError = err.message;
-        console.error(err);
     });
   }
 }

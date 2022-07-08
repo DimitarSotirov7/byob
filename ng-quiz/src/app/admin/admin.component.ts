@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { COMPILER_OPTIONS, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CategoryService } from '../services/category/category.service';
 import { QuestionService } from '../services/question/question.service';
@@ -18,6 +18,7 @@ export class AdminComponent {
   categories: { name: string, id: string, selected: boolean }[] | undefined;
   quizzes: { name: string, id: string, selected: boolean }[] | undefined;
   rotateCateg: boolean = false; rotateQuiz: boolean = false;
+  serverError: string | undefined;
 
   constructor(
     private authService: AuthService,
@@ -29,9 +30,15 @@ export class AdminComponent {
   }
 
   submit(input: any) {
-    console.log(input);
-    return
-    this.addCategory(input);
+    if (input?.category?.length > 0) {
+      this.addCategory(input.category);
+    } else if (input?.quiz?.length > 0) {
+      this.addQuiz(input.quiz);
+    } else if (input?.question?.length > 0) {
+      // Add question
+    } else {
+      this.authService.authMsg.emit('All the fields are empty!');
+    }
   }
 
   loadCategories() {
@@ -79,45 +86,54 @@ export class AdminComponent {
     return firstChar + text.slice(1);
   }
 
-  addCategory(input: any) {
-    // Use category from input    
-    if (input?.category) {
-      const categName = this.capitalize(input.category);
-      let categoryExists = this.categories?.some(c => c.name === categName);
+  addCategory(name: any) {
+    name = this.capitalize(name);
+    this.categoryService.getAll().get().subscribe(res => {
+      const categories = res.docs.map(c => ({ name: c.data().name }));
+      let categoryExists = categories?.some(c => c.name === name);
       if (!categoryExists) {
-        this.categoryService.add({ name: categName } as ICategoryModel)
+        this.categoryService.add({ name } as ICategoryModel)
           .then(data => {
             if (data.id) {
               this.authService.authMsg.emit('Category has been added successfully!');
-              if (input?.quiz) {
-                this.addQuiz(input.quiz, data.id);
+              if (this.categories) {
+                this.loadCategories();
               }
-              return;
             }
-        });
+          }).catch(err => {
+            this.serverError = err.message;
+          });
+      } else {
+        this.authService.authMsg.emit('Category already exists!');
       }
-    }
-
-    // Use selected category
-    const category = this.categories?.find(c => c.selected);
-    if (category && input?.quiz) {
-      this.addQuiz(input.quiz, category.id);
-    } else {
-      this.authService.authMsg.emit('You must choose category first');
-    }
+    });
   }
 
-  addQuiz(name: string, categoryId: string) {
-    const quizName = this.capitalize(name);
-    const quizExists = this.quizzes?.some(c => c.name === quizName);
-    if (!quizExists) {
-      this.quizService.add({ name: quizName, categoryId, questions: [] as IQuestionModel[] } as IQuizModel).then(data => {
-        if (data.id) {
-          this.authService.authMsg.emit('Quiz has been added successfully!');
-        }
-      });
-    } else {
-      this.authService.authMsg.emit('Quiz exists!');
+  addQuiz(name: string) {
+    name = this.capitalize(name);
+    const categoryId = this.categories?.find(c => c.selected)?.id;
+    if (!categoryId) {
+      this.authService.authMsg.emit('You should select category first!');
+      return;
     }
+    this.quizService.getAll().get().subscribe(res => {
+      const quizzes = res.docs.map(q => ({ name: q.data().name, categoryId: q.data().categoryId }));
+      const quizExists = quizzes?.some(q => q.name === name && q.categoryId === categoryId);
+      if (!quizExists) {
+        this.quizService.add({ name, categoryId, questions: [] as IQuestionModel[] } as IQuizModel)
+          .then(data => {
+            if (data.id) {
+              this.authService.authMsg.emit('Quiz has been added successfully!');
+              if (this.quizzes) {
+                this.loadQuizzes();
+              }
+            }
+          }).catch(err => {
+            this.serverError = err.message;
+          });
+      } else {
+        this.authService.authMsg.emit('Quiz already exists!');
+      }
+    });
   }
 }

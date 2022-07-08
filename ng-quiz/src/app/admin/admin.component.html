@@ -1,6 +1,6 @@
 <div class="container">
     <div class="form">
-        <form #f="ngForm">
+        <form #f="ngForm" (ngSubmit)="submit(f.value)">
             <div class="title">Creation</div>
             <div class="field">
                 <label>Category</label>
@@ -27,15 +27,12 @@
                 </p>
             </div>
 
-            <!-- <div *ngIf="serverError">
+            <div *ngIf="serverError">
                 <p class="validation">{{serverError}}</p>
-            </div> -->
+            </div>
 
             <div class="button-wrapper">
-                <button type="submit" (click)="submit(f.value)" [disabled]="f.invalid">Category</button>
-                <button type="submit" (click)="submit(f.value)" [disabled]="f.invalid">Quiz</button>
-                <button type="submit" (click)="submit(f.value)" [disabled]="f.invalid">Question</button>
-                <!-- <button type="submit" (click)="submit(f.value)" [disabled]="f.invalid">Answers</button> -->
+                <button type="submit" [disabled]="f.invalid">Submit</button>
             </div>
         </form>
     </div>
