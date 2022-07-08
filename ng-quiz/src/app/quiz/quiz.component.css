@@ -28,10 +28,6 @@ button:disabled {
     position: absolute;
 }
 
-.warning {
-    width: 20px;
-}
-
 .lines {
     display: flex;
     flex-direction: row;

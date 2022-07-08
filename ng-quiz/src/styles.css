@@ -115,6 +115,10 @@ img:hover {
     cursor: pointer;
 }
 
+.warning {
+    width: 20px;
+}
+
 .toggle-button {
     padding: 5px 10px;
     margin: 10px 0;
