@@ -7,4 +7,10 @@
             {{answer?.text}}
         </div>
     </div>
+    <div class="no-answers" *ngIf="question?.answers?.length === 0">
+        <span class="icon">
+            <img src="../../assets/icons/warning-image.png" alt="warning">
+        </span>
+        <span>There is no answers yet. Please check later.</span>
+    </div>
 </section>
