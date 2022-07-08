@@ -6,6 +6,7 @@ import { IQuizModel } from '../interfaces/quiz-model';
 import { CategoryService } from '../services/category/category.service';
 import { QuestionService } from '../services/question/question.service';
 import { QuizService } from '../services/quiz/quiz.service';
+import { AuthService } from '../services/auth/auth.service';
 
 @Component({
   selector: 'app-quiz',
@@ -24,7 +25,8 @@ export class QuizComponent implements DoCheck {
     private router: Router,
     private quizService: QuizService,
     private categoryService: CategoryService,
-    private questionService: QuestionService) {
+    private questionService: QuestionService,
+    private authService: AuthService) {
     this.quiz = {} as IQuizModel;
     this.load();
   }
@@ -41,6 +43,10 @@ export class QuizComponent implements DoCheck {
     if (this.quiz.questions?.every(q => q.selected)) {
       this.completed = true;
     }
+  }
+
+  addUser() {
+    this.quizService.addUser(this.id, this.authService?.uid as string);
   }
 
   load() {
@@ -105,6 +111,8 @@ export class QuizComponent implements DoCheck {
                 } as IAnswerModel;
               });
             });
+            
+            this.addUser();
           });
         });
       }

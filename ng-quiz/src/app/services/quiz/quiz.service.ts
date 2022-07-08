@@ -31,4 +31,15 @@ export class QuizService {
       this.firestore.collection(this.quizzesColl).doc(quizId).update({ questions });
     });
   }
+
+  addUser(quizId: string, uid: string) {
+    this.firestore.collection(this.quizzesColl).doc(quizId).get().subscribe(q => {
+      const quiz = q.data() as { users: string[] | undefined };
+      const users = quiz?.users === undefined ? [] : quiz?.users;
+      if (!users.includes(uid)) {
+        users.push(uid);
+      }
+      this.firestore.collection(this.quizzesColl).doc(quizId).update({ users });
+    });
+  }
 }
