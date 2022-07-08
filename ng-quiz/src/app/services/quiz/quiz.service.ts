@@ -24,7 +24,7 @@ export class QuizService {
   }
 
   addQuestion(quizId: string, id:string): void {
-    this.firestore.collection(this.quizzesColl).doc(id).get().subscribe(q => {
+    this.firestore.collection(this.quizzesColl).doc(quizId).get().subscribe(q => {
       const quiz = q.data() as { questions: string[] | undefined };
       const questions = quiz?.questions === undefined ? [] : quiz?.questions;
       questions.push(id);
