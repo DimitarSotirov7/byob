@@ -17,9 +17,11 @@ import { IAnswerModel } from '../interfaces/answer-model';
 export class AdminComponent {
 
   categories: { name: string, id: string, selected: boolean }[] | undefined;
-  quizzes: { name: string, id: string, selected: boolean }[] | undefined;
-  rotateCateg: boolean = false; rotateQuiz: boolean = false;
+  quizzes: { name: string, id: string, selected: boolean, questions: string[] }[] | undefined;
+  questions: { text: string, id: string, selected: boolean, answers: string[] }[] | undefined;
+  rotateCateg: boolean = false; rotateQuiz: boolean = false; rotateQuest: boolean = false;
   serverError: string | undefined;
+  fullForm: boolean = true;
 
   constructor(
     private authService: AuthService,
@@ -37,6 +39,8 @@ export class AdminComponent {
       this.addQuiz(input.quiz);
     } else if (input?.question?.length > 0) {
       this.addQuestion(input.question);
+    } else if (input?.answers?.length > 0) {
+      this.addAnswers(input?.answers);
     } else {
       this.authService.authMsg.emit('All the fields are empty!');
     }
@@ -53,8 +57,23 @@ export class AdminComponent {
   loadQuizzes() {
     this.rotateQuiz = true;
     this.quizService.getAll().get().subscribe(res => {
-      this.quizzes = res.docs.map(c => ({ ...c.data(), id: c.id })) as { name: string, id: string, selected: boolean }[];
+      this.quizzes = res.docs.map(c => ({ ...c.data(), id: c.id })) as { name: string, id: string, selected: boolean, questions: string[] }[];
       this.rotateQuiz = false;
+    });
+  }
+
+  loadQuestions() {
+    this.rotateQuest = true;
+    const quizQuestions = this.quizzes?.find(q => q.selected)?.questions;
+    if (!quizQuestions) {
+      this.authService.authMsg.emit('You should select a quiz first!');
+      return;
+    }
+    this.questionService.getAll().get().subscribe(res => {
+      this.questions = res.docs
+        .filter(q => quizQuestions.includes(q.id))
+        .map(c => ({ ...c.data(), id: c.id })) as { text: string, id: string, selected: boolean, answers: string[] }[];
+      this.rotateQuest = false;
     });
   }
 
@@ -149,7 +168,7 @@ export class AdminComponent {
       const questions = res.docs.map(q => ({ text: q.data().text }));
       const questionExists = questions?.some(q => q.text === text); // Check for quiz as well!
       if (!questionExists) {
-        this.questionService.add({ text, correct: {} as IAnswerModel , answers: [] as IAnswerModel[] } as IQuestionModel)
+        this.questionService.add({ text, correct: {} as IAnswerModel, answers: [] as IAnswerModel[] } as IQuestionModel)
           .then(data => {
             if (data.id) {
               this.authService.authMsg.emit('Question has been added successfully!');
@@ -162,5 +181,12 @@ export class AdminComponent {
         this.authService.authMsg.emit('Question already exists!');
       }
     });
+  }
+
+  addAnswers(input: string) {
+    const answers = input.split(/\r?\n/).map(a => this.capitalize(a));
+    
+    
+    console.log(answers);
   }
 }

@@ -27,4 +27,8 @@ export class QuestionService {
   add(data: any): Promise<any> {
     return this.firestore.collection(this.questionsColl).add(data);
   }
+
+  addAnswers(data: any): Promise<any> {
+    return this.firestore.collection(this.answersColl).add(data);
+  }
 }

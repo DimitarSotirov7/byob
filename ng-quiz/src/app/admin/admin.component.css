@@ -41,3 +41,8 @@
 .field, .title {
     justify-content: center;
 }
+
+textarea {
+    height: 90px;
+    resize: none;
+}

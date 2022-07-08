@@ -1,5 +1,11 @@
 <div class="container">
     <div class="form">
+        <div class="toggle">
+            <button [ngClass]="{'selected': fullForm}" class="toggle-button left"
+                (click)="fullForm = true">Expand</button>
+            <button [ngClass]="{'selected': !fullForm}" class="toggle-button right"
+                (click)="fullForm = false">Hide</button>
+        </div>
         <form #f="ngForm" (ngSubmit)="submit(f.value)">
             <div class="title">Creation</div>
             <div class="field">
@@ -24,6 +30,14 @@
                 <input #questionInput="ngModel" type="text" name="question" ngModel minlength="10">
                 <p class="validation" *ngIf="questionInput.errors?.minlength && questionInput.touched">
                     Quiz name length must be 10 characters at least!
+                </p>
+            </div>
+
+            <div class="field" *ngIf="fullForm">
+                <label>Answers</label>
+                <textarea #questionInput="ngModel" type="text" name="answers" ngModel minlength="20"></textarea>
+                <p class="validation" *ngIf="questionInput.errors?.minlength && questionInput.touched">
+                    Answers length must be 10 characters at least!
                 </p>
             </div>
 
@@ -62,6 +76,20 @@
                 <div class="item" (click)="selectItem(quiz.id)">{{quiz.name}}</div>
                 <div class="small-icon">
                     <img *ngIf="quiz.selected" src="../../assets/icons/tick-image.png" alt="tick">
+                </div>
+            </div>
+        </div>
+        <div class="title">
+            <span>Load questions by quiz</span>
+            <div class="large-icon" (click)="loadQuestions()" [ngClass]="{'rotate': rotateQuest === true}">
+                <img src="../../assets/icons/refresh.png" alt="refresh">
+            </div>
+        </div>
+        <div class="items">
+            <div *ngFor="let question of questions" class="wrapper">
+                <div class="item" (click)="selectItem(question.id)">{{question.text}}</div>
+                <div class="small-icon">
+                    <img *ngIf="question.selected" src="../../assets/icons/tick-image.png" alt="tick">
                 </div>
             </div>
         </div>
