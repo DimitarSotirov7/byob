@@ -39,7 +39,6 @@ export class QuestionService {
   }
 
   deleteAnswers(answerIds: string[]): Promise<any> {
-    console.log(answerIds)
     return Promise.all(answerIds.map(id => this.firestore.collection(this.answersColl).doc(id).delete()));
   }
 }

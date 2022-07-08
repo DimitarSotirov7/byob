@@ -200,23 +200,15 @@ export class AdminComponent {
     if (!question) {
       this.sendMsg('You should select a question first!');
     }
-    if (question?.answers.length !== 0) {
-      this.questionService.deleteAnswers(question?.answers as string[]);
-    }
     this.questionService.addAnswers(answers)
       .then(res => {
-        console.log(res)
         const answerIds = (res as { id: string }[]).map(a => a.id);
         if (answerIds) {
+          this.sendMsg('Answers are added succesfully!');
           this.questionService.updateAnswers(question?.id as string, answerIds);
         }
         if (question?.answers.length !== 0) {
-          console.log(question?.answers)
-          this.questionService.deleteAnswers(question?.answers as string[])
-            .then(res => {
-              console.log(res)
-            })
-            .catch(err => console.log(err.message));
+          this.questionService.deleteAnswers(question?.answers as string[]);
         }
       })
       .catch(err => console.log(err.message));
