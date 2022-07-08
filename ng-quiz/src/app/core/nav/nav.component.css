@@ -28,6 +28,8 @@ a:hover {
     background-color: rgb(243, 243, 183);
     padding: 4px 0;
     text-align: center;
+    position: sticky;
+    top: 0;
 }
 
 .menu {

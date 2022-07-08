@@ -67,6 +67,8 @@ export class AdminComponent {
     const quizQuestions = this.quizzes?.find(q => q.selected)?.questions;
     if (!quizQuestions) {
       this.authService.authMsg.emit('You should select a quiz first!');
+      this.questions = undefined;
+      this.rotateQuest = false;
       return;
     }
     this.questionService.getAll().get().subscribe(res => {
@@ -88,6 +90,15 @@ export class AdminComponent {
     })
 
     this.quizzes = this.quizzes?.map(q => {
+      if (q.id === id) {
+        q.selected = !q.selected;
+      } else {
+        q.selected = false;
+      }
+      return q;
+    })
+
+    this.questions = this.questions?.map(q => {
       if (q.id === id) {
         q.selected = !q.selected;
       } else {
