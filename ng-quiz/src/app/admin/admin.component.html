@@ -1,58 +1,63 @@
-<div class="form">
-    <form #f="ngForm" (ngSubmit)="submit(f.value)">
-        <div class="title">Creation</div>
-        <div class="toggle">
-            <button [ngClass]="{'selected': categToggle}" class="toggle-button left" (click)="categToggle = true">New</button>
-            <button [ngClass]="{'selected': !categToggle}" class="toggle-button right" (click)="categToggle = false">Existing</button>
+<div class="container">
+    <div class="form">
+        <form #f="ngForm" (ngSubmit)="submit(f.value)">
+            <div class="title">Creation</div>
+            <div class="field" *ngIf="categToggle">
+                <label>Category</label>
+                <input #categoryInput="ngModel" type="text" name="category" ngModel minlength="3">
+                <!-- <p class="validation" *ngIf="categoryInput.errors?.required && categoryInput.touched">
+                    Category is required!
+                </p> -->
+                <p class="validation" *ngIf="categoryInput.errors?.minlength && categoryInput.touched">
+                    Category name must be 3 characters at least!
+                </p>
+            </div>
+
+            <div class="field" *ngIf="quizToggle">
+                <label>Quiz</label>
+                <input #quizInput="ngModel" type="text" name="quiz" ngModel minlength="3">
+                <p class="validation" *ngIf="quizInput.errors?.minlength && quizInput.touched">
+                    Quiz name length must be 3 characters at least!
+                </p>
+            </div>
+
+            <!-- <div *ngIf="serverError">
+                <p class="validation">{{serverError}}</p>
+            </div> -->
+
+            <div class="button-wrapper">
+                <button type="submit" [disabled]="f.invalid">Submit</button>
+            </div>
+        </form>
+    </div>
+    <div class="loader">
+        <div class="title">
+            <span>Load categories</span>
+            <div class="large-icon" (click)="loadCategories()">
+                <img src="../../assets/icons/refresh.png" alt="refresh">
+            </div>
         </div>
-        <div class="field" *ngIf="categToggle">
-            <label>Category</label>
-            <input #categoryInput="ngModel" type="text" name="category" ngModel minlength="3">
-            <!-- <p class="validation" *ngIf="categoryInput.errors?.required && categoryInput.touched">
-                Category is required!
-            </p> -->
-            <p class="validation" *ngIf="categoryInput.errors?.minlength && categoryInput.touched">
-                Category name must be 3 characters at least!
-            </p>
-        </div>
-        <div *ngIf="!categToggle">
-            <label>All categories</label>
-            <div class="field exist" *ngFor="let category of categories">
-                <div (click)="selectItem(category.id)">{{category.name}}</div>
-                <div class="icon">
-                    <img *ngIf="category.selected" src="../../assets/icons/tick-image.png" alt="">
+        <div class="items">
+            <div *ngFor="let category of categories" class="wrapper">
+                <div class="item" (click)="selectItem(category.id)">{{category.name}}</div>
+                <div class="small-icon">
+                    <img *ngIf="category.selected" src="../../assets/icons/tick-image.png" alt="tick">
                 </div>
-             </div>
+            </div>
         </div>
-
-        <div class="toggle">
-            <button [ngClass]="{'selected': quizToggle}" class="toggle-button left" (click)="quizToggle = true">New</button>
-            <button [ngClass]="{'selected': !quizToggle}" class="toggle-button right" (click)="quizToggle = false">Existing</button>
+        <div class="title">
+            <span>Load quizzes</span>
+            <div class="large-icon" (click)="loadQuizzes()">
+                <img src="../../assets/icons/refresh.png" alt="refresh">
+            </div>
         </div>
-
-        <div class="field" *ngIf="quizToggle">
-            <label>Quiz</label>
-            <input #quizInput="ngModel" type="text" name="quiz" ngModel minlength="3">
-            <p class="validation" *ngIf="quizInput.errors?.minlength && quizInput.touched">
-                Quiz name length must be 3 characters at least!
-            </p>
-        </div>
-        <div *ngIf="!quizToggle">
-            <label>All quizzes</label>
-            <div class="field exist" *ngFor="let quiz of quizzes">
-                <div (click)="selectItem(quiz.id)">{{quiz.name}}</div>
-                <div class="icon">
-                    <img *ngIf="quiz.selected" src="../../assets/icons/tick-image.png" alt="">
+        <div class="items">
+            <div *ngFor="let quiz of quizzes" class="wrapper">
+                <div class="item" (click)="selectItem(quiz.id)">{{quiz.name}}</div>
+                <div class="small-icon">
+                    <img *ngIf="quiz.selected" src="../../assets/icons/tick-image.png" alt="tick">
                 </div>
-             </div>
+            </div>
         </div>
-
-        <!-- <div *ngIf="serverError">
-            <p class="validation">{{serverError}}</p>
-        </div> -->
-
-        <div class="button-wrapper">
-            <button type="submit" [disabled]="f.invalid">Submit</button>
-        </div>
-    </form>
+    </div>
 </div>

@@ -8,6 +8,31 @@
     text-align: right;
 }
 
-.icon {
+.small-icon {
     width: 15px;
+    position: absolute;
+    left: 90%;
+    top: 40%;
+}
+
+.large-icon {
+    width: 30px;
+}
+
+.large-icon:hover {
+    cursor: pointer;;
+}
+
+.loader {
+    text-align: center;
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.wrapper {
+    position: relative;
 }

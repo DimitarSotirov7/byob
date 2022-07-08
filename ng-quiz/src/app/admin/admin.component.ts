@@ -27,21 +27,19 @@ export class AdminComponent {
     private categoryService: CategoryService,
     private questionService: QuestionService
   ) {
-    this.loadCategories();
-    this.loadQuizzes();
   }
 
   submit(input: any) {
     this.addCategory(input);
   }
 
-  private loadCategories() {
+  loadCategories() {
     this.categoryService.getAll().get().subscribe(res => {
       this.categories = res.docs.map(c => ({ ...c.data(), id: c.id })) as { name: string, id: string, selected: boolean }[];
     });
   }
 
-  private loadQuizzes() {
+  loadQuizzes() {
     this.quizService.getAll().get().subscribe(res => {
       this.quizzes = res.docs.map(c => ({ ...c.data(), id: c.id })) as { name: string, id: string, selected: boolean }[];
     });
