@@ -28,6 +28,25 @@ export class QuestionService {
     this.firestore.collection(this.questionsColl).doc(questionId).update({ correct: answerIds[0], answers: answerIds });
   }
 
+  addUser(questionId: string, uid: string, selected: string) {
+    this.firestore.collection(this.questionsColl).doc(questionId).get().subscribe(q => {
+      const question = q.data() as { users: { uid: string, selected: string }[] | undefined };
+      let users = question?.users === undefined ? [] : question?.users;
+      const user = users.find(u => u.uid === uid);
+      if (!user) {
+        users.push({ uid, selected });
+      } else {
+        users = users.map(u => {
+          if (u.uid === uid) {
+            u.selected = selected;
+          }
+          return u;
+        });
+      }
+      this.firestore.collection(this.questionsColl).doc(questionId).update({ users });
+    });
+  }
+
   // Answers
 
   getAnswers(): AngularFirestoreCollection {
