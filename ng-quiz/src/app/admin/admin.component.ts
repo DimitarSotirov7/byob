@@ -15,9 +15,7 @@ import { IQuestionModel } from '../interfaces/question-model';
 })
 export class AdminComponent {
 
-  categToggle: boolean = true; //New
   categories: { name: string, id: string, selected: boolean }[] | undefined;
-  quizToggle: boolean = true; //New
   quizzes: { name: string, id: string, selected: boolean }[] | undefined;
   rotateCateg: boolean = false; rotateQuiz: boolean = false;
 
@@ -31,6 +29,8 @@ export class AdminComponent {
   }
 
   submit(input: any) {
+    console.log(input);
+    return
     this.addCategory(input);
   }
 

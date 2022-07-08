@@ -68,8 +68,8 @@ p {
 }
 
 button {
-    margin: 20px 0;
-    padding: 8px 50px;
+    margin: 20px 5px;
+    padding: 8px 30px;
     border: none;
     border-radius: 7%;
     background-color: rgb(89, 104, 240);
@@ -98,6 +98,7 @@ img {
 
 .toggle-button {
     padding: 5px 10px;
+    margin: 10px 0;
 }
 
 .toggle-button.selected {

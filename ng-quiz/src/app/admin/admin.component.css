@@ -37,3 +37,7 @@
 .wrapper {
     position: relative;
 }
+
+.field, .title {
+    justify-content: center;
+}

@@ -1,8 +1,8 @@
 <div class="container">
     <div class="form">
-        <form #f="ngForm" (ngSubmit)="submit(f.value)">
+        <form #f="ngForm">
             <div class="title">Creation</div>
-            <div class="field" *ngIf="categToggle">
+            <div class="field">
                 <label>Category</label>
                 <input #categoryInput="ngModel" type="text" name="category" ngModel minlength="3">
                 <!-- <p class="validation" *ngIf="categoryInput.errors?.required && categoryInput.touched">
@@ -12,12 +12,18 @@
                     Category name must be 3 characters at least!
                 </p>
             </div>
-
-            <div class="field" *ngIf="quizToggle">
+            <div class="field">
                 <label>Quiz</label>
                 <input #quizInput="ngModel" type="text" name="quiz" ngModel minlength="3">
                 <p class="validation" *ngIf="quizInput.errors?.minlength && quizInput.touched">
                     Quiz name length must be 3 characters at least!
+                </p>
+            </div>
+            <div class="field">
+                <label>Question</label>
+                <input #questionInput="ngModel" type="text" name="question" ngModel minlength="10">
+                <p class="validation" *ngIf="questionInput.errors?.minlength && questionInput.touched">
+                    Quiz name length must be 10 characters at least!
                 </p>
             </div>
 
@@ -26,7 +32,10 @@
             </div> -->
 
             <div class="button-wrapper">
-                <button type="submit" [disabled]="f.invalid">Submit</button>
+                <button type="submit" (click)="submit(f.value)" [disabled]="f.invalid">Category</button>
+                <button type="submit" (click)="submit(f.value)" [disabled]="f.invalid">Quiz</button>
+                <button type="submit" (click)="submit(f.value)" [disabled]="f.invalid">Question</button>
+                <!-- <button type="submit" (click)="submit(f.value)" [disabled]="f.invalid">Answers</button> -->
             </div>
         </form>
     </div>
