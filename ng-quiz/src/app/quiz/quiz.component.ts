@@ -28,6 +28,9 @@ export class QuizComponent implements DoCheck {
     private questionService: QuestionService,
     private authService: AuthService) {
     this.quiz = {} as IQuizModel;
+  }
+
+  ngOnInit() {
     this.load();
   }
 
@@ -50,73 +53,76 @@ export class QuizComponent implements DoCheck {
   }
 
   load() {
-    this.quizService.get(this.id).subscribe(quizRes => {
-      this.quiz.name = quizRes.data()?.name;
-      const questions = quizRes.data()?.questions;
+    const quiz = this.route.snapshot.data.quiz;
+    this.quiz.name = quiz.data()?.name;
+    const questions = quiz.data()?.questions;
 
-      if (quizRes.data()?.categoryId) {
-        this.categoryService.get(quizRes.data()?.categoryId).subscribe(res => {
-          this.quiz.category = res.data().name;
-        });
-      }
+    if (quiz.data()?.categoryId) {
+      this.categoryService.get(quiz.data()?.categoryId).subscribe(res => {
+        this.quiz.category = res.data().name;
+      });
+    }
 
-      if (questions) {
-        this.questionService.getAll().get().subscribe(questRes => {
-          const questionsRes = questRes.docs.filter(q => questions.includes(q.id.toString()));
-          const firstQuestionData = questionsRes[0]?.data();
-          const firstQuestionAnswers = firstQuestionData?.answers;
-          const firstQuestionCorrect = firstQuestionData?.correct;
+    if (questions) {
+      this.questionService.getAll().get().subscribe(questRes => {
+        const questionsRes = questRes.docs.filter(q => questions.includes(q.id.toString()));
+        const firstQuestionData = questionsRes[0]?.data();
+        const firstQuestionAnswers = firstQuestionData?.answers;
+        const firstQuestionCorrect = firstQuestionData?.correct;
 
-          this.quiz.currQuestion = { 
-            id: questionsRes[0]?.id,
-            text: firstQuestionData?.text,
-            correct: firstQuestionData?.correct,
-            users: firstQuestionData?.users
-          } as IQuestionModel;
+        this.quiz.currQuestion = {
+          id: questionsRes[0]?.id,
+          text: firstQuestionData?.text,
+          correct: firstQuestionData?.correct,
+          users: firstQuestionData?.users
+        } as IQuestionModel;
 
-          const questionToAnswer = [] as { questionId: string, answers: string[] }[];
-          this.quiz.questions = [] as IQuestionModel[];
-          questionsRes.forEach(q => {
-            this.quiz.questions.push({
-              id: q.id,
-              text: q.data().text,
-              answers: (q.data().answers as string[]).map(a => { return { id: a }}),
-              users: q.data()?.users
-            } as IQuestionModel); 
+        const questionToAnswer = [] as { questionId: string, answers: string[] }[];
+        this.quiz.questions = [] as IQuestionModel[];
+        questionsRes.forEach(q => {
+          this.quiz.questions.push({
+            id: q.id,
+            text: q.data().text,
+            answers: (q.data().answers as string[]).map(a => { return { id: a } }),
+            users: q.data()?.users
+          } as IQuestionModel);
 
-            questionToAnswer.push({
-              questionId: q.id,
-              answers: q.data().answers
-            });
-          });
-
-          this.questionService.getAnswers().get().subscribe(answRes => {
-            this.quiz.currQuestion.answers = answRes.docs.filter(a => firstQuestionAnswers?.includes(a.id)).map(a => {
-              return {
-                id: a.id,
-                text: a.data().text
-              } as IAnswerModel;
-            });
-
-            this.quiz.currQuestion.correct = answRes.docs.filter(a => firstQuestionCorrect === a.id).map(a => {
-              return {
-                id: a.id,
-                text: a.data().text
-              } as IAnswerModel;
-            })[0];
-
-            this.quiz.questions.forEach(q => {
-              q.answers = q.answers.map(a => {
-                return {
-                  id: a.id,
-                  text: answRes.docs.find(ar => ar.id === a.id)?.data().text
-                } as IAnswerModel;
-              });
-            });
+          questionToAnswer.push({
+            questionId: q.id,
+            answers: q.data().answers
           });
         });
-      }
-    });
+
+        this.questionService.getAnswers().get().subscribe(answRes => {
+          this.quiz.currQuestion.answers = answRes.docs.filter(a => firstQuestionAnswers?.includes(a.id)).map(a => {
+            return {
+              id: a.id,
+              text: a.data().text
+            } as IAnswerModel;
+          });
+
+          this.quiz.currQuestion.correct = answRes.docs.filter(a => firstQuestionCorrect === a.id).map(a => {
+            return {
+              id: a.id,
+              text: a.data().text
+            } as IAnswerModel;
+          })[0];
+
+          this.quiz.questions.forEach(q => {
+            q.answers = q.answers.map(a => {
+              return {
+                id: a.id,
+                text: answRes.docs.find(ar => ar.id === a.id)?.data().text
+              } as IAnswerModel;
+            });
+          });
+        });
+      });
+    }
+
+    // this.quizService.get(this.id).subscribe(quizRes => {
+
+    // });
   }
 
   getQuestion(goto: number) {
@@ -141,7 +147,7 @@ export class QuizComponent implements DoCheck {
     if (!nextIndex) {
       return true;
     }
-    
+
     if (nextIndex < 0 || this.quiz.questions?.length <= nextIndex) {
       return false;
     }
@@ -154,7 +160,7 @@ export class QuizComponent implements DoCheck {
     this.sendMsg('You have completed the quiz successfully!');
     this.navigate('quizzes');
   }
-  
+
   navigate(url: string = '/') {
     this.router.navigateByUrl(url);
   }

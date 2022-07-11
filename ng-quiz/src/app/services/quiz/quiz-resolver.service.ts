@@ -11,6 +11,12 @@ export class QuizResolverService {
   constructor(private quizService: QuizService) {}
 
   resolve<T>(router: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Promise<any> | any {
-    return this.quizService.getAll().get();
+    const path = router.routeConfig?.path;
+    if (path === 'quizzes') {
+      return this.quizService.getAll().get();
+    } else {
+      const quizId: string = router.params.id;
+      return this.quizService.get(quizId);
+    }
   }
 }

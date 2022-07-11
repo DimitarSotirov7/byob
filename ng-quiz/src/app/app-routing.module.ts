@@ -24,6 +24,7 @@ const routes: Routes = [
     path: 'quiz/:id',
     pathMatch: 'full',
     component: QuizComponent,
+    resolve: { quiz: QuizResolverService },
     canActivate: [ AuthGuard, QuizGuard ],
     data: {
       authRequired: true,

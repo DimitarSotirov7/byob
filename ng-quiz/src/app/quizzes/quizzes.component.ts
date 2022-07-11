@@ -14,14 +14,9 @@ export class QuizzesComponent {
   categoryId: string = this.route.snapshot.params.id;
 
   constructor(private quizService: QuizService, private router: Router, private route: ActivatedRoute) {
-    this.getQuizzes();
   }
 
   ngOnInit() {
-    this.getQuizzes();
-  }
-  
-  getQuizzes() {
     this.quizzes = (this.route.snapshot.data.quiz.docs as any[]).map(c => ({ ...c.data(), id: c.id }));
     if (this.categoryId) {
       this.quizzes = this.quizzes.filter(q => q?.categoryId === this.categoryId);
