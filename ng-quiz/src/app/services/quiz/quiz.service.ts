@@ -7,9 +7,14 @@ import { Observable } from 'rxjs';
 })
 export class QuizService {
 
+  data: any;
   quizzesColl: string = 'quizzes';
 
-  constructor(private firestore: AngularFirestore) { }
+  constructor(private firestore: AngularFirestore) {
+    this.getAll().get().subscribe(res => {
+      this.data = res.docs.map(c => ({ ...c.data(), id: c.id }));
+    });
+  }
 
   getAll(): AngularFirestoreCollection {
     return this.firestore.collection(this.quizzesColl);

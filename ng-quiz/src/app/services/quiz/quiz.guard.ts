@@ -17,12 +17,15 @@ export class QuizGuard implements CanActivate {
     const { authRequired, redirectUrl, roleRequired } = route.data;
     
     const uid = this.authService?.uid;
+    const quizId = route.params.id;
+    const quizUsers = (this.quizService.data as any[])?.find(q => q.id === quizId)?.users;
 
-    if (uid) {
-      return true;
+    if (!uid || !quizUsers || quizUsers.includes(uid)) {
+      this.authService.authMsg.emit('You have already completed it!');
+      this.router.navigate([this.url]);
+      return false;
     }
     
-    this.router.navigate([this.url]);
-    return false;
+    return true;
   }
 }
