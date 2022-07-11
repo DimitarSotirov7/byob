@@ -64,11 +64,9 @@ export class QuizzesComponent {
     })
   }
 
-
-
   calcStars(quizId: string) {
     const quiz = this.quizzes?.find(q => q.id === quizId);
     if (!quiz?.points) { return new Array(0); }
-    return new Array(Math.floor(1 / (quiz?.points as number)));
+    return new Array(6 - Math.floor(1 / (quiz?.points as number)));
   }
 }

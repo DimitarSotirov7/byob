@@ -16,8 +16,10 @@
     gap: 10px;
 }
 
-.result {
+img {
+    vertical-align: middle;
+}
+
+.stars {
     display: flex;
-    align-items: center;
-    gap: 4px;
 }

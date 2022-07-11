@@ -11,12 +11,12 @@
                     </div>
                     <div>{{quiz.name}}</div>
                 </div>
-                <div *ngIf="lock(quiz.id)" class="result">
-                    <div>{{quiz.points * 100}}%</div>
+                <div *ngIf="lock(quiz.id)" class="stars">
                     <div *ngFor="let star of calcStars(quiz.id)" class="icon">
                         <img src="../../assets/icons/star.png" alt="star">
                     </div>
                 </div>
+                <div *ngIf="lock(quiz.id)">{{quiz.points * 100}}%</div>
             </div>
         </div>
     </div>
