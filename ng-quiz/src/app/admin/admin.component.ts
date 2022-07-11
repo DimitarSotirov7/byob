@@ -179,7 +179,7 @@ export class AdminComponent {
       const questions = res.docs.map(q => ({ text: q.data().text }));
       const questionExists = questions?.some(q => q.text === text); // Check for quiz as well!
       if (!questionExists) {
-        this.questionService.add({ text, correct: {} as IAnswerModel, answers: [] as IAnswerModel[] } as IQuestionModel)
+        this.questionService.add({ text, correct: "", answers: [] as IAnswerModel[] } as IQuestionModel)
           .then(data => {
             if (data.id) {
               this.authService.authMsg.emit('Question has been added successfully!');

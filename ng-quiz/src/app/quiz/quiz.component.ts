@@ -101,12 +101,7 @@ export class QuizComponent implements DoCheck {
             } as IAnswerModel;
           });
 
-          this.quiz.currQuestion.correct = answRes.docs.filter(a => firstQuestionCorrect === a.id).map(a => {
-            return {
-              id: a.id,
-              text: a.data().text
-            } as IAnswerModel;
-          })[0];
+          this.quiz.currQuestion.correct = answRes.docs.filter(a => firstQuestionCorrect === a.id).map(a => a.id)[0];
 
           this.quiz.questions.forEach(q => {
             q.answers = q.answers.map(a => {

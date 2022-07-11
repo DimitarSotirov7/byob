@@ -5,7 +5,18 @@
     <div class="items">
         <div *ngFor="let quiz of quizzes">
             <div class="item" routerLink="/quiz/{{quiz.id}}">
-                <div>{{quiz.name}}</div>
+                <div class="main">
+                    <div class="icon" *ngIf="lock(quiz.id)">
+                        <img src="../../assets/icons/lock.png" alt="lock">
+                    </div>
+                    <div>{{quiz.name}}</div>
+                </div>
+                <div *ngIf="lock(quiz.id)" class="result">
+                    <div>{{quiz.points * 100}}%</div>
+                    <div *ngFor="let star of calcStars(quiz.id)" class="icon">
+                        <img src="../../assets/icons/star.png" alt="star">
+                    </div>
+                </div>
             </div>
         </div>
     </div>

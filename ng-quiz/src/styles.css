@@ -22,12 +22,12 @@ header {
 
 .item, .no-items {
     padding: 15px 50px;
-    background-color: bisque;
+    background-color: rgb(216, 233, 238);
     margin: 10px auto;
 }
 
 .item:hover{
-    background-color: rgb(231, 188, 136);
+    background-color: rgb(184, 212, 221);
     cursor: pointer;
 }
 

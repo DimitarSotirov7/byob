@@ -12,7 +12,7 @@ export class QuizService {
 
   constructor(private firestore: AngularFirestore) {
     this.getAll().get().subscribe(res => {
-      this.data = res.docs.map(c => ({ ...c.data(), id: c.id }));
+      this.data = res.docs.map(q => ({ ...q.data(), id: q.id }));
     });
   }
 

@@ -7,4 +7,6 @@ export interface  IQuizModel {
     category: string,
     questions: IQuestionModel[],
     currQuestion: IQuestionModel,
+    users: string[],
+    points: number,
 }
