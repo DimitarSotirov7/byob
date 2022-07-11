@@ -16,14 +16,16 @@ export class QuizzesComponent {
   constructor(private quizService: QuizService, private router: Router, private route: ActivatedRoute) {
     this.getQuizzes();
   }
+
+  ngOnInit() {
+    this.getQuizzes();
+  }
   
   getQuizzes() {
-    this.quizService.getAll().get().subscribe(res => {
-      this.quizzes = res.docs.map(c => ({ ...c.data(), id: c.id })) as IQuizModel[];
-      if (this.categoryId) {
-        this.quizzes = this.quizzes.filter(q => q?.categoryId === this.categoryId);
-      }
-    });
+    this.quizzes = (this.route.snapshot.data.quiz.docs as any[]).map(c => ({ ...c.data(), id: c.id }));
+    if (this.categoryId) {
+      this.quizzes = this.quizzes.filter(q => q?.categoryId === this.categoryId);
+    }
   }
 
   openQuiz(id: string) {

@@ -20,6 +20,7 @@ import { UserComponent } from './user/user.component';
 import { AuthService } from './services/auth/auth.service';
 import { QuizzesComponent } from './quizzes/quizzes.component';
 import { AdminComponent } from './admin/admin.component';
+import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
 @NgModule({
   declarations: [

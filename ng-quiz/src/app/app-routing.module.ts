@@ -6,6 +6,7 @@ import { QuizComponent } from './quiz/quiz.component';
 import { QuizzesComponent } from './quizzes/quizzes.component';
 import { AuthGuard } from './services/auth/auth.guard';
 import { QuizResolverService } from './services/quiz/quiz-resolver.service';
+import { QuizGuard } from './services/quiz/quiz.guard';
 import { UserComponent } from './user/user.component';
 
 const routes: Routes = [
@@ -23,8 +24,7 @@ const routes: Routes = [
     path: 'quiz/:id',
     pathMatch: 'full',
     component: QuizComponent,
-    // resolve: { quiz: QuizResolverService },
-    canActivate: [AuthGuard],
+    canActivate: [ AuthGuard, QuizGuard ],
     data: {
       authRequired: true,
     },
@@ -47,10 +47,12 @@ const routes: Routes = [
     path: 'quizzes',
     pathMatch: 'full',
     component: QuizzesComponent,
+    resolve: { quiz: QuizResolverService },
   },
   {
     path: 'quizzes/:id',
     component: QuizzesComponent,
+    resolve: { quiz: QuizResolverService },
   },
 ];
 

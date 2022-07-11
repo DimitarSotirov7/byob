@@ -113,8 +113,6 @@ export class QuizComponent implements DoCheck {
                 } as IAnswerModel;
               });
             });
-
-            this.addUser();
           });
         });
       }
@@ -152,10 +150,16 @@ export class QuizComponent implements DoCheck {
   }
 
   complete() {
-    console.log('wow')
+    this.addUser();
+    this.sendMsg('You have completed the quiz successfully!');
+    this.navigate('quizzes');
   }
   
   navigate(url: string = '/') {
     this.router.navigateByUrl(url);
+  }
+
+  sendMsg(msg: string = 'Attention') {
+    this.authService.authMsg.emit(msg);
   }
 }
