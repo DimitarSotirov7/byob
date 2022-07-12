@@ -1,4 +1,4 @@
-<div class="container" *ngIf="!authService.uid">
+<div class="container" *ngIf="!authService.user?.uid">
     <div class="form">
         <div class="toggle">
             <button [ngClass]="{'selected': formToggle}" class="toggle-button left" (click)="formToggle = true">SingUn</button>

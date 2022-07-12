@@ -26,6 +26,6 @@ export class QuestionComponent extends Base {
 
   select(answer: IAnswerModel) {
     this.question.selected = answer.id;
-    this.questionService.addUser(this.question.id, this.authService?.uid as string, answer.id);
+    this.questionService.addUser(this.question.id, this.authService.user?.uid as string, answer.id);
   }
 }

@@ -13,13 +13,13 @@
         <div class="menu-item" (click)="navigate('/category')">
             <a>Categories</a>
         </div>
-        <div class="menu-item" (click)="navigate('/user')" *ngIf="!authService.uid">
+        <div class="menu-item" (click)="navigate('/user')" *ngIf="!authService.user?.uid">
             <a>User</a>
         </div>
-        <div class="menu-item" (click)="navigate('/admin')" *ngIf="authService.uid">
+        <div class="menu-item" (click)="navigate('/admin')" *ngIf="authService.user?.uid">
             <a>Dashboard</a>
         </div>
-        <div class="menu-item" (click)="logout()" *ngIf="authService.uid">
+        <div class="menu-item" (click)="logout()" *ngIf="authService.user?.uid">
             <a>Sign Out</a>
         </div>
     </div>

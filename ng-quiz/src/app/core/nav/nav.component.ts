@@ -13,6 +13,7 @@ export class NavComponent {
   notify: string | undefined;
   event: Subscription[] = [];
   menuOn: boolean = false;
+  email: string | null | undefined = this.authService.user?.email;
 
   constructor(public authService: AuthService, private router: Router) { 
     this.subscriptionListener();

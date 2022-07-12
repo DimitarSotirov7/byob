@@ -38,7 +38,7 @@ export class QuizzesComponent extends Base {
 
   lock(quizId: string): boolean {
     return (this.quizzes.find(q => q.id === quizId)?.users as string[])
-      .includes(this.authService.uid as string);
+      .includes(this.authService.user?.uid as string);
   }
 
   calcPoints() {
@@ -51,7 +51,7 @@ export class QuizzesComponent extends Base {
         let correctCounter = 0;
         let counter = 0;
         quizQuest.forEach(qq => {
-          if((qq as IQuestionModel)?.correct === (qq as IQuestionModel)?.users?.find(u => u.uid === this.authService.uid)?.selected) {
+          if((qq as IQuestionModel)?.correct === (qq as IQuestionModel)?.users?.find(u => u.uid === this.authService.user?.uid)?.selected) {
             correctCounter++;
           };
           counter++;

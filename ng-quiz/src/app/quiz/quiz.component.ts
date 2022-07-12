@@ -52,7 +52,7 @@ export class QuizComponent extends Base implements DoCheck {
   }
 
   addUser() {
-    this.quizService.addUser(this.id, this.authService?.uid as string);
+    this.quizService.addUser(this.id, this.authService.user?.uid as string);
   }
 
   load() {

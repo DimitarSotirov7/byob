@@ -14,13 +14,13 @@ export class AuthGuard implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     const { authRequired, redirectUrl, roleRequired } = route.data;
-    console.log(this.authService.uid)
+    console.log(this.authService.user?.uid)
 
     // Success: no auth restriction
     if (authRequired === undefined) { return true; } 
 
     // Denied: must be logged but NOT
-    else if (authRequired === true && !this.authService.uid) { 
+    else if (authRequired === true && !this.authService.user?.uid) { 
       this.authService.authMsg.emit('You must sign in first!');
     }
 

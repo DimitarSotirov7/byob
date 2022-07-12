@@ -16,7 +16,7 @@ export class QuizGuard implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     const { authRequired, redirectUrl, roleRequired } = route.data;
     
-    const uid = this.authService?.uid;
+    const uid = this.authService.user?.uid;
     const quizId = route.params.id;
     const quizUsers = (this.quizService.data as any[])?.find(q => q.id === quizId)?.users;
 

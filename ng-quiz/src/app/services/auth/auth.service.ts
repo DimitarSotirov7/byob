@@ -1,7 +1,6 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
-import { Observable } from 'rxjs';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { IFormModel } from 'src/app/interfaces/form-model';
 import { IUserModel } from 'src/app/interfaces/user-model';
 import { environment } from 'src/environments/environment';
@@ -11,17 +10,12 @@ import { environment } from 'src/environments/environment';
 })
 export class AuthService {
 
-  authState: Observable<any> = this.fireAuth.authState;
-  user: IUserModel | undefined;
-  uid: string | undefined;
+  user: IUserModel;
   authMsg: EventEmitter<string> = new EventEmitter();
 
   constructor(private fireAuth: AngularFireAuth, private firestore: AngularFirestore) {
-    this.seeder();
-    this.fireAuth.user.subscribe(res => {
-      this.user = { uid: res?.uid, email: res?.email };
-      this.uid = this.user?.uid;
-    });
+    this.user = {} as IUserModel;
+    this.load();
   }
 
   login(input: IFormModel): Promise<any> {
@@ -36,24 +30,28 @@ export class AuthService {
     return this.fireAuth.signOut();
   }
 
-  addUserFirestore(doc: string, input: IFormModel): Promise<void> {
-    return this.firestore.collection("users").doc(doc).set({
-      isAdmin: input.email === environment.admin.email
+  addUserFirestore(user: any) {
+    const uid = user?.uid;
+    const email = user?.email;
+    if (!uid || !email) {
+      return;
+    }
+    this.firestore.collection("users").doc(uid).set({
+      admin: email === environment.admin.email
     });
   }
 
-  getUserData(doc: string): AngularFirestoreDocument {
-    return this.firestore.collection("users").doc(doc);
+  load() {
+    this.fireAuth.user.subscribe(authRes => {
+      this.user = { uid: authRes?.uid, email: authRes?.email, admin: false };
+      console.log(this.user?.uid)
+      this.firestore.collection("users").doc(authRes?.uid).get().subscribe(storeRes => {
+        (this.user as IUserModel).admin = (storeRes.data() as { admin: boolean })?.admin;
+      });
+    });
   }
 
   setUserFirestore(doc: string, isAdmin: Boolean): void {
     this.firestore.collection("users").doc(doc).update({ isAdmin: isAdmin });
-  }
-
-  private seeder() {
-    // this.fireAuth.currentUser.then(res => console.log(res));
-    // const res = this.fireAuth.user.subscribe(res => console.log(res));
-
-    // console.log(res)
   }
 }

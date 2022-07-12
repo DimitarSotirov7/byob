@@ -30,6 +30,7 @@ export class UserComponent extends Base {
   register(input: IFormModel) {
     this.authService.register(input)
       .then(res => {
+        this.authService.addUserFirestore(res?.user);
         this.authService.authMsg.emit('You are sign up successfully!');
         this.navigate('quizzes');
       })
