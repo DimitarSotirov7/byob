@@ -23,10 +23,6 @@
     cursor: pointer;;
 }
 
-.loader {
-    text-align: center;
-}
-
 .title {
     padding-left: 20px;
     display: flex;
@@ -45,4 +41,9 @@
 textarea {
     height: 90px;
     resize: none;
+}
+
+.item {
+    display: flex;
+    gap: 5px;
 }

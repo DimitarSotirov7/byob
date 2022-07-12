@@ -219,4 +219,11 @@ export class AdminComponent extends Base {
       })
       .catch(err => console.log(err.message));
   }
+
+  getDate(date: Date) {
+    const newDate = new Date((date as any)?.seconds*1000);
+    if (newDate.toString() === 'Invalid Date') { return '' };
+    const dateParts = newDate.toDateString().split(' ');
+    return `${dateParts[1]} ${dateParts[2]}`;
+  }
 }
