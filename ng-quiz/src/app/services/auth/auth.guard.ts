@@ -18,11 +18,6 @@ export class AuthGuard implements CanActivate {
 
     // Success: no auth restriction
     if (authRequired === undefined) { return true; } 
-    
-    // Denied: logged in restriction
-    else if (authRequired === false && this.authService.uid) { 
-      this.authService.authMsg.emit('You are already signed in!');
-    } 
 
     // Denied: must be logged but NOT
     else if (authRequired === true && !this.authService.uid) { 

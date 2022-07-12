@@ -31,6 +31,7 @@ export class UserComponent extends Base {
     this.authService.register(input)
       .then(res => {
         this.authService.authMsg.emit('You are sign up successfully!');
+        this.navigate('quizzes');
       })
       .catch(err => {
         this.serverError = err.message;
@@ -41,6 +42,7 @@ export class UserComponent extends Base {
     this.authService.login(input)
       .then(res => {
         this.authService.authMsg.emit('You are sign in successfully!');
+        this.navigate('quizzes');
       })
       .catch(err => {
         this.serverError = err.message;

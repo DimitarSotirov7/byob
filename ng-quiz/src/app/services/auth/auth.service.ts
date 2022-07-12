@@ -3,6 +3,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
 import { IFormModel } from 'src/app/interfaces/form-model';
+import { IUserModel } from 'src/app/interfaces/user-model';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -11,13 +12,15 @@ import { environment } from 'src/environments/environment';
 export class AuthService {
 
   authState: Observable<any> = this.fireAuth.authState;
+  user: IUserModel | undefined;
   uid: string | undefined;
   authMsg: EventEmitter<string> = new EventEmitter();
 
   constructor(private fireAuth: AngularFireAuth, private firestore: AngularFirestore) {
-    this.authState.subscribe(res => {
-      this.uid = res?.auth?.lastNotifiedUid;
-      console.log(this.uid)
+    this.seeder();
+    this.fireAuth.user.subscribe(res => {
+      this.user = { uid: res?.uid, email: res?.email };
+      this.uid = this.user?.uid;
     });
   }
 
@@ -45,5 +48,12 @@ export class AuthService {
 
   setUserFirestore(doc: string, isAdmin: Boolean): void {
     this.firestore.collection("users").doc(doc).update({ isAdmin: isAdmin });
+  }
+
+  private seeder() {
+    // this.fireAuth.currentUser.then(res => console.log(res));
+    // const res = this.fireAuth.user.subscribe(res => console.log(res));
+
+    // console.log(res)
   }
 }
