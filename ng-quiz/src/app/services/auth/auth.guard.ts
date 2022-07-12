@@ -14,7 +14,6 @@ export class AuthGuard implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     const { authRequired, redirectUrl, adminRequired } = route.data;
-    console.log(this.authService.user?.uid)
 
     // Success: no auth restriction
     if (authRequired === undefined) { return true; } 

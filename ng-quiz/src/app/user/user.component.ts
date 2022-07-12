@@ -10,7 +10,7 @@ import { AuthService } from '../services/auth/auth.service';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent extends Base {
-  formToggle: boolean = true; //Register
+  formToggle: boolean = false; //Login
 
   constructor(
     router: Router,

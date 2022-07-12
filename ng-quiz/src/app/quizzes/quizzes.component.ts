@@ -38,7 +38,7 @@ export class QuizzesComponent extends Base {
 
   lock(quizId: string): boolean {
     return (this.quizzes.find(q => q.id === quizId)?.users as string[])
-      .includes(this.authService.user?.uid as string);
+      ?.includes(this.authService.user?.uid as string);
   }
 
   calcPoints() {

@@ -9,6 +9,8 @@ import { IQuizModel } from '../interfaces/quiz-model';
 import { IQuestionModel } from '../interfaces/question-model';
 import { IAnswerModel } from '../interfaces/answer-model';
 import { Base } from '../common/base';
+import { IAdminQuizModel } from '../interfaces/admin-quiz-model';
+import { IAdminCategoryModel } from '../interfaces/admin-category-model';
 
 @Component({
   selector: 'app-admin',
@@ -17,8 +19,8 @@ import { Base } from '../common/base';
 })
 export class AdminComponent extends Base {
 
-  categories: { name: string, id: string, selected: boolean }[] | undefined;
-  quizzes: { name: string, id: string, selected: boolean, questions: string[] }[] | undefined;
+  categories: IAdminCategoryModel[] | undefined;
+  quizzes: IAdminQuizModel[] | undefined;
   questions: { text: string, id: string, selected: boolean, answers: string[] }[] | undefined;
   rotateCateg: boolean = false; rotateQuiz: boolean = false; rotateQuest: boolean = false;
   fullForm: boolean = true;
@@ -51,7 +53,7 @@ export class AdminComponent extends Base {
   loadCategories() {
     this.rotateCateg = true;
     this.categoryService.getAll().get().subscribe(res => {
-      this.categories = res.docs.map(c => ({ ...c.data(), id: c.id })) as { name: string, id: string, selected: boolean }[];
+      this.categories = res.docs.map(c => ({ ...c.data(), id: c.id })) as IAdminCategoryModel[];
       this.rotateCateg = false;
     });
   }
@@ -59,7 +61,7 @@ export class AdminComponent extends Base {
   loadQuizzes() {
     this.rotateQuiz = true;
     this.quizService.getAll().get().subscribe(res => {
-      this.quizzes = res.docs.map(c => ({ ...c.data(), id: c.id })) as { name: string, id: string, selected: boolean, questions: string[] }[];
+      this.quizzes = res.docs.map(c => ({ ...c.data(), id: c.id })) as IAdminQuizModel[];
       this.rotateQuiz = false;
     });
   }
@@ -153,7 +155,9 @@ export class AdminComponent extends Base {
       const quizzes = res.docs.map(q => ({ name: q.data().name, categoryId: q.data().categoryId }));
       const quizExists = quizzes?.some(q => q.name === name && q.categoryId === categoryId);
       if (!quizExists) {
-        this.quizService.add({ name, categoryId, questions: [] as IQuestionModel[] } as IQuizModel)
+        let start = new Date();
+        let end = new Date(start.setDate(start.getDate() + 360));//Add one year
+        this.quizService.add({ name, categoryId, questions: [] as IQuestionModel[], start, end } as IQuizModel)
           .then(data => {
             if (data.id) {
               this.sendMsg('Quiz has been added successfully!');
