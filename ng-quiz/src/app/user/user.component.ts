@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { Base } from '../common/base';
 import { IFormModel } from '../interfaces/form-model';
 import { AuthService } from '../services/auth/auth.service';
 
@@ -7,11 +9,14 @@ import { AuthService } from '../services/auth/auth.service';
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.css']
 })
-export class UserComponent {
-  serverError: string | undefined;
+export class UserComponent extends Base {
   formToggle: boolean = true; //Register
 
-  constructor(public authService: AuthService) {
+  constructor(
+    router: Router,
+    authService: AuthService
+  ) {
+    super(router, authService);
   }
 
   submit(input: IFormModel) {
@@ -29,7 +34,7 @@ export class UserComponent {
       })
       .catch(err => {
         this.serverError = err.message;
-    });
+      });
   }
 
   login(input: IFormModel) {
@@ -39,6 +44,6 @@ export class UserComponent {
       })
       .catch(err => {
         this.serverError = err.message;
-    });
+      });
   }
 }

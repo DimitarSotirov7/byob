@@ -34,6 +34,10 @@ const routes: Routes = [
     path: 'user',
     pathMatch: 'full',
     component: UserComponent,
+    canActivate: [AuthGuard],
+    data: {
+      authRequired: false,
+    },
   },
   {
     path: 'admin',

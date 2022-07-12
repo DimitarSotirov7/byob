@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Base } from '../common/base';
 import { IQuestionModel } from '../interfaces/question-model';
 import { IQuizModel } from '../interfaces/quiz-model';
 import { AuthService } from '../services/auth/auth.service';
@@ -11,18 +12,19 @@ import { QuizService } from '../services/quiz/quiz.service';
   templateUrl: './quizzes.component.html',
   styleUrls: ['./quizzes.component.css']
 })
-export class QuizzesComponent {
+export class QuizzesComponent extends Base {
 
   quizzes: IQuizModel[] = [];
   categoryId: string = this.route.snapshot.params.id;
 
   constructor(
+    router: Router,
+    authService: AuthService,
     private quizService: QuizService,
     private questionService: QuestionService,
-    private router: Router,
     private route: ActivatedRoute,
-    private authService: AuthService,
   ) {
+    super(router, authService);
   }
 
   ngOnInit() {
@@ -32,10 +34,6 @@ export class QuizzesComponent {
       this.quizzes = this.quizzes.filter(q => q?.categoryId === this.categoryId);
     }
     this.calcPoints();
-  }
-
-  openQuiz(id: string) {
-    this.router.navigate(['/quiz', id]);
   }
 
   lock(quizId: string): boolean {

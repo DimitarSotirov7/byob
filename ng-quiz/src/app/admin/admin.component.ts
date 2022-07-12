@@ -1,5 +1,5 @@
 import { COMPILER_OPTIONS, Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CategoryService } from '../services/category/category.service';
 import { QuestionService } from '../services/question/question.service';
 import { QuizService } from '../services/quiz/quiz.service';
@@ -8,28 +8,30 @@ import { AuthService } from '../services/auth/auth.service';
 import { IQuizModel } from '../interfaces/quiz-model';
 import { IQuestionModel } from '../interfaces/question-model';
 import { IAnswerModel } from '../interfaces/answer-model';
+import { Base } from '../common/base';
 
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.css']
 })
-export class AdminComponent {
+export class AdminComponent extends Base {
 
   categories: { name: string, id: string, selected: boolean }[] | undefined;
   quizzes: { name: string, id: string, selected: boolean, questions: string[] }[] | undefined;
   questions: { text: string, id: string, selected: boolean, answers: string[] }[] | undefined;
   rotateCateg: boolean = false; rotateQuiz: boolean = false; rotateQuest: boolean = false;
-  serverError: string | undefined;
   fullForm: boolean = true;
 
   constructor(
-    private authService: AuthService,
+    router: Router,
+    authService: AuthService,
     private route: ActivatedRoute,
     private quizService: QuizService,
     private categoryService: CategoryService,
     private questionService: QuestionService
   ) {
+    super(router, authService);
   }
 
   submit(input: any) {
@@ -212,9 +214,5 @@ export class AdminComponent {
         }
       })
       .catch(err => console.log(err.message));
-  }
-
-  sendMsg(msg: string = 'Attention') {
-    this.authService.authMsg.emit(msg);
   }
 }

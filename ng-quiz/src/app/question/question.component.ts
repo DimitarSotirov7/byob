@@ -1,4 +1,6 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
+import { Base } from '../common/base';
 import { IAnswerModel } from '../interfaces/answer-model';
 import { IQuestionModel } from '../interfaces/question-model';
 import { AuthService } from '../services/auth/auth.service';
@@ -9,11 +11,16 @@ import { QuestionService } from '../services/question/question.service';
   templateUrl: './question.component.html',
   styleUrls: ['./question.component.css']
 })
-export class QuestionComponent {
+export class QuestionComponent extends Base {
 
   @Input() question: IQuestionModel;
 
-  constructor(public authService: AuthService, private questionService: QuestionService) {
+  constructor(
+    router: Router,
+    authService: AuthService,
+    private questionService: QuestionService
+  ) {
+    super(router, authService);
     this.question = {} as IQuestionModel;
   }
 

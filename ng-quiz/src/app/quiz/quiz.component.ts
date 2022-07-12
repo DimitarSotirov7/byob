@@ -7,13 +7,14 @@ import { CategoryService } from '../services/category/category.service';
 import { QuestionService } from '../services/question/question.service';
 import { QuizService } from '../services/quiz/quiz.service';
 import { AuthService } from '../services/auth/auth.service';
+import { Base } from '../common/base';
 
 @Component({
   selector: 'app-quiz',
   templateUrl: './quiz.component.html',
   styleUrls: ['./quiz.component.css']
 })
-export class QuizComponent implements DoCheck {
+export class QuizComponent extends Base implements DoCheck {
 
   @Output() quiz: IQuizModel;
   id: string = this.route.snapshot.params.id;
@@ -21,12 +22,14 @@ export class QuizComponent implements DoCheck {
   completed: boolean = false;
 
   constructor(
+    router: Router,
+    authService: AuthService,
     private route: ActivatedRoute,
-    private router: Router,
     private quizService: QuizService,
     private categoryService: CategoryService,
     private questionService: QuestionService,
-    private authService: AuthService) {
+  ) {
+    super(router, authService);
     this.quiz = {} as IQuizModel;
   }
 
@@ -154,13 +157,5 @@ export class QuizComponent implements DoCheck {
     this.addUser();
     this.sendMsg('You have completed the quiz successfully!');
     this.navigate('quizzes');
-  }
-
-  navigate(url: string = '/') {
-    this.router.navigateByUrl(url);
-  }
-
-  sendMsg(msg: string = 'Attention') {
-    this.authService.authMsg.emit(msg);
   }
 }
