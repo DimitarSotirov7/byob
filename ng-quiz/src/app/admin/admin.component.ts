@@ -155,9 +155,9 @@ export class AdminComponent extends Base {
       const quizzes = res.docs.map(q => ({ name: q.data().name, categoryId: q.data().categoryId }));
       const quizExists = quizzes?.some(q => q.name === name && q.categoryId === categoryId);
       if (!quizExists) {
-        let start = new Date();
-        let end = new Date(start.setDate(start.getDate() + 360));//Add one year
-        this.quizService.add({ name, categoryId, questions: [] as IQuestionModel[], start, end } as IQuizModel)
+        let date = new Date();
+        let end = new Date(date.setDate(date.getDate() + 360));//Add one year
+        this.quizService.add({ name, categoryId, questions: [] as IQuestionModel[], start: new Date(), end: end } as IQuizModel)
           .then(data => {
             if (data.id) {
               this.sendMsg('Quiz has been added successfully!');
