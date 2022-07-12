@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Timestamp } from 'rxjs';
 import { Base } from '../common/base';
 import { IQuestionModel } from '../interfaces/question-model';
 import { IQuizModel } from '../interfaces/quiz-model';
@@ -66,5 +67,18 @@ export class QuizzesComponent extends Base {
     const quiz = this.quizzes?.find(q => q.id === quizId);
     if (!quiz?.points) { return new Array(0); }
     return new Array(Math.ceil(5 * (quiz?.points as number)));
+  }
+
+  dates(quiz: IQuizModel): boolean {
+    if (!quiz?.start && !quiz?.end) {
+      return true;
+    }
+    const curr = new Date();
+    const start = new Date((quiz?.start as any).seconds*1000);
+    const end = new Date((quiz?.end as any).seconds*1000)
+    if (start < curr && curr < end) {
+      return true;
+    }
+    return false;
   }
 }

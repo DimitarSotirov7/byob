@@ -4,7 +4,7 @@
     </header>
     <div class="items">
         <div *ngFor="let quiz of quizzes">
-            <div class="item" routerLink="/quiz/{{quiz.id}}">
+            <div *ngIf="dates(quiz)" class="item" routerLink="/quiz/{{quiz.id}}">
                 <div class="main">
                     <div class="icon" *ngIf="lock(quiz.id)">
                         <img src="../../assets/icons/lock.png" alt="lock">
