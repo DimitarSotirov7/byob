@@ -46,6 +46,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: {
       authRequired: true,
+      adminRequired: true,
     },
   },
   {

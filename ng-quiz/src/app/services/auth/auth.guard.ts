@@ -13,7 +13,7 @@ export class AuthGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    const { authRequired, redirectUrl, roleRequired } = route.data;
+    const { authRequired, redirectUrl, adminRequired } = route.data;
     console.log(this.authService.user?.uid)
 
     // Success: no auth restriction
@@ -21,11 +21,13 @@ export class AuthGuard implements CanActivate {
 
     // Denied: must be logged but NOT
     else if (authRequired === true && !this.authService.user?.uid) { 
-      this.authService.authMsg.emit('You must sign in first!');
+      this.authService.authMsg.emit('You are not authorized!');
     }
 
     // Success: no role restriction
-    else if (roleRequired === undefined) { return true; }
+    else if (adminRequired === true && !this.authService.user?.admin) { 
+      this.authService.authMsg.emit('You are not authorized!');
+    }
     
     // Success
     else { return true; }
