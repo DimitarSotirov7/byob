@@ -8,6 +8,7 @@ import { QuestionService } from '../services/question/question.service';
 import { QuizService } from '../services/quiz/quiz.service';
 import { AuthService } from '../services/auth/auth.service';
 import { Base } from '../common/base';
+import { TranslateService } from '../services/translate/translate.service';
 
 @Component({
   selector: 'app-quiz',
@@ -25,11 +26,12 @@ export class QuizComponent extends Base implements DoCheck {
     router: Router,
     authService: AuthService,
     private route: ActivatedRoute,
+    menu: TranslateService,
     private quizService: QuizService,
     private categoryService: CategoryService,
     private questionService: QuestionService,
   ) {
-    super(router, authService);
+    super(router, authService, menu);
     this.quiz = {} as IQuizModel;
   }
 

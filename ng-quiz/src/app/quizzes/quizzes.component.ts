@@ -7,6 +7,7 @@ import { IQuizModel } from '../interfaces/quiz-model';
 import { AuthService } from '../services/auth/auth.service';
 import { QuestionService } from '../services/question/question.service';
 import { QuizService } from '../services/quiz/quiz.service';
+import { TranslateService } from '../services/translate/translate.service';
 
 @Component({
   selector: 'app-quizzes',
@@ -21,11 +22,12 @@ export class QuizzesComponent extends Base {
   constructor(
     router: Router,
     authService: AuthService,
+    menu: TranslateService,
     private quizService: QuizService,
     private questionService: QuestionService,
     private route: ActivatedRoute,
   ) {
-    super(router, authService);
+    super(router, authService, menu);
   }
 
   ngOnInit() {

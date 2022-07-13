@@ -21,6 +21,7 @@ import { AuthService } from './services/auth/auth.service';
 import { QuizzesComponent } from './quizzes/quizzes.component';
 import { AdminComponent } from './admin/admin.component';
 import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { TranslateService } from './services/translate/translate.service';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
     QuestionService,
     AuthService,
     QuizResolverService,
+    TranslateService,
   ],
   bootstrap: [AppComponent]
 })

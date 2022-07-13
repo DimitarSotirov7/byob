@@ -5,6 +5,7 @@ import { IAnswerModel } from '../interfaces/answer-model';
 import { IQuestionModel } from '../interfaces/question-model';
 import { AuthService } from '../services/auth/auth.service';
 import { QuestionService } from '../services/question/question.service';
+import { TranslateService } from '../services/translate/translate.service';
 
 @Component({
   selector: 'app-question',
@@ -18,9 +19,10 @@ export class QuestionComponent extends Base {
   constructor(
     router: Router,
     authService: AuthService,
+    menu: TranslateService,
     private questionService: QuestionService
   ) {
-    super(router, authService);
+    super(router, authService, menu);
     this.question = {} as IQuestionModel;
   }
 

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Base } from '../common/base';
 import { AuthService } from '../services/auth/auth.service';
+import { TranslateService } from '../services/translate/translate.service';
 
 @Component({
   selector: 'app-home',
@@ -12,8 +13,9 @@ export class HomeComponent extends Base {
 
   constructor(
     router: Router,
-    authService: AuthService
+    authService: AuthService,
+    menu: TranslateService,
   ) {
-    super(router, authService);
+    super(router, authService, menu);
   }
 }

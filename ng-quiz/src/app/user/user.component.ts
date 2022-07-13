@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Base } from '../common/base';
 import { IFormModel } from '../interfaces/form-model';
 import { AuthService } from '../services/auth/auth.service';
+import { TranslateService } from '../services/translate/translate.service';
 
 @Component({
   selector: 'app-user',
@@ -14,9 +15,10 @@ export class UserComponent extends Base {
 
   constructor(
     router: Router,
-    authService: AuthService
+    authService: AuthService,
+    menu: TranslateService,
   ) {
-    super(router, authService);
+    super(router, authService, menu);
   }
 
   submit(input: IFormModel) {

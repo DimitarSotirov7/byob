@@ -11,6 +11,7 @@ import { IAnswerModel } from '../interfaces/answer-model';
 import { Base } from '../common/base';
 import { IAdminQuizModel } from '../interfaces/admin-quiz-model';
 import { IAdminCategoryModel } from '../interfaces/admin-category-model';
+import { TranslateService } from '../services/translate/translate.service';
 
 @Component({
   selector: 'app-admin',
@@ -29,12 +30,13 @@ export class AdminComponent extends Base {
   constructor(
     router: Router,
     authService: AuthService,
+    menu: TranslateService,
     private route: ActivatedRoute,
     private quizService: QuizService,
     private categoryService: CategoryService,
-    private questionService: QuestionService
+    private questionService: QuestionService,
   ) {
-    super(router, authService);
+    super(router, authService, menu);
   }
 
   submit(input: any) {
