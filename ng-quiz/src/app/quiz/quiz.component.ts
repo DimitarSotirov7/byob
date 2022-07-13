@@ -159,9 +159,13 @@ export class QuizComponent extends Base implements DoCheck {
     return true;
   }
 
-  complete() {
+  complete(success: boolean = true) {
     this.addUser();
-    this.sendMsg('You have completed the quiz successfully!');
+    if (success) {
+      this.sendMsg('You have completed the quiz successfully!');
+    } else {
+      this.sendMsg('Your time is over!');
+    }
     this.navigate('quizzes');
   }
 
