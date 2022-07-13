@@ -9,6 +9,7 @@ import { QuizService } from '../services/quiz/quiz.service';
 import { AuthService } from '../services/auth/auth.service';
 import { Base } from '../common/base';
 import { TranslateService } from '../services/translate/translate.service';
+import { ITimeModel } from '../interfaces/time-model';
 
 @Component({
   selector: 'app-quiz',
@@ -22,8 +23,8 @@ export class QuizComponent extends Base implements DoCheck {
   back: boolean = false; next: boolean = true;
   completed: boolean = false;
   interval: any;
-  time: { minutes: number, seconds: number } = { minutes: 2, seconds: 0 };
-  timer: string = `${this.time.minutes < 10 ? '0' + this.time.minutes : this.time.minutes}:${this.time.seconds < 10 ? '0' + this.time.seconds : this.time.seconds}`;
+  time: ITimeModel | undefined;
+  timer: string | undefined;
 
   constructor(
     router: Router,
@@ -63,6 +64,7 @@ export class QuizComponent extends Base implements DoCheck {
 
   load() {
     const quiz = this.route.snapshot.data.quiz;
+    this.time = this.setTime(quiz.data()?.questions);
     this.quiz.name = quiz.data()?.name;
     const questions = quiz.data()?.questions;
 
@@ -170,27 +172,41 @@ export class QuizComponent extends Base implements DoCheck {
   }
 
   setTimer() {
-    var minutes = this.time.minutes;
-    var seconds = this.time.seconds;
+    var minutes = this.time?.minutes;
+    var seconds = this.time?.seconds;
     var me = this;
     this.interval = setInterval(function () {
       if (seconds === 0) {
         seconds = 59;
-        minutes = minutes - 1;
+        minutes = (minutes as number) - 1;
       } else {
-        seconds = seconds - 1;
+        seconds = (seconds as number) - 1;
       }
       if (minutes === 0 && seconds === 0) {
         clearInterval(me.interval);
         me.timer = '';
         me.navigate('/quizzes');
       }
-      me.timer = `${minutes < 10 ? '0' + minutes : minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+      me.timer = `${(minutes as number) < 10 ? '0' + minutes : minutes}:${(seconds as number) < 10 ? '0' + seconds : seconds}`;
     }, 1000);
   }
 
   goBack() {
     clearInterval(this.interval);
     this.navigate('/quizzes');
+  }
+
+  setTime(questions: any): ITimeModel | undefined {
+    if (!questions || questions?.length === 0) {
+      return undefined;
+    }
+
+    const count = questions?.length;
+    const SecPerQuest = 20;
+    const time = count * SecPerQuest;
+    const minutes = Math.floor(time / 60);
+    const seconds = Math.floor(time % 60);
+
+    return { minutes, seconds };
   }
 }
