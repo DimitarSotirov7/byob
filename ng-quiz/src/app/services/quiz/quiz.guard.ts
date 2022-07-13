@@ -20,6 +20,10 @@ export class QuizGuard implements CanActivate {
     const quizId = route.params.id;
     const quizUsers = (this.quizService.data as any[])?.find(q => q.id === quizId)?.users;
 
+    if (!quizUsers) {
+      return true;
+    }
+
     if (!uid || !quizUsers || quizUsers.includes(uid)) {
       this.authService.authMsg.emit('You have already completed it!');
       this.router.navigate([this.url]);

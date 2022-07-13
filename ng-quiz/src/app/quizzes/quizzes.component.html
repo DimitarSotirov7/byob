@@ -17,6 +17,12 @@
                     </div>
                 </div>
                 <div *ngIf="lock(quiz.id)">{{quiz.points * 100}}%</div>
+                <div *ngIf="!lock(quiz.id)" class="expire">
+                    <span class="icon">
+                        <img src="../../assets/icons/calendar.png" alt="calendar">
+                    </span>
+                    <span>{{getDate(quiz.expire)}}</span>
+                </div>
             </div>
         </div>
     </div>

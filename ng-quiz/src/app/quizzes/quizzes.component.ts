@@ -80,4 +80,8 @@ export class QuizzesComponent extends Base {
     }
     return false;
   }
+
+  getDate(date: Date) {
+    return this.quizService.getDate(date);
+  }
 }

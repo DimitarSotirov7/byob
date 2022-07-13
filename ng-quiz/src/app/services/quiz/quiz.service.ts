@@ -51,4 +51,11 @@ export class QuizService {
   updateExpire(quizId: string, expire: Date) {
     this.firestore.collection(this.quizzesColl).doc(quizId).update({ expire });
   }
+
+  getDate(date: Date) {
+    const newDate = new Date((date as any)?.seconds*1000);
+    if (newDate.toString() === 'Invalid Date') { return '' };
+    const dateParts = newDate.toDateString().split(' ');
+    return `${dateParts[1]} ${dateParts[2]}`;
+  }
 }
