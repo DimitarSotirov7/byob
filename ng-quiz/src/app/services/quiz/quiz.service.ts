@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
+import { ITimeModel } from 'src/app/interfaces/time-model';
 
 @Injectable({
   providedIn: 'root'
@@ -57,5 +58,19 @@ export class QuizService {
     if (newDate.toString() === 'Invalid Date') { return '' };
     const dateParts = newDate.toDateString().split(' ');
     return `${dateParts[1]} ${dateParts[2]}`;
+  }
+
+  setTime(questions: any): ITimeModel | undefined {
+    if (!questions || questions?.length === 0) {
+      return undefined;
+    }
+
+    const count = questions?.length;
+    const SecPerQuest = 20;
+    const time = count * SecPerQuest;
+    const minutes = Math.floor(time / 60);
+    const seconds = Math.floor(time % 60);
+
+    return { minutes, seconds };
   }
 }

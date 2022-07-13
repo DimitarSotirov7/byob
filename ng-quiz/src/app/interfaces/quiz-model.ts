@@ -1,4 +1,5 @@
 import { IQuestionModel } from "./question-model";
+import { ITimeModel } from "./time-model";
 
 export interface  IQuizModel {
     id: string,
@@ -11,4 +12,5 @@ export interface  IQuizModel {
     points: number,
     expire: Date,
     date: number;
+    time: ITimeModel | undefined;
 }

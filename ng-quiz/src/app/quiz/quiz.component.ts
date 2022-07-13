@@ -197,16 +197,6 @@ export class QuizComponent extends Base implements DoCheck {
   }
 
   setTime(questions: any): ITimeModel | undefined {
-    if (!questions || questions?.length === 0) {
-      return undefined;
-    }
-
-    const count = questions?.length;
-    const SecPerQuest = 20;
-    const time = count * SecPerQuest;
-    const minutes = Math.floor(time / 60);
-    const seconds = Math.floor(time % 60);
-
-    return { minutes, seconds };
+    return this.quizService.setTime(questions);
   }
 }

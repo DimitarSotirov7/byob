@@ -39,6 +39,7 @@ export class QuizzesComponent extends Base {
     }
     this.quizzes = this.quizzes.map(q => {
       q.date = this.getDaysLeft(q.expire);
+      q.time = this.quizService.setTime(q.questions);
       return q;
     });
     this.calcPoints();
