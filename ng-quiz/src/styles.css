@@ -9,8 +9,12 @@ body {
 }
 
 header {
-    text-align: center;
-    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    /* text-align: center;
+    position: relative; */
     gap: 10px;
     margin: 20px;
 }

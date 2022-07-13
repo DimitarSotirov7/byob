@@ -28,7 +28,7 @@
 }
 
 .menu-item {
-    width: 30%;
+    min-width: 50%;
     padding: 10px;
     display: flex;
     align-items: left;
@@ -42,8 +42,4 @@
 
 .menu-icon {
     width: 20px;
-}
-
-.menu-content {
-    font-size: 20px;
 }

@@ -3,8 +3,13 @@
         <div class="back" (click)="navigate('/quizzes')">
             <img src="../../assets/icons/back.png" alt="back">
         </div>
-        <div>Quiz category: {{quiz.category}}</div>
-        <div>Quiz name: {{quiz.name}}</div>
+        <div>
+            <div>Quiz category: {{quiz.category}}</div>
+            <div>Quiz name: {{quiz.name}}</div>
+        </div>
+        <div>
+            Time
+        </div>
     </header>
 
     <div class="lines" *ngIf="quiz?.questions?.length !== 0">
