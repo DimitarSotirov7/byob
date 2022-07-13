@@ -1,6 +1,6 @@
 <div class="container">
     <header>
-        <div class="back" (click)="navigate('/quizzes')">
+        <div class="back" (click)="goBack()">
             <img src="../../assets/icons/back.png" alt="back">
         </div>
         <div>
@@ -9,8 +9,7 @@
         </div>
         <div class="timer-wrapper">
             <img class="timer" src="../../assets/icons/timer.png" alt="timer" class="timer">
-            <span>{{timer.minutes < 10 ? '0' + timer.minutes : timer.minutes}}</span>:
-            <span>{{timer.seconds < 10 ? '0' + timer.seconds : timer.seconds}}</span>
+            <span>{{timer}}</span>
         </div>
     </header>
 

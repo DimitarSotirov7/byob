@@ -21,7 +21,9 @@ export class QuizComponent extends Base implements DoCheck {
   id: string = this.route.snapshot.params.id;
   back: boolean = false; next: boolean = true;
   completed: boolean = false;
-  timer: { minutes: number, seconds: number, countDown: number } = { minutes: 2, seconds: 0, countDown: 0 };
+  interval: any;
+  time: { minutes: number, seconds: number } = { minutes: 2, seconds: 0 };
+  timer: string = `${this.time.minutes < 10 ? '0' + this.time.minutes : this.time.minutes}:${this.time.seconds < 10 ? '0' + this.time.seconds : this.time.seconds}`;
 
   constructor(
     router: Router,
@@ -38,6 +40,7 @@ export class QuizComponent extends Base implements DoCheck {
 
   ngOnInit() {
     this.load();
+    this.setTimer();
   }
 
   ngDoCheck(): void {
@@ -163,16 +166,27 @@ export class QuizComponent extends Base implements DoCheck {
   }
 
   setTimer() {
-    const time = (this.timer.minutes * 60) + this.timer.seconds;
-    this.timer.countDown = time;
-    var countDownTime = new Date("Jul 25, 2021 16:37:52").getTime();
+    var minutes = this.time.minutes;
+    var seconds = this.time.seconds;
+    var me = this;
+    this.interval = setInterval(function () {
+      if (seconds === 0) {
+        seconds = 59;
+        minutes = minutes - 1;
+      } else {
+        seconds = seconds - 1;
+      }
+      if (minutes === 0 && seconds === 0) {
+        clearInterval(me.interval);
+        me.timer = '';
+        me.navigate('/quizzes');
+      }
+      me.timer = `${minutes < 10 ? '0' + minutes : minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+    }, 1000);
   }
 
-  counting() {
-    let time = (this.timer.minutes * 60) + this.timer.seconds;
-    setInterval(function () {
-      time = time - 1; 
-    }, 1000);
-
+  goBack() {
+    clearInterval(this.interval);
+    this.navigate('/quizzes');
   }
 }
