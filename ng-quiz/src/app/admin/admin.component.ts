@@ -24,6 +24,7 @@ export class AdminComponent extends Base {
   questions: { text: string, id: string, selected: boolean, answers: string[] }[] | undefined;
   rotateCateg: boolean = false; rotateQuiz: boolean = false; rotateQuest: boolean = false;
   fullForm: boolean = true;
+  editExpire: string | undefined;
 
   constructor(
     router: Router,
@@ -225,5 +226,17 @@ export class AdminComponent extends Base {
     if (newDate.toString() === 'Invalid Date') { return '' };
     const dateParts = newDate.toDateString().split(' ');
     return `${dateParts[1]} ${dateParts[2]}`;
+  }
+
+  editDate(input: any) {
+    console.log(input)
+  }
+
+  selectDate(quiz: IAdminQuizModel) {
+    if (this.editExpire === quiz.id) {
+      this.editExpire = undefined;
+    } else {
+      this.editExpire = quiz.id;
+    }
   }
 }

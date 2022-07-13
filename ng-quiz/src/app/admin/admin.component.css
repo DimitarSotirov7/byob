@@ -58,3 +58,9 @@ img {
     align-items: center;
     gap: 5px;
 }
+
+.edit-date {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}

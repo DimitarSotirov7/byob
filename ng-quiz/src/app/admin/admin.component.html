@@ -73,16 +73,22 @@
         </div>
         <div class="items">
             <div *ngFor="let quiz of quizzes" class="wrapper">
-                <div class="item" (click)="selectItem(quiz.id)">
-                    <div>{{quiz.name}}</div>
-                    <div *ngIf="quiz?.expire" class="expire">
+                <div class="item">
+                    <div (click)="selectItem(quiz.id)">{{quiz.name}}</div>
+                    <div *ngIf="quiz.selected">
+                        <img src="../../assets/icons/tick-image.png" alt="tick">
+                    </div>
+                    <div *ngIf="quiz.id === editExpire">
+                        <form #f="ngForm" (ngSubmit)="editDate(f.value)" class="edit-date">
+                            <input type="date" name="expire" ngModel>
+                            <button type="submit">Submit</button>
+                        </form>
+                    </div>
+                    <div *ngIf="quiz?.expire" class="expire" (click)="selectDate(quiz)">
                         <span class="icon">
                             <img src="../../assets/icons/calendar.png" alt="calendar">
                         </span>
                         <span>{{getDate(quiz.expire)}}</span>
-                    </div>
-                    <div *ngIf="quiz.selected">
-                        <img src="../../assets/icons/tick-image.png" alt="tick">
                     </div>
                 </div>
             </div>
