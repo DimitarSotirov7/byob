@@ -21,6 +21,7 @@ export class QuizComponent extends Base implements DoCheck {
   id: string = this.route.snapshot.params.id;
   back: boolean = false; next: boolean = true;
   completed: boolean = false;
+  timer: { minutes: number, seconds: number, countDown: number } = { minutes: 2, seconds: 0, countDown: 0 };
 
   constructor(
     router: Router,
@@ -159,5 +160,19 @@ export class QuizComponent extends Base implements DoCheck {
     this.addUser();
     this.sendMsg('You have completed the quiz successfully!');
     this.navigate('quizzes');
+  }
+
+  setTimer() {
+    const time = (this.timer.minutes * 60) + this.timer.seconds;
+    this.timer.countDown = time;
+    var countDownTime = new Date("Jul 25, 2021 16:37:52").getTime();
+  }
+
+  counting() {
+    let time = (this.timer.minutes * 60) + this.timer.seconds;
+    setInterval(function () {
+      time = time - 1; 
+    }, 1000);
+
   }
 }

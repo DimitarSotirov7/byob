@@ -7,8 +7,10 @@
             <div>Quiz category: {{quiz.category}}</div>
             <div>Quiz name: {{quiz.name}}</div>
         </div>
-        <div>
-            Time
+        <div class="timer-wrapper">
+            <img class="timer" src="../../assets/icons/timer.png" alt="timer" class="timer">
+            <span>{{timer.minutes < 10 ? '0' + timer.minutes : timer.minutes}}</span>:
+            <span>{{timer.seconds < 10 ? '0' + timer.seconds : timer.seconds}}</span>
         </div>
     </header>
 
