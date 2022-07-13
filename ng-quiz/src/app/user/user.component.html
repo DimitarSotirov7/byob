@@ -1,30 +1,30 @@
 <div class="container" *ngIf="!authService.user?.uid">
     <div class="form">
         <div class="toggle">
-            <button [ngClass]="{'selected': formToggle}" class="toggle-button left" (click)="formToggle = true">SingUn</button>
-            <button [ngClass]="{'selected': !formToggle}" class="toggle-button right" (click)="formToggle = false">SignIn</button>
+            <button [ngClass]="{'selected': formToggle}" class="toggle-button left" (click)="formToggle = true">{{menu.register}}</button>
+            <button [ngClass]="{'selected': !formToggle}" class="toggle-button right" (click)="formToggle = false">{{menu.login}}</button>
         </div>
         <form #f="ngForm" (ngSubmit)="submit(f.value)">
-            <div class="title">{{formToggle ? 'Sign Up' : 'Sign In'}}</div>
+            <div class="title">{{formToggle ? menu.register : menu.login}}</div>
             <div class="field">
-                <label>Email</label>
+                <label>{{menu.email}}</label>
                 <input #emailInput="ngModel" type="text" name="email" ngModel required email>
                 <p class="validation" *ngIf="emailInput.errors?.required && emailInput.touched">
-                    Email is required
+                    {{validation.requiredEmail}}
                 </p>
                 <p class="validation" *ngIf="emailInput.errors?.email && emailInput.touched">
-                    Email is invalid
+                    {{validation.invalidEmail}}
                 </p>
             </div>
     
             <div class="field">
-                <label>Password</label>
+                <label>{{menu.password}}</label>
                 <input #passwordInput="ngModel" type="password" name="password" ngModel required minlength="4">
                 <p class="validation" *ngIf="passwordInput.errors?.required && passwordInput.touched">
-                    Password is required
+                    {{validation.requiredPassword}}
                 </p>
                 <p class="validation" *ngIf="passwordInput.errors?.minlength && passwordInput.touched">
-                    Password length must be 4 characters at least
+                    {{validation.passwordLength}}
                 </p>
             </div>
     
@@ -33,7 +33,7 @@
             </div>
     
             <div class="button-wrapper">
-                <button type="submit" [disabled]="f.invalid">Submit</button>
+                <button type="submit" [disabled]="f.invalid">{{menu.submit}}</button>
             </div>
         </form>
     </div>

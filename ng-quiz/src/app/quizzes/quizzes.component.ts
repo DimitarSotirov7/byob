@@ -18,6 +18,7 @@ export class QuizzesComponent extends Base {
 
   quizzes: IQuizModel[] = [];
   categoryId: string = this.route.snapshot.params.id;
+  menu: any = this._menu.quizzes;
 
   constructor(
     router: Router,

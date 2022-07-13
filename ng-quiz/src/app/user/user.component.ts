@@ -12,6 +12,8 @@ import { TranslateService } from '../services/translate/translate.service';
 })
 export class UserComponent extends Base {
   formToggle: boolean = false; //Login
+  menu: any = this._menu.join;
+  validation: any = this._menu.validations;
 
   constructor(
     router: Router,
