@@ -10,4 +10,5 @@ export interface  IQuizModel {
     users: string[],
     points: number,
     expire: Date,
+    date: number;
 }

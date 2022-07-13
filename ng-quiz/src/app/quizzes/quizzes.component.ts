@@ -37,6 +37,10 @@ export class QuizzesComponent extends Base {
     if (this.categoryId) {
       this.quizzes = this.quizzes.filter(q => q?.categoryId === this.categoryId);
     }
+    this.quizzes = this.quizzes.map(q => {
+      q.date = this.getDaysLeft(q.expire);
+      return q;
+    });
     this.calcPoints();
   }
 
@@ -84,7 +88,14 @@ export class QuizzesComponent extends Base {
     return false;
   }
 
-  getDate(date: Date) {
-    return this.quizService.getDate(date);
+  getDaysLeft(timestamp: any): number {
+    const curr = new Date();
+    const date = new Date((timestamp as any)?.seconds*1000);
+    const daysLeft = Math.ceil((date.getTime() - curr.getTime()) / (86400 * 1000));
+    if (daysLeft < 0) {
+      
+    }
+    console.log(daysLeft)
+    return daysLeft;
   }
 }
