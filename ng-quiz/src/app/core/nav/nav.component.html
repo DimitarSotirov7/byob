@@ -1,5 +1,5 @@
 <div class="nav">
-    <div class="normal-icon" (click)="navigate('/')">
+    <div class="normal-icon" (click)="_navigate('/')">
         <img src="../../../assets/icons/quiz-logo-image.png" alt="logo">
     </div>
     <div class="normal-icon" (click)="menuOn = !menuOn">
@@ -7,16 +7,16 @@
     </div>
 
     <div class="menu" *ngIf="menuOn">
-        <div class="menu-item" (click)="navigate('/quizzes')">
+        <div class="menu-item" (click)="_navigate('/quizzes')">
             <a>Quizzes</a>
         </div>
-        <div class="menu-item" (click)="navigate('/category')">
-            <a>Categories</a>
+        <div class="menu-item" (click)="_navigate('/category')">
+            <a>{{menu.categories}}</a>
         </div>
-        <div class="menu-item" (click)="navigate('/user')" *ngIf="!authService.user?.uid">
+        <div class="menu-item" (click)="_navigate('/user')" *ngIf="!authService.user?.uid">
             <a>User</a>
         </div>
-        <div class="menu-item" (click)="navigate('/admin')" *ngIf="authService.user?.admin">
+        <div class="menu-item" (click)="_navigate('/admin')" *ngIf="authService.user?.admin">
             <a>Dashboard</a>
         </div>
         <div class="menu-item" (click)="logout()" *ngIf="authService.user?.uid">

@@ -1,0 +1,24 @@
+{
+    "language": "bg",
+    "nav": {
+        "logo": "Quiz",
+        "join": "Впиши се",
+        "categories": "Категории",
+        "quizzes": "Куизове",
+        "logout": "Отпиши се"
+    },
+    "home": {},
+    "join": {
+        "login": "Вход",
+        "register": "Регистрирай",
+        "submit": "Изпрати",
+        "email": "Имейл",
+        "password": "Парола"
+    },
+    "validations": {
+        "requiredEmail": "Имейлът е задължителен!",
+        "requiredPassword": "Паролата е задължителна!",
+        "invalidEmail": "Имейлът е невалиден!",
+        "passwordLength": "Паролата трябва да бъде минимум 4 символа!"
+    }
+}

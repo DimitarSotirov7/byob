@@ -15,5 +15,6 @@ export const environment = {
   },
   admin: {
     email: 'dimitarsotirov7@gmail.com'
-  }
+  },
+  translate: "bg",
 };
