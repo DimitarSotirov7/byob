@@ -4,7 +4,7 @@
     </header>
     <div class="items">
         <div *ngFor="let quiz of quizzes">
-            <div *ngIf="validateDate(quiz)" class="item" routerLink="/quiz/{{quiz.id}}">
+            <div *ngIf="quiz.date > 0" class="item" routerLink="/quiz/{{quiz.id}}">
                 <div class="main">
                     <div class="icon" *ngIf="lock(quiz.id)">
                         <img src="../../assets/icons/lock.png" alt="lock">
@@ -17,9 +17,10 @@
                     </div>
                 </div>
                 <div *ngIf="lock(quiz.id)">{{quiz.points * 100}}%</div>
-                <div *ngIf="!lock(quiz.id)" class="expire">
-                    <img src="../../assets/icons/calendar.png" alt="calendar">
-                    <span>{{quiz.date}}</span>
+                <div *ngIf="!lock(quiz.id)">
+                    <span>{{quiz.date === 1 ? menu.leftOne : menu.left}} </span>
+                    <span>{{quiz.date}} </span>
+                    <span>{{quiz.date === 1 ? menu.day : menu.days}} </span>
                 </div>
             </div>
         </div>

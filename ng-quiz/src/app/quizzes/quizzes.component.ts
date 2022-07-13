@@ -76,26 +76,13 @@ export class QuizzesComponent extends Base {
     return new Array(Math.ceil(5 * (quiz?.points as number)));
   }
 
-  validateDate(quiz: IQuizModel): boolean {
-    if (!quiz?.expire) {
-      return true;
-    }
-    const curr = new Date();
-    const expire = new Date((quiz?.expire as any).seconds*1000)
-    if (curr < expire) {
-      return true;
-    }
-    return false;
-  }
-
   getDaysLeft(timestamp: any): number {
     const curr = new Date();
     const date = new Date((timestamp as any)?.seconds*1000);
-    const daysLeft = Math.ceil((date.getTime() - curr.getTime()) / (86400 * 1000));
-    if (daysLeft < 0) {
-      
+    const daysLeft = (date.getTime() - curr.getTime()) / (86400 * 1000) + 1;
+    if (daysLeft < -1) {
+      return 0;
     }
-    console.log(daysLeft)
-    return daysLeft;
+    return Math.ceil(daysLeft);
   }
 }
