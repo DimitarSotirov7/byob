@@ -45,5 +45,16 @@ textarea {
 
 .item {
     display: flex;
+    justify-content: space-between;
+    gap: 5px;
+}
+
+img {
+    width: 15px;
+}
+
+.expire {
+    display: flex;
+    align-items: center;
     gap: 5px;
 }

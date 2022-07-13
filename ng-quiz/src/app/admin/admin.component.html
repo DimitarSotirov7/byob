@@ -75,12 +75,15 @@
             <div *ngFor="let quiz of quizzes" class="wrapper">
                 <div class="item" (click)="selectItem(quiz.id)">
                     <div>{{quiz.name}}</div>
-                    <div *ngIf="quiz?.start">{{getDate(quiz.start)}}</div>
-                    <div *ngIf="quiz?.start && quiz?.end"> - </div>
-                    <div *ngIf="quiz?.end">{{getDate(quiz.end)}}</div>
-                </div>
-                <div class="small-icon">
-                    <img *ngIf="quiz.selected" src="../../assets/icons/tick-image.png" alt="tick">
+                    <div *ngIf="quiz?.expire" class="expire">
+                        <span class="icon">
+                            <img src="../../assets/icons/calendar.png" alt="calendar">
+                        </span>
+                        <span>{{getDate(quiz.expire)}}</span>
+                    </div>
+                    <div *ngIf="quiz.selected">
+                        <img src="../../assets/icons/tick-image.png" alt="tick">
+                    </div>
                 </div>
             </div>
         </div>

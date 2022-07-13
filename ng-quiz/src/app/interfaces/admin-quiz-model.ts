@@ -3,6 +3,5 @@ export interface  IAdminQuizModel {
     id: string, 
     selected: boolean, 
     questions: string[],
-    start: Date,
-    end: Date,
+    expire: Date,
 }

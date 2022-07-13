@@ -9,6 +9,5 @@ export interface  IQuizModel {
     currQuestion: IQuestionModel,
     users: string[],
     points: number,
-    start: Date,
-    end: Date,
+    expire: Date,
 }

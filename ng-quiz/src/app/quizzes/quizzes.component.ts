@@ -69,14 +69,13 @@ export class QuizzesComponent extends Base {
     return new Array(Math.ceil(5 * (quiz?.points as number)));
   }
 
-  dates(quiz: IQuizModel): boolean {
-    if (!quiz?.start && !quiz?.end) {
+  validateDate(quiz: IQuizModel): boolean {
+    if (!quiz?.expire) {
       return true;
     }
     const curr = new Date();
-    const start = new Date((quiz?.start as any).seconds*1000);
-    const end = new Date((quiz?.end as any).seconds*1000)
-    if (start < curr && curr < end) {
+    const expire = new Date((quiz?.expire as any).seconds*1000)
+    if (curr < expire) {
       return true;
     }
     return false;

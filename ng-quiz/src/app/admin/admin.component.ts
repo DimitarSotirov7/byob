@@ -156,8 +156,8 @@ export class AdminComponent extends Base {
       const quizExists = quizzes?.some(q => q.name === name && q.categoryId === categoryId);
       if (!quizExists) {
         let date = new Date();
-        let end = new Date(date.setDate(date.getDate() + 360));//Add one year
-        this.quizService.add({ name, categoryId, questions: [] as IQuestionModel[], start: new Date(), end: end } as IQuizModel)
+        let expire = new Date(date.setDate(date.getDate() + 90));//Add three year
+        this.quizService.add({ name, categoryId, questions: [] as IQuestionModel[], expire } as IQuizModel)
           .then(data => {
             if (data.id) {
               this.sendMsg('Quiz has been added successfully!');
