@@ -81,7 +81,7 @@
                     <div *ngIf="quiz.id === editExpire">
                         <form #f="ngForm" (ngSubmit)="editDate(f.value)" class="edit-date">
                             <input type="date" name="expire" ngModel>
-                            <button type="submit">Submit</button>
+                            <button type="submit">Send</button>
                         </form>
                     </div>
                     <div *ngIf="quiz?.expire" class="expire" (click)="selectDate(quiz)">

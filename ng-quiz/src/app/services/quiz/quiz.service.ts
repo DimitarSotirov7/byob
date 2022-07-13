@@ -47,4 +47,8 @@ export class QuizService {
       this.firestore.collection(this.quizzesColl).doc(quizId).update({ users });
     });
   }
+
+  updateExpire(quizId: string, expire: Date) {
+    this.firestore.collection(this.quizzesColl).doc(quizId).update({ expire });
+  }
 }

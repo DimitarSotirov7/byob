@@ -229,7 +229,9 @@ export class AdminComponent extends Base {
   }
 
   editDate(input: any) {
-    console.log(input)
+    const expire = new Date(input.expire);
+    this.quizService.updateExpire(this.editExpire as string, expire);
+    this.editExpire = undefined;
   }
 
   selectDate(quiz: IAdminQuizModel) {
