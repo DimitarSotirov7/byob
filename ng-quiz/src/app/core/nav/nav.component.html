@@ -8,19 +8,19 @@
 
     <div class="menu" *ngIf="menuOn">
         <div class="menu-item" (click)="_navigate('/quizzes')">
-            <a>Quizzes</a>
+            <a>{{menu.quizzes}}</a>
         </div>
         <div class="menu-item" (click)="_navigate('/category')">
             <a>{{menu.categories}}</a>
         </div>
         <div class="menu-item" (click)="_navigate('/user')" *ngIf="!authService.user?.uid">
-            <a>User</a>
+            <a>{{menu.join}}</a>
         </div>
         <div class="menu-item" (click)="_navigate('/admin')" *ngIf="authService.user?.admin">
             <a>Dashboard</a>
         </div>
         <div class="menu-item" (click)="logout()" *ngIf="authService.user?.uid">
-            <a>Sign Out</a>
+            <a>{{menu.logout}}</a>
         </div>
     </div>
 </div>

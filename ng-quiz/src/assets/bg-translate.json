@@ -8,6 +8,12 @@
         "logout": "Отпиши се"
     },
     "home": {},
+    "category": {
+        "title": "Категории"
+    },
+    "quizzes": {
+        "title": "Куизове"
+    },
     "join": {
         "login": "Вход",
         "register": "Регистрирай",
@@ -20,5 +26,8 @@
         "requiredPassword": "Паролата е задължителна!",
         "invalidEmail": "Имейлът е невалиден!",
         "passwordLength": "Паролата трябва да бъде минимум 4 символа!"
+    },
+    "messages": {
+        
     }
 }
