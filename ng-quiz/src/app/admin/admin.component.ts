@@ -278,6 +278,7 @@ export class AdminComponent extends Base {
           }
         });
       });
+      this.results = this.results.sort((a, b) => b.points - a.points);
     });
     this.rotateRes = false;
   }
