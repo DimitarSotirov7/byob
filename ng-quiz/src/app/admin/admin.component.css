@@ -23,11 +23,12 @@
     cursor: pointer;;
 }
 
-.title {
-    padding-left: 20px;
+.load {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 0.3rem;
+    justify-content: center;
+    margin: 1rem 0;
 }
 
 .wrapper {
@@ -41,12 +42,6 @@
 textarea {
     height: 90px;
     resize: none;
-}
-
-.item {
-    display: flex;
-    justify-content: space-between;
-    gap: 5px;
 }
 
 img {
@@ -65,7 +60,7 @@ img {
     gap: 5px;
 }
 
-button {
-    padding: 2px;
-    margin: 0 3px;
+.button {
+    padding: 0.3rem;
+    margin: 0 0.3rem;
 }

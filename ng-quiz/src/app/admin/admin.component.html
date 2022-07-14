@@ -51,7 +51,7 @@
         </form>
     </div>
     <div class="loader">
-        <div class="title">
+        <div class="load">
             <span>Load categories</span>
             <div class="large-icon rotate" (click)="loadCategories()" [ngClass]="{'rotate': rotateCateg === true}">
                 <img src="../../assets/icons/refresh.png" alt="refresh">
@@ -65,7 +65,7 @@
                 </div>
             </div>
         </div>
-        <div class="title">
+        <div class="load">
             <span>Load quizzes</span>
             <div class="large-icon" (click)="loadQuizzes()" [ngClass]="{'rotate': rotateQuiz === true}">
                 <img src="../../assets/icons/refresh.png" alt="refresh">
@@ -74,17 +74,19 @@
         <div class="items">
             <div *ngFor="let quiz of quizzes" class="wrapper">
                 <div class="item">
-                    <div (click)="selectItem(quiz.id)">{{quiz.name}}</div>
-                    <div *ngIf="quiz.selected">
-                        <img src="../../assets/icons/tick-image.png" alt="tick">
+                    <div class="start" (click)="selectItem(quiz.id)">
+                        <span>{{quiz.name}}</span>
+                        <div *ngIf="quiz.selected">
+                            <img src="../../assets/icons/tick-image.png" alt="tick">
+                        </div>
                     </div>
-                    <div *ngIf="quiz.id === editExpire">
+                    <div class="middle" *ngIf="quiz.id === editExpire">
                         <form #f="ngForm" (ngSubmit)="editDate(f.value)" class="edit-date">
                             <input type="date" name="expire" ngModel>
-                            <button type="submit">Send</button>
+                            <button class="button" type="submit">Send</button>
                         </form>
                     </div>
-                    <div *ngIf="quiz?.expire" class="expire" (click)="selectDate(quiz)">
+                    <div *ngIf="quiz?.expire" class="expire end" (click)="selectDate(quiz)">
                         <span class="icon">
                             <img src="../../assets/icons/calendar.png" alt="calendar">
                         </span>
@@ -93,7 +95,7 @@
                 </div>
             </div>
         </div>
-        <div class="title">
+        <div class="load">
             <span>Load questions by quiz</span>
             <div class="large-icon" (click)="loadQuestions()" [ngClass]="{'rotate': rotateQuest === true}">
                 <img src="../../assets/icons/refresh.png" alt="refresh">
