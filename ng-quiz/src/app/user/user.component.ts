@@ -14,6 +14,7 @@ export class UserComponent extends Base {
   formToggle: boolean = false; //Login
   menu: any = this._menu.join;
   validation: any = this._menu.validations;
+  messages: any = this._menu.messages;
 
   constructor(
     router: Router,
@@ -50,7 +51,14 @@ export class UserComponent extends Base {
         this.navigate('quizzes');
       })
       .catch(err => {
-        this.serverError = err.message;
+        this.serverError = this.handleServerError(err.message);
       });
+  }
+
+  handleServerError(msg: string) {
+    if (msg.includes('auth/user-not-found')) {
+      return this.messages.userNotFound;
+    }
+    return msg;
   }
 }

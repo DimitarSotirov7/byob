@@ -28,8 +28,8 @@
                 </p>
             </div>
     
-            <div *ngIf="serverError">
-                <p class="validation">{{serverError}}</p>
+            <div class="field" *ngIf="serverError">
+                <span class="single validation">{{serverError}}</span>
             </div>
     
             <div class="button-wrapper">
