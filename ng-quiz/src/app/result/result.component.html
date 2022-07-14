@@ -15,7 +15,24 @@
         </div>
     </div>
 
-    <app-question [question]="quiz.currQuestion" *ngIf="quiz?.questions?.length !== 0"></app-question>
+    <!-- <app-question [question]="quiz.currQuestion" *ngIf="quiz?.questions?.length !== 0"></app-question> -->
+
+    <header>
+        <span oncopy="return false" oncut="return false">{{quiz.currQuestion?.text}}</span>
+    </header>
+    <section>
+        <div *ngFor="let answer of quiz.currQuestion?.answers">
+            <div [ngClass]="getClass(quiz.currQuestion.id, answer.id)" class="answer">
+                <span oncopy="return false" oncut="return false">{{answer?.text}}</span>
+            </div>
+        </div>
+        <div class="no-answers" *ngIf="quiz.currQuestion?.answers?.length === 0">
+            <span class="icon">
+                <img class="warning" src="../../assets/icons/warning-image.png" alt="warning">
+            </span>
+            <span>There is no answers yet. Please check later.</span>
+        </div>
+    </section>
 
     <div class="no-questions" *ngIf="quiz?.questions?.length === 0">
         <span>

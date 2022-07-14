@@ -25,3 +25,18 @@
 .completed-line {
     border-bottom: 5px solid rgb(1, 102, 1);
 }
+
+.answer {
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+.answer.selected {
+   background-color: rgb(224, 108, 88);     
+   cursor: pointer;
+}
+
+.answer.correct {
+   background-color: rgb(134, 248, 105);     
+   cursor: pointer;
+}

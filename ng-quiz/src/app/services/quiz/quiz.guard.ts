@@ -29,8 +29,7 @@ export class QuizGuard implements CanActivate {
     }
 
     if (!uid || !quizUsers || quizUsers.includes(uid)) {
-      this.url += route.params.id;
-      this.router.navigate([this.url]);
+      this.router.navigateByUrl(this.url + `${route.params.id}`);
       return false;
     }
     

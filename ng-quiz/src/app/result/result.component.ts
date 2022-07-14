@@ -18,6 +18,7 @@ export class ResultComponent extends Base {
 
   id: string = this.route.snapshot.params.id;
   quiz: IQuizModel;
+  evaluate: { questionId: string, correct: string, selected: string }[] | undefined;
   menu: any = this._menu.quiz;
   back: boolean = false; next: boolean = true;
 
@@ -42,6 +43,16 @@ export class ResultComponent extends Base {
     if (questions) {
       this.questionService.getAll().get().subscribe(questRes => {
         const questionsRes = questRes.docs.filter(q => questions.includes(q.id.toString()));
+        
+        this.evaluate = [];
+        questionsRes.forEach(q => {
+          const selected = (q.data()?.users as { uid: string, selected: string }[])
+            .find(u => u.uid === this.authService.user?.uid)?.selected;
+            
+          const record = { questionId: q.id, correct: q.data()?.correct, selected: selected as string };
+          this.evaluate?.push(record);
+        });
+
         const questionToAnswer = [] as { questionId: string, answers: string[] }[];
         this.quiz.questions = [] as IQuestionModel[];
         questionsRes.forEach(q => {
@@ -106,5 +117,10 @@ export class ResultComponent extends Base {
     }
 
     return true;
+  }
+
+  getClass(questionId: string, answerId: string) {
+    const question = this.evaluate?.find(q => q.questionId === questionId);
+    return answerId === question?.correct ? 'correct' : answerId === question?.selected ? 'selected' : '';
   }
 }
