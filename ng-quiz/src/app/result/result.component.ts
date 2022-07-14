@@ -119,8 +119,13 @@ export class ResultComponent extends Base {
     return true;
   }
 
-  getClass(questionId: string, answerId: string) {
+  getClassAnswer(questionId: string, answerId: string) {
     const question = this.evaluate?.find(q => q.questionId === questionId);
     return answerId === question?.correct ? 'correct' : answerId === question?.selected ? 'selected' : '';
+  }
+
+  getClassQuestion(questionId: string) {
+    const question = this.evaluate?.find(q => q.questionId === questionId);
+    return this.quiz.currQuestion?.id === questionId ? 'on' : question?.correct === question?.selected ? 'success' : 'fail';
   }
 }

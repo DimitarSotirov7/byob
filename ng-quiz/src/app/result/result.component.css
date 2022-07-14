@@ -18,12 +18,19 @@
 }
 
 .line {
-    border-bottom: 5px solid rgb(161, 236, 161);
     width: 20px;
 }
 
-.completed-line {
-    border-bottom: 5px solid rgb(1, 102, 1);
+.success {
+    border-bottom: 5px solid rgb(161, 236, 161);
+}
+
+.fail {
+    border-bottom: 5px solid rgb(129, 26, 0);
+}
+
+.on {
+    border-bottom: 5px solid rgb(190, 188, 20);
 }
 
 .answer {

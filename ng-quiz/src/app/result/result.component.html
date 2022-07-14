@@ -11,7 +11,7 @@
 
     <div class="lines" *ngIf="quiz?.questions?.length !== 0">
         <div *ngFor="let question of quiz.questions">
-            <div class="line" [ngClass]="{'completed-line': question.selected != undefined}"></div>
+            <div class="line" [ngClass]="getClassQuestion(question.id)"></div>
         </div>
     </div>
 
@@ -22,7 +22,7 @@
     </header>
     <section>
         <div *ngFor="let answer of quiz.currQuestion?.answers">
-            <div [ngClass]="getClass(quiz.currQuestion.id, answer.id)" class="answer">
+            <div [ngClass]="getClassAnswer(quiz.currQuestion.id, answer.id)" class="answer">
                 <span oncopy="return false" oncut="return false">{{answer?.text}}</span>
             </div>
         </div>
