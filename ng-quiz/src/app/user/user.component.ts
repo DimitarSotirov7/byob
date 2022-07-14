@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Base } from '../common/base';
 import { IFormModel } from '../interfaces/form-model';
 import { AuthService } from '../services/auth/auth.service';
@@ -20,8 +20,16 @@ export class UserComponent extends Base {
     router: Router,
     authService: AuthService,
     menu: TranslateService,
+    private route: ActivatedRoute,
   ) {
     super(router, authService, menu);
+  }
+
+  ngDoCheck(): void {
+    if (this.authService.user?.uid && this.authService.preUrl) {
+      this.navigate(this.authService.preUrl);
+      this.authService.preUrl = undefined;
+    }
   }
 
   submit(input: IFormModel) {

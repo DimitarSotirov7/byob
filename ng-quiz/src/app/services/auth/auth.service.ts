@@ -12,6 +12,7 @@ export class AuthService {
 
   user: IUserModel;
   authMsg: EventEmitter<string> = new EventEmitter();
+  preUrl: any;
 
   constructor(private fireAuth: AngularFireAuth, private firestore: AngularFirestore) {
     this.user = {} as IUserModel;

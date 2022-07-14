@@ -8,7 +8,7 @@ export class Base {
     _menu: ITranslateModel = this.translateService.get();
     messages: any = this._menu.messages;
   
-    constructor(private router: Router, public authService: AuthService, private translateService: TranslateService) {
+    constructor(public router: Router, public authService: AuthService, private translateService: TranslateService) {
     }
 
     navigate(url: string = '/') {

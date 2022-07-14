@@ -20,6 +20,12 @@ export class AuthGuard implements CanActivate {
 
     // Denied: must be logged but NOT
     else if (authRequired === true && !this.authService.user?.uid) {
+      this.authService.preUrl = '';
+      route.url?.forEach(u => this.authService.preUrl += u.path + '/' );
+      const last = this.authService.preUrl?.lastIndexOf('/');
+      if (last) {
+        this.authService.preUrl = this.authService.preUrl.slice(0, -1)
+      }
     }
 
     // Success: no role restriction
