@@ -78,17 +78,6 @@ export class QuizComponent extends Base implements DoCheck {
     if (questions) {
       this.questionService.getAll().get().subscribe(questRes => {
         const questionsRes = questRes.docs.filter(q => questions.includes(q.id.toString()));
-        const firstQuestionData = questionsRes[0]?.data();
-        const firstQuestionAnswers = firstQuestionData?.answers;
-        const firstQuestionCorrect = firstQuestionData?.correct;
-
-        this.quiz.currQuestion = {
-          id: questionsRes[0]?.id,
-          text: firstQuestionData?.text,
-          correct: firstQuestionData?.correct,
-          users: firstQuestionData?.users
-        } as IQuestionModel;
-
         const questionToAnswer = [] as { questionId: string, answers: string[] }[];
         this.quiz.questions = [] as IQuestionModel[];
         questionsRes.forEach(q => {
@@ -106,15 +95,6 @@ export class QuizComponent extends Base implements DoCheck {
         });
 
         this.questionService.getAnswers().get().subscribe(answRes => {
-          this.quiz.currQuestion.answers = answRes.docs.filter(a => firstQuestionAnswers?.includes(a.id)).map(a => {
-            return {
-              id: a.id,
-              text: a.data().text
-            } as IAnswerModel;
-          });
-
-          this.quiz.currQuestion.correct = answRes.docs.filter(a => firstQuestionCorrect === a.id).map(a => a.id)[0];
-
           this.quiz.questions.forEach(q => {
             q.answers = q.answers.map(a => {
               return {
@@ -123,13 +103,14 @@ export class QuizComponent extends Base implements DoCheck {
               } as IAnswerModel;
             });
           });
+
+          if (this.quiz.questions.length > 0) {
+            this.quiz.currQuestion = this.quiz.questions[0];
+          }
         });
+        // this.randomize();
       });
     }
-
-    // this.quizService.get(this.id).subscribe(quizRes => {
-
-    // });
   }
 
   getQuestion(goto: number) {
@@ -199,5 +180,17 @@ export class QuizComponent extends Base implements DoCheck {
 
   setTime(questions: any): ITimeModel | undefined {
     return this.quizService.setTime(questions);
+  }
+
+  randomize() {
+    const tempQuestions = [] as IQuestionModel[] | [];
+    const index = new Date().getMilliseconds(); //Between 0 - 999
+    const length = this.quiz.questions.length;
+    for (let i = 0; i < length; i++) {
+      const random = Math.floor(Math.random() * (this.quiz.questions.length - 1 - 0) + 0);
+      const question = this.quiz.questions.splice(random, 1)[0];
+      (tempQuestions as IQuestionModel[]).push(question);
+    }
+    this.quiz.questions = tempQuestions;
   }
 }
