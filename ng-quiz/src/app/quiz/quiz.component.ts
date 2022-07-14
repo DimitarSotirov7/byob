@@ -20,6 +20,7 @@ export class QuizComponent extends Base implements DoCheck {
 
   @Output() quiz: IQuizModel;
   id: string = this.route.snapshot.params.id;
+  menu: any = this._menu.quiz;
   back: boolean = false; next: boolean = true;
   completed: boolean = false;
   interval: any;

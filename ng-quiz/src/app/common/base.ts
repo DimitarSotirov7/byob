@@ -6,6 +6,7 @@ import { TranslateService } from "../services/translate/translate.service";
 export class Base {
     serverError: string | undefined;
     _menu: ITranslateModel = this.translateService.get();
+    messages: any = this._menu.messages;
   
     constructor(private router: Router, public authService: AuthService, private translateService: TranslateService) {
     }
@@ -14,7 +15,7 @@ export class Base {
       this.router.navigateByUrl(url);
     }
   
-    sendMsg(msg: string = 'Attention') {
+    sendMsg(msg: string = this.messages.attention) {
       this.authService.authMsg.emit(msg);
     }
   }

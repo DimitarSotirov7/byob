@@ -4,8 +4,8 @@
             <img src="../../assets/icons/back.png" alt="back">
         </div>
         <div>
-            <div>Quiz category: {{quiz.category}}</div>
-            <div>Quiz name: {{quiz.name}}</div>
+            <div>{{menu.category}}: {{quiz.category}}</div>
+            <div>{{menu.title}}: {{quiz.name}}</div>
         </div>
         <div class="timer-wrapper">
             <img class="timer" src="../../assets/icons/timer.png" alt="timer" class="timer">
@@ -29,8 +29,8 @@
     </div>
 
     <div class="arrows">
-        <button [disabled]="!back" (click)="getQuestion(-1)">Previous</button>
-        <button [disabled]="!next" (click)="getQuestion(1)">Next</button>
+        <button [disabled]="!back" (click)="getQuestion(-1)">{{menu.previous}}</button>
+        <button [disabled]="!next" (click)="getQuestion(1)">{{menu.next}}</button>
     </div>
 
     <div class="complete-wrapper" *ngIf="completed">

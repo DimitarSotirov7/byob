@@ -12,9 +12,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-
-    /* text-align: center;
-    position: relative; */
+    font-size: larger;
     gap: 10px;
     margin: 20px;
 }
@@ -197,7 +195,13 @@ img:hover {
 }
 
 @media only screen and (max-width: 420px) {
-    .item {
+    body {
         font-size: smaller;
+    }
+}
+
+@media only screen and (max-width: 320px) {
+    body {
+        font-size: x-small;
     }
 }

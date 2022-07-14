@@ -2,9 +2,9 @@
     "language": "bg",
     "nav": {
         "logo": "Quiz",
-        "join": "Впиши се",
+        "join": "Влез",
         "categories": "Категории",
-        "quizzes": "Куизове",
+        "quizzes": "Викторини",
         "logout": "Изход"
     },
     "home": {},
@@ -12,11 +12,17 @@
         "title": "Категории"
     },
     "quizzes": {
-        "title": "Куизове",
+        "title": "Викторини",
         "left": "Остават",
         "leftOne": "Остава",
         "days": "дни",
         "day": "ден"
+    },
+    "quiz": {
+        "title": "Викторина",
+        "category": "Категория",
+        "previous": "Назад",
+        "next": "Напред"
     },
     "join": {
         "login": "Вход",
@@ -32,6 +38,7 @@
         "passwordLength": "Паролата трябва да бъде минимум 4 символа!"
     },
     "messages": {
-
+        "attention": "Внимание",
+        "completedQuiz": "Викторината вече е попълнена!"
     }
 }

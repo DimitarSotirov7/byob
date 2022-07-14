@@ -4,6 +4,8 @@ export interface ITranslateModel {
     home:any,
     join: any,
     validations: any,
+    messages: any,
     category: any,
-    quizzes: any
+    quizzes: any,
+    quiz: any
 }
