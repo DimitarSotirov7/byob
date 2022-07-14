@@ -65,6 +65,7 @@ const routes: Routes = [
     path: 'result/:id',
     pathMatch: 'full',
     component: ResultComponent,
+    resolve: { quiz: QuizResolverService },
   },
 ];
 
