@@ -53,7 +53,7 @@
     <div class="loader">
         <div class="load">
             <span>Load categories</span>
-            <div class="large-icon rotate" (click)="loadCategories()" [ngClass]="{'rotate': rotateCateg === true}">
+            <div class="icon rotate" (click)="loadCategories()" [ngClass]="{'rotate': rotateCateg === true}">
                 <img src="../../assets/icons/refresh.png" alt="refresh">
             </div>
         </div>
@@ -67,7 +67,7 @@
         </div>
         <div class="load">
             <span>Load quizzes</span>
-            <div class="large-icon" (click)="loadQuizzes()" [ngClass]="{'rotate': rotateQuiz === true}">
+            <div class="icon" (click)="loadQuizzes()" [ngClass]="{'rotate': rotateQuiz === true}">
                 <img src="../../assets/icons/refresh.png" alt="refresh">
             </div>
         </div>
@@ -97,7 +97,7 @@
         </div>
         <div class="load">
             <span>Load questions by quiz</span>
-            <div class="large-icon" (click)="loadQuestions()" [ngClass]="{'rotate': rotateQuest === true}">
+            <div class="icon" (click)="loadQuestions()" [ngClass]="{'rotate': rotateQuest === true}">
                 <img src="../../assets/icons/refresh.png" alt="refresh">
             </div>
         </div>
@@ -107,6 +107,12 @@
                 <div class="small-icon">
                     <img *ngIf="question.selected" src="../../assets/icons/tick-image.png" alt="tick">
                 </div>
+            </div>
+        </div>
+        <div class="load">
+            <span>Load results by quiz</span>
+            <div class="icon" (click)="loadResults()" [ngClass]="{'rotate': rotateRes === true}">
+                <img src="../../assets/icons/refresh.png" alt="refresh">
             </div>
         </div>
     </div>

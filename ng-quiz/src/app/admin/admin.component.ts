@@ -23,9 +23,10 @@ export class AdminComponent extends Base {
   categories: IAdminCategoryModel[] | undefined;
   quizzes: IAdminQuizModel[] | undefined;
   questions: { text: string, id: string, selected: boolean, answers: string[] }[] | undefined;
-  rotateCateg: boolean = false; rotateQuiz: boolean = false; rotateQuest: boolean = false;
+  rotateCateg: boolean = false; rotateQuiz: boolean = false; rotateQuest: boolean = false; rotateRes: boolean = false;
   fullForm: boolean = true;
   editExpire: string | undefined;
+  results: { uid: string, points: number }[] | [] = [];
 
   constructor(
     router: Router,
@@ -239,5 +240,46 @@ export class AdminComponent extends Base {
     } else {
       this.editExpire = quiz.id;
     }
+  }
+
+  loadResults() {
+    this.results = [];
+    const quiz = this.quizzes?.find(q => q.selected);
+    if (!quiz) {
+      this.sendMsg('You should select quiz first!');
+      return;
+    }
+    this.rotateRes = true;
+    this.questionService.getAll().get().subscribe(questRes => {
+      const questions = questRes.docs
+        .map(q => ({ ...q.data(), users: q.data().users as { uid: string, selected: string }[], correct: q.data().correct, id: q.id }))
+        .filter(q => quiz?.questions?.includes(q.id));
+      questions?.forEach(q => {
+        const correct = q.correct;
+        const results = q?.users.map(u => {
+          let points = 0;
+          if (u.selected === correct) {
+            points++;
+          }
+          return { uid: u.uid, points };
+        });
+        results?.forEach(r => {
+          const result = this.results.find(x => x.uid === r.uid);
+          if (!result) {
+            (this.results as { uid: string, points: number }[])
+              .push({ uid: r.uid, points: r.points });
+          } else {
+            this.results = this.results.map(y => {
+              if (y.uid === r.uid) {
+                y.points += r.points;
+              }
+              return y;
+            });
+          }
+        });
+      });
+      console.log(this.results)
+    });
+    this.rotateRes = false;
   }
 }

@@ -15,14 +15,6 @@
     top: 40%;
 }
 
-.large-icon {
-    width: 25px;
-}
-
-.large-icon:hover {
-    cursor: pointer;;
-}
-
 .load {
     display: flex;
     align-items: center;
