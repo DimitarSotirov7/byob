@@ -168,10 +168,6 @@ img:hover {
     width: 20px;
 }
 
-.rotate {
-    animation: rotation 1s;
-}
-
 .timer-wrapper {
     display: flex;
     align-items: center;
@@ -180,6 +176,10 @@ img:hover {
 
 .timer {
     width: 15px;
+}
+
+.rotate {
+    animation: rotation 1s;
 }
   
 @keyframes rotation {
