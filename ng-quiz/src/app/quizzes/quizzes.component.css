@@ -10,19 +10,3 @@ img {
 .stars {
     display: flex;
 }
-
-.timer-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 2px;
-}
-
-.timer {
-    width: 15px;
-}
-
-@media only screen and (max-width: 420px) {
-    .item {
-        font-size: smaller;
-    }
-}

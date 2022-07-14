@@ -164,6 +164,16 @@ img:hover {
 .rotate {
     animation: rotation 1s;
 }
+
+.timer-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.timer {
+    width: 15px;
+}
   
 @keyframes rotation {
     from {
@@ -183,5 +193,11 @@ img:hover {
 @media only screen and (max-width: 700px) {
     body {
         width: 100%;
+    }
+}
+
+@media only screen and (max-width: 420px) {
+    .item {
+        font-size: smaller;
     }
 }

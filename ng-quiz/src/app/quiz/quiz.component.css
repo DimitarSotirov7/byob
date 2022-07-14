@@ -69,13 +69,3 @@ button:disabled {
     padding: 10px;
     background-color: rgb(238, 247, 225);
 }
-
-.timer-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 2px;
-}
-
-.timer {
-    width: 15px;
-}
