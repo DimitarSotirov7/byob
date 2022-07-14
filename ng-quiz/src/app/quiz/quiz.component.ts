@@ -155,6 +155,9 @@ export class QuizComponent extends Base implements DoCheck {
   }
 
   setTimer() {
+    if (!this.time) {
+      return;
+    }
     var minutes = this.time?.minutes;
     var seconds = this.time?.seconds;
     var me = this;
