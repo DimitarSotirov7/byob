@@ -8,7 +8,7 @@ import { AuthService } from './auth.service';
 })
 export class AuthGuard implements CanActivate {
 
-  private url: string = '';
+  private url: string = 'user';
 
   constructor(private authService: AuthService, private router: Router) { }
 
@@ -19,8 +19,7 @@ export class AuthGuard implements CanActivate {
     if (authRequired === undefined) { return true; } 
 
     // Denied: must be logged but NOT
-    else if (authRequired === true && !this.authService.user?.uid) { 
-      this.authService.authMsg.emit('You are not authorized!');
+    else if (authRequired === true && !this.authService.user?.uid) {
     }
 
     // Success: no role restriction

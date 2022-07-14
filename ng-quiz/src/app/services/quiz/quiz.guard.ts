@@ -17,6 +17,10 @@ export class QuizGuard implements CanActivate {
     const { authRequired, redirectUrl, roleRequired } = route.data;
     
     const uid = this.authService.user?.uid;
+    if (!uid) {
+      this.router.navigate(['user']);
+      return false;
+    }
     const quizId = route.params.id;
     const quizUsers = (this.quizService.data as any[])?.find(q => q.id === quizId)?.users;
 
