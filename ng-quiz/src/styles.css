@@ -25,9 +25,30 @@ header {
 }
 
 .item, .no-items {
-    padding: 15px 50px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 0.2rem;
+    padding: 1.3rem 0.8rem;
     background-color: rgb(216, 233, 238);
     margin: 10px auto;
+}
+
+.start {
+    justify-self: start;
+    align-self: center;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.middle {
+    justify-self: center;
+    align-self: center;
+}
+
+.end {
+    justify-self: end;
+    align-self: center;
 }
 
 .item:hover{
