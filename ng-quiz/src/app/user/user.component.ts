@@ -40,7 +40,7 @@ export class UserComponent extends Base {
         this.navigate('quizzes');
       })
       .catch(err => {
-        this.serverError = err.message;
+        this.serverError = this.handleServerError(err.message);
       });
   }
 
@@ -56,9 +56,7 @@ export class UserComponent extends Base {
   }
 
   handleServerError(msg: string) {
-    if (msg.includes('auth/user-not-found')) {
-      return this.messages.userNotFound;
-    }
-    return msg;
+    return msg.includes('auth/email-already-in-use') ? this.messages.userInUsed :
+    msg.includes('auth/user-not-found') ? this.messages.userNotFound : msg;
   }
 }

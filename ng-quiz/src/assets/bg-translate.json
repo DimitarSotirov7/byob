@@ -40,6 +40,7 @@
     "messages": {
         "attention": "Внимание",
         "completedQuiz": "Викторината вече е попълнена!",
-        "userNotFound": "Потребителят не е намерен!"
+        "userNotFound": "Имейлът не е намерен!",
+        "userInUsed": "Имейлът е вече зает!"
     }
 }
