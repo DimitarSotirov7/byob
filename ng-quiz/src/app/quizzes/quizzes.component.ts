@@ -24,12 +24,12 @@ export class QuizzesComponent extends Base {
   constructor(
     router: Router,
     authService: AuthService,
-    menu: TranslateService,
+    translateService: TranslateService,
     private quizService: QuizService,
     private questionService: QuestionService,
     private route: ActivatedRoute,
   ) {
-    super(router, authService, menu);
+    super(router, authService, translateService);
   }
 
   ngOnInit() {

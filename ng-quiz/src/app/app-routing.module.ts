@@ -4,6 +4,7 @@ import { CategoryComponent } from './category/category.component';
 import { HomeComponent } from './home/home.component';
 import { QuizComponent } from './quiz/quiz.component';
 import { QuizzesComponent } from './quizzes/quizzes.component';
+import { ResultComponent } from './result/result.component';
 import { AuthGuard } from './services/auth/auth.guard';
 import { QuizResolverService } from './services/quiz/quiz-resolver.service';
 import { QuizGuard } from './services/quiz/quiz.guard';
@@ -59,6 +60,11 @@ const routes: Routes = [
     path: 'quizzes/:id',
     component: QuizzesComponent,
     resolve: { quiz: QuizResolverService },
+  },
+  {
+    path: 'result/:id',
+    pathMatch: 'full',
+    component: ResultComponent,
   },
 ];
 

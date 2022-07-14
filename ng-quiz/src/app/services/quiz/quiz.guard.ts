@@ -9,7 +9,7 @@ import { QuizService } from './quiz.service';
 })
 export class QuizGuard implements CanActivate {
 
-  private url: string = '/quizzes';
+  private url: string = '/result/';
 
   constructor(private authService: AuthService, private quizService: QuizService, private router: Router) { }
 
@@ -29,7 +29,7 @@ export class QuizGuard implements CanActivate {
     }
 
     if (!uid || !quizUsers || quizUsers.includes(uid)) {
-      this.authService.authMsg.emit('You have already completed it!');
+      this.url += route.params.id;
       this.router.navigate([this.url]);
       return false;
     }

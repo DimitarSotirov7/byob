@@ -104,7 +104,7 @@ export class QuizComponent extends Base implements DoCheck {
             });
           });
 
-          this.randomize();
+          this.quiz.questions = this.quizService.randomize(this.quiz.questions);
 
           if (this.quiz.questions.length > 0) {
             this.quiz.currQuestion = this.quiz.questions[0];
@@ -184,26 +184,5 @@ export class QuizComponent extends Base implements DoCheck {
 
   setTime(questions: any): ITimeModel | undefined {
     return this.quizService.setTime(questions);
-  }
-
-  randomize() {
-    const tempQuestions = [] as IQuestionModel[] | [];
-    const qLength = this.quiz.questions.length;
-    for (let i = 0; i < qLength; i++) {
-      const qRandom = Math.floor(Math.random()*this.quiz.questions.length);
-      const question = this.quiz.questions.splice(qRandom, 1)[0];
-
-      const tempAnswers = [] as IAnswerModel[] | [];
-      const aLength = question.answers.length;
-      for (let j = 0; j < aLength; j++) {
-        const aRandom = Math.floor(Math.random()*question.answers.length);
-        const answers = question.answers.splice(aRandom, 1)[0];
-        (tempAnswers as IAnswerModel[]).push(answers);
-      }
-      question.answers = tempAnswers;
-
-      (tempQuestions as IQuestionModel[]).push(question);
-    }
-    this.quiz.questions = tempQuestions;
   }
 }
