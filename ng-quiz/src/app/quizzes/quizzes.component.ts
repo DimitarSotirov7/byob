@@ -4,6 +4,7 @@ import { Timestamp } from 'rxjs';
 import { Base } from '../common/base';
 import { IQuestionModel } from '../interfaces/question-model';
 import { IQuizModel } from '../interfaces/quiz-model';
+import { ITimeModel } from '../interfaces/time-model';
 import { AuthService } from '../services/auth/auth.service';
 import { QuestionService } from '../services/question/question.service';
 import { QuizService } from '../services/quiz/quiz.service';
@@ -85,5 +86,9 @@ export class QuizzesComponent extends Base {
       return 0;
     }
     return Math.ceil(daysLeft);
+  }
+
+  getTimer(time: ITimeModel | undefined): string {
+    return this.quizService.getTimer(time);
   }
 }

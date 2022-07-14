@@ -24,7 +24,7 @@ export class QuizComponent extends Base implements DoCheck {
   completed: boolean = false;
   interval: any;
   time: ITimeModel | undefined;
-  timer: string | undefined;
+  timer: string = '00:00';
 
   constructor(
     router: Router,

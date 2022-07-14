@@ -73,4 +73,12 @@ export class QuizService {
 
     return { minutes, seconds };
   }
+
+  getTimer(time: ITimeModel | undefined): string {
+    if (!time) {
+      return '00:00';
+    }
+    return `${(time.minutes as number) < 10 ? '0' + time.minutes : 
+      time.minutes}:${(time.seconds as number) < 10 ? '0' + time.seconds : time.seconds}`;
+  }
 }

@@ -6,8 +6,9 @@
         <div *ngFor="let quiz of quizzes">
             <div *ngIf="quiz.date > 0" class="item" routerLink="/quiz/{{quiz.id}}">
                 <div class="main">
-                    <div class="icon" *ngIf="lock(quiz.id)">
-                        <img src="../../assets/icons/lock.png" alt="lock">
+                    <div class="icon">
+                        <img *ngIf="lock(quiz.id)" src="../../assets/icons/lock.png" alt="lock">
+                        <img *ngIf="!lock(quiz.id)" src="../../assets/icons/open.png" alt="open">
                     </div>
                     <div>{{quiz.name}}</div>
                 </div>
@@ -15,6 +16,9 @@
                     <div *ngFor="let star of calcStars(quiz.id)" class="icon">
                         <img src="../../assets/icons/star.png" alt="star">
                     </div>
+                </div>
+                <div *ngIf="!lock(quiz.id)">
+                    <div class="icon">{{getTimer(quiz.time)}}</div>
                 </div>
                 <div *ngIf="lock(quiz.id)">{{quiz.points * 100}}%</div>
                 <div *ngIf="!lock(quiz.id)">
