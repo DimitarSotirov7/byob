@@ -29,8 +29,8 @@
     </div>
 
     <div class="arrows">
-        <button [disabled]="!back" (click)="getQuestion(-1)">{{menu.previous}}</button>
-        <button [disabled]="!next" (click)="getQuestion(1)">{{menu.next}}</button>
+        <button class="button" [disabled]="!back" (click)="getQuestion(-1)">{{menu.previous}}</button>
+        <button class="button" [disabled]="!next" (click)="getQuestion(1)">{{menu.next}}</button>
     </div>
 
     <div class="complete-wrapper" *ngIf="completed">

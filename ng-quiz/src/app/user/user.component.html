@@ -1,6 +1,6 @@
 <div class="container" *ngIf="!authService.user?.uid">
     <div class="form">
-        <div class="toggle">
+        <div>
             <button [ngClass]="{'selected': formToggle}" class="toggle-button left" (click)="formToggle = true">{{menu.register}}</button>
             <button [ngClass]="{'selected': !formToggle}" class="toggle-button right" (click)="formToggle = false">{{menu.login}}</button>
         </div>
@@ -33,7 +33,7 @@
             </div>
     
             <div class="button-wrapper">
-                <button type="submit" [disabled]="f.invalid">{{menu.submit}}</button>
+                <button class="button" type="submit" [disabled]="f.invalid">{{menu.submit}}</button>
             </div>
         </form>
     </div>

@@ -4,25 +4,6 @@
     padding: 20px;
 }
 
-button {
-    width: 80px;
-    padding: 8px 15px;
-    border: none;
-    border-radius: 20%;
-    background-color: rgb(89, 104, 240);
-    color: aliceblue;
-}
-
-button:hover {
-    cursor: pointer;
-    background-color: rgb(42, 62, 240);
-}
-
-button:disabled {
-    cursor: no-drop;
-    background-color: rgb(71, 71, 71);
-}
-
 .back {
     width: 40px;
     /* position: absolute; */
