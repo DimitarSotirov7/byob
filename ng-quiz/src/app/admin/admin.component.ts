@@ -278,7 +278,6 @@ export class AdminComponent extends Base {
           }
         });
       });
-      console.log(this.results)
     });
     this.rotateRes = false;
   }

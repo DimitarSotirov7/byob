@@ -115,5 +115,13 @@
                 <img src="../../assets/icons/refresh.png" alt="refresh">
             </div>
         </div>
+        <div class="items">
+            <div *ngFor="let result of results" class="wrapper">
+                <div class="item">
+                    <div class="start">{{result.uid}}</div>
+                    <div class="end">{{result.points === 1 ? result.points + ' point' : result.points + ' points'}}</div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
