@@ -171,7 +171,7 @@ export class QuizComponent extends Base implements DoCheck {
       if (minutes === 0 && seconds === 0) {
         clearInterval(me.interval);
         me.timer = '';
-        me.navigate('/quizzes');
+        me.complete(false);
       }
       me.timer = `${(minutes as number) < 10 ? '0' + minutes : minutes}:${(seconds as number) < 10 ? '0' + seconds : seconds}`;
     }, 1000);

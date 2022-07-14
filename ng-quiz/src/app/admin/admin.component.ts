@@ -278,8 +278,18 @@ export class AdminComponent extends Base {
           }
         });
       });
-      this.results = this.results.sort((a, b) => b.points - a.points);
+      console.log(quiz.users)
+      this.results = this.results.filter(r => (quiz.users as string[]).some(u => u === r.uid))
+        .sort((a, b) => b.points - a.points);
+      this.rotateRes = false;
     });
-    this.rotateRes = false;
+  }
+
+  removeUser(uid: string) {
+    const quiz = this.quizzes?.find(q => q.selected);
+    if (!quiz) {
+      return;
+    }
+    this.quizService.removeUser(quiz.id, uid);
   }
 }

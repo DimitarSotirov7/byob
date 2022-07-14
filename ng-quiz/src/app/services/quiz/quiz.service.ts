@@ -51,6 +51,18 @@ export class QuizService {
     });
   }
 
+  removeUser(quizId: string, uid: string) {
+    this.firestore.collection(this.quizzesColl).doc(quizId).get().subscribe(q => {
+      const quiz = q.data() as { users: string[] | undefined };
+      const users = quiz?.users === undefined ? [] : quiz?.users;
+      const index = users.indexOf(uid)
+      if (index >= 0) {
+        users.splice(index, 1);
+      }
+      this.firestore.collection(this.quizzesColl).doc(quizId).update({ users });
+    });
+  }
+
   updateExpire(quizId: string, expire: Date) {
     this.firestore.collection(this.quizzesColl).doc(quizId).update({ expire });
   }
