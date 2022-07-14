@@ -3,17 +3,28 @@
 }
 
 .item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 0.2rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 0.2rem;
     padding: 1.3rem 0.8rem;
 }
 
-.main {
+.start {
+    justify-self: start;
+    align-self: center;
     display: flex;
     align-items: center;
     gap: 5px;
+}
+
+.middle {
+    justify-self: center;
+    align-self: center;
+}
+
+.end {
+    justify-self: end;
+    align-self: center;
 }
 
 img {
@@ -23,4 +34,14 @@ img {
 
 .stars {
     display: flex;
+}
+
+.timer-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.timer {
+    width: 15px;
 }
