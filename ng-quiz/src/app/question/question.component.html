@@ -1,10 +1,10 @@
 <header>
-    {{question?.text}}
+    <span oncopy="return false" oncut="return false">{{question?.text}}</span>
 </header>
 <section>
     <div *ngFor="let answer of question?.answers">
         <div [ngClass]="{'selected': question?.selected === answer.id}" class="answer" (click)="select(answer)">
-            {{answer?.text}}
+            <span oncopy="return false" oncut="return false">{{answer?.text}}</span>
         </div>
     </div>
     <div class="no-answers" *ngIf="question?.answers?.length === 0">
