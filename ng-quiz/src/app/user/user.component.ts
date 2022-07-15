@@ -44,7 +44,8 @@ export class UserComponent extends Base {
     this.authService.register(input)
       .then(res => {
         this.authService.addUserFirestore(res?.user);
-        this.authService.authMsg.emit('You are sign up successfully!');
+        this.authService.authMsg.emit(this.messages.regSuccess);
+        this.authService.setCookie(res?.user.uid);
         this.navigate('quizzes');
       })
       .catch(err => {
@@ -55,7 +56,8 @@ export class UserComponent extends Base {
   login(input: IFormModel) {
     this.authService.login(input)
       .then(res => {
-        this.authService.authMsg.emit('You are sign in successfully!');
+        this.authService.authMsg.emit(this.messages.logSuccess);
+        this.authService.setCookie(res?.user.uid);
         this.navigate('quizzes');
       })
       .catch(err => {

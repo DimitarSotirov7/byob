@@ -8,7 +8,7 @@ import { AuthService } from './auth.service';
 })
 export class AuthGuard implements CanActivate {
 
-  private url: string = 'user';
+  private url: string = '';
 
   constructor(private authService: AuthService, private router: Router) { }
 
@@ -18,14 +18,13 @@ export class AuthGuard implements CanActivate {
     // Success: no auth restriction
     if (authRequired === undefined) { return true; } 
 
+    // Denied: must be NOT logged but Yes
+    else if (authRequired === false && this.authService.state) {
+    }
+
     // Denied: must be logged but NOT
-    else if (authRequired === true && !this.authService.user?.uid) {
-      this.authService.preUrl = '';
-      route.url?.forEach(u => this.authService.preUrl += u.path + '/' );
-      const last = this.authService.preUrl?.lastIndexOf('/');
-      if (last) {
-        this.authService.preUrl = this.authService.preUrl.slice(0, -1)
-      }
+    else if (authRequired === true && !this.authService.state) {
+      this.url = 'user';
     }
 
     // Success: no role restriction

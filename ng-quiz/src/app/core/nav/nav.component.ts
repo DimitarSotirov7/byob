@@ -17,6 +17,7 @@ export class NavComponent extends Base {
   menuOn: boolean = false;
   email: string | null | undefined = this.authService.user?.email;
   menu: any = this._menu.nav;
+  messages: any = this._menu.messages;
 
   constructor(
     router: Router,
@@ -35,7 +36,8 @@ export class NavComponent extends Base {
   logout() {
     this.authService.logout()
     .then(res => {
-      this.authService.authMsg.emit('You are sign out successfully!');
+      this.authService.authMsg.emit(this.messages.outSuccess);
+      this.authService.removeCookie();
       this.navigate();
     })
     .catch(err => {

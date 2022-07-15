@@ -15,7 +15,7 @@
             <img class="menu-icon" src="../../../assets/icons/category.png" alt="category">
             <span class="menu-content">{{menu.categories}}</span>
         </div>
-        <div class="menu-item" (click)="_navigate('/user')" *ngIf="!authService.user?.uid">
+        <div class="menu-item" (click)="_navigate('/user')" *ngIf="!authService.state">
             <img class="menu-icon" src="../../../assets/icons/join.png" alt="join">
             <span class="menu-content">{{menu.join}}</span>
         </div>
@@ -23,7 +23,7 @@
             <img class="menu-icon" src="../../../assets/icons/quiz.png" alt="quiz">
             <span class="menu-content">Dashboard</span>
         </div>
-        <div class="menu-item" (click)="logout()" *ngIf="authService.user?.uid">
+        <div class="menu-item" (click)="logout()" *ngIf="authService.state">
             <img class="menu-icon" src="../../../assets/icons/logout.png" alt="logout">
             <span class="menu-content">{{menu.logout}}</span>
         </div>

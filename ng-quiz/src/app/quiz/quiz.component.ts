@@ -1,4 +1,4 @@
-import { Component, DoCheck, Output, SimpleChanges } from '@angular/core';
+import { Component, DoCheck, OnDestroy, Output, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IQuestionModel } from '../interfaces/question-model';
 import { IAnswerModel } from '../interfaces/answer-model';
@@ -16,7 +16,7 @@ import { ITimeModel } from '../interfaces/time-model';
   templateUrl: './quiz.component.html',
   styleUrls: ['./quiz.component.css']
 })
-export class QuizComponent extends Base implements DoCheck {
+export class QuizComponent extends Base implements DoCheck, OnDestroy {
 
   @Output() quiz: IQuizModel;
   id: string = this.route.snapshot.params.id;
@@ -43,6 +43,10 @@ export class QuizComponent extends Base implements DoCheck {
   ngOnInit() {
     this.load();
     this.setTimer();
+  }
+  
+  ngOnDestroy(): void {
+    clearInterval(this.interval);
   }
 
   ngDoCheck(): void {
@@ -169,7 +173,6 @@ export class QuizComponent extends Base implements DoCheck {
         seconds = (seconds as number) - 1;
       }
       if (minutes === 0 && seconds === 0) {
-        clearInterval(me.interval);
         me.timer = '';
         me.complete(false);
       }
@@ -178,7 +181,6 @@ export class QuizComponent extends Base implements DoCheck {
   }
 
   goBack() {
-    clearInterval(this.interval);
     this.navigate('/quizzes');
   }
 
