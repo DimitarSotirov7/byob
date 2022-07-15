@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Base } from '../common/base';
 import { IFormModel } from '../interfaces/form-model';
@@ -10,7 +10,7 @@ import { TranslateService } from '../services/translate/translate.service';
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.css']
 })
-export class UserComponent extends Base {
+export class UserComponent extends Base implements OnDestroy {
   formToggle: boolean = false; //Login
   menu: any = this._menu.join;
   validation: any = this._menu.validations;
@@ -25,11 +25,8 @@ export class UserComponent extends Base {
     super(router, authService, menu);
   }
 
-  ngDoCheck(): void {
-    if (this.authService.user?.uid && this.authService.preUrl) {
-      this.navigate(this.authService.preUrl);
-      this.authService.preUrl = undefined;
-    }
+  ngOnDestroy(): void {
+    this.serverError = undefined;
   }
 
   submit(input: IFormModel) {
@@ -66,7 +63,8 @@ export class UserComponent extends Base {
   }
 
   handleServerError(msg: string) {
-    return msg.includes('auth/email-already-in-use') ? this.messages.userInUsed :
-    msg.includes('auth/user-not-found') ? this.messages.userNotFound : msg;
+    return msg.includes('auth/email-already-in-use') ? this.validation.userInUsed :
+    msg.includes('auth/user-not-found') ? this.validation.userNotFound : 
+    msg.includes('auth/wrong-password') ? this.validation.userNotFound : msg;
   }
 }
