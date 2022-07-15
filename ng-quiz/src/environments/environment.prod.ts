@@ -17,5 +17,5 @@ export const environment = {
     email: 'dimitarsotirov7@gmail.com'
   },
   translate: "bg",
-  cookieName: "uid",
+  cookieName: "security-auth-uid",
 };

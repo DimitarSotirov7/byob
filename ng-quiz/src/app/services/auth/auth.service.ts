@@ -60,10 +60,11 @@ export class AuthService {
     this.firestore.collection("users").doc(doc).update({ isAdmin: isAdmin });
   }
 
-  setCookie(uid: string) {
+  setCookie(value: string, key: string | undefined = undefined) {
+    key = key ? key : environment.cookieName;
     const date = new Date();
     date.setDate(date.getDate() + 30);
-    document.cookie = `${environment.cookieName}=${uid}; expires=${date}`;
+    document.cookie = `${key}=${value}; expires=${date}`;
   }
 
   removeCookie(key: string | undefined = undefined) {
