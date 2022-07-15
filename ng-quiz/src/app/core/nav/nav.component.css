@@ -18,11 +18,11 @@
     z-index: 9999;
     position: absolute;
     left: 0;
-    top: 64px;
+    top: 63px;
     background-color: rgb(33, 76, 126);
     color: aliceblue;
     width: 100%;
-    height: calc(100vh - 64px);
+    height: calc(100vh - 63px);
     display: flex;
     align-items: center;
     flex-direction: column;
