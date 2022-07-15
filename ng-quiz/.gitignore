@@ -2,6 +2,7 @@
 
 # compiled output
 /dist
+/quiz
 /tmp
 /out-tsc
 # Only exists if Bazel was run
@@ -45,3 +46,8 @@ testem.log
 Thumbs.db
 
 package-lock.json
+
+# Firebase
+.firebase
+firebase.json
+firebase-debug.log
