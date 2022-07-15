@@ -33,17 +33,19 @@ export class QuizzesComponent extends Base {
   }
 
   ngOnInit() {
-    // this.quizzes = (this.route.snapshot.data.quiz.docs as any[]).map(c => ({ ...c.data(), id: c.id }));
-    this.quizzes = this.quizService.data;
-    if (this.categoryId) {
-      this.quizzes = this.quizzes.filter(q => q?.categoryId === this.categoryId);
-    }
-    this.quizzes = this.quizzes.map(q => {
-      q.date = this.getDaysLeft(q.expire);
-      q.time = this.quizService.setTime(q.questions);
-      return q;
+    this.quizService.getAll().get().subscribe(res => {
+      this.quizzes = (res.docs as any[]).map(c => ({ ...c.data(), id: c.id }));
+
+      if (this.categoryId) {
+        this.quizzes = this.quizzes.filter(q => q?.categoryId === this.categoryId);
+      }
+      this.quizzes = this.quizzes.map(q => {
+        q.date = this.getDaysLeft(q.expire);
+        q.time = this.quizService.setTime(q.questions);
+        return q;
+      });
+      this.calcPoints();
     });
-    this.calcPoints();
   }
 
   lock(quizId: string): boolean {

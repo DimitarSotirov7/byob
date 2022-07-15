@@ -278,7 +278,6 @@ export class AdminComponent extends Base {
           }
         });
       });
-      console.log(quiz.users)
       this.results = this.results.filter(r => (quiz.users as string[]).some(u => u === r.uid))
         .sort((a, b) => b.points - a.points);
       this.rotateRes = false;
