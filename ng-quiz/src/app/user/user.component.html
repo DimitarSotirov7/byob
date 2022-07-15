@@ -19,7 +19,7 @@
     
             <div class="field">
                 <label>{{menu.password}}</label>
-                <input #passwordInput="ngModel" type="password" name="password" ngModel required minlength="4">
+                <input #passwordInput="ngModel" type="password" name="password" ngModel required minlength="6">
                 <p class="validation" *ngIf="passwordInput.errors?.required && passwordInput.touched">
                     {{validation.requiredPassword}}
                 </p>
