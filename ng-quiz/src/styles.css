@@ -215,3 +215,15 @@ img:hover {
         font-size: smaller;
     }
 }
+
+@media only screen and (max-width: 330px) {
+    body {
+        font-size: x-small;
+    }
+
+    .button {
+        margin: 0.5rem;
+        padding: 0.4rem 1.5rem;
+        font-size: smaller;
+    }
+}
