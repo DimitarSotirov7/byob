@@ -61,15 +61,16 @@ export class AuthService {
   }
 
   setCookie(uid: string) {
-    document.cookie = `${environment.cookieName}=${uid}`;
+    const date = new Date();
+    date.setDate(date.getDate() + 30);
+    document.cookie = `${environment.cookieName}=${uid}; expires=${date}`;
   }
 
   removeCookie(key: string | undefined = undefined) {
     key = key ? key : environment.cookieName;
-    const curr = new Date();
-    const previous = new Date(curr.getTime());
-    previous.setDate(curr.getDate() - 1);
-    document.cookie = `${key}=; expires=${previous}`;
+    const date = new Date();
+    date.setDate(date.getDate() - 1);
+    document.cookie = `${key}=; expires=${date}`;
   }
 
   private getCookie(key: string | undefined = undefined): string | undefined {
