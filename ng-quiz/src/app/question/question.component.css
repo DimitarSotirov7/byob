@@ -4,8 +4,9 @@
 }
 
 .answer:hover, .selected {
-   background-color: blanchedalmond;     
-   cursor: pointer;
+    background-color: rgb(33, 76, 126);
+    color: aliceblue;
+    cursor: pointer;
 }
 
 .answer:hover {
