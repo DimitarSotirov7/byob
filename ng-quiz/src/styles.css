@@ -208,9 +208,3 @@ img:hover {
         font-size: smaller;
     }
 }
-
-@media only screen and (max-width: 320px) {
-    body {
-        font-size: x-small;
-    }
-}
