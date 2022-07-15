@@ -21,6 +21,7 @@ export class QuizComponent extends Base implements DoCheck, OnDestroy {
   @Output() quiz: IQuizModel;
   id: string = this.route.snapshot.params.id;
   menu: any = this._menu.quiz;
+  messages: any = this._menu.messages;
   back: boolean = false; next: boolean = true;
   completed: boolean = false;
   interval: any;
@@ -151,9 +152,9 @@ export class QuizComponent extends Base implements DoCheck, OnDestroy {
   complete(success: boolean = true) {
     this.addUser();
     if (success) {
-      this.sendMsg('You have completed the quiz successfully!');
+      this.sendMsg(this.messages.quizCompleted);
     } else {
-      this.sendMsg('Your time is over!');
+      this.sendMsg(this.messages.timeOver);
     }
     this.navigate('quizzes');
   }

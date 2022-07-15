@@ -50,7 +50,7 @@ export class NavComponent extends Base {
       this.notify = msg;
       setTimeout(() => {
         this.notify = undefined;
-      }, 1500);
+      }, 2000);
     }));
   }
 }
