@@ -39,6 +39,9 @@ export class QuizzesComponent extends Base {
       if (this.categoryId) {
         this.quizzes = this.quizzes.filter(q => q?.categoryId === this.categoryId);
       }
+
+      this.quizService.data = this.quizzes;
+
       this.quizzes = this.quizzes.map(q => {
         q.date = this.getDaysLeft(q.expire);
         q.time = this.quizService.setTime(q.questions);
