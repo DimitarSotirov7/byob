@@ -3,10 +3,9 @@
         <div class="back" (click)="goBack()">
             <img src="../../assets/icons/back.png" alt="back">
         </div>
-        <div>
-            <div>{{menu.category}}: {{quiz.category}}</div>
-            <div>{{menu.title}}: {{quiz.name}}</div>
-        </div>
+        <header>
+            <div>{{quiz.name}}</div>
+        </header>
         <div class="timer-wrapper">
             <img [ngClass]="{'shake': timer?.includes('5')}" src="../../assets/icons/timer.png" alt="timer" class="timer">
             <span>{{timer}}</span>
