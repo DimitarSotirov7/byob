@@ -2,7 +2,7 @@
     display: flex;
     justify-content: space-between;
     gap: 10px;
-    background-color: aquamarine;
+    background-color: rgb(33, 76, 126);
     padding: 10px 20px;
 }
 
@@ -18,10 +18,11 @@
     z-index: 9999;
     position: absolute;
     left: 0;
-    top: 53px;
-    background-color: aquamarine;
+    top: 64px;
+    background-color: rgb(33, 76, 126);
+    color: aliceblue;
     width: 100%;
-    height: calc(100vh - 53px);
+    height: calc(100vh - 64px);
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -40,8 +41,7 @@
 
 .menu-item:hover {
     cursor: pointer;
-    background-color: rgb(79, 226, 177);
-    /* border-bottom: 3px rgb(0, 105, 88) solid; */
+    background-color: rgb(46, 90, 141);
 }
 
 .menu-icon {

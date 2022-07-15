@@ -1,3 +1,8 @@
+.container {
+    background-color: rgba(151,216,234,255);
+    height: calc(100vh - 65px);
+}
+
 .welcome {
     position: relative;
 }

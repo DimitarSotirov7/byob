@@ -1,9 +1,10 @@
 <div class="nav">
     <div class="normal-icon" (click)="_navigate('/')">
-        <img src="../../../assets/icons/quiz-logo-image.png" alt="logo">
+        <img src="../../../assets/icons/quiz-logo.png" alt="logo">
     </div>
     <div class="normal-icon" (click)="menuOn = !menuOn">
-        <img src="../../../assets/icons/hamburger-image.png" alt="hamburger">
+        <img *ngIf="!menuOn" src="../../../assets/icons/hamburger.png" alt="hamburger">
+        <img *ngIf="menuOn" src="../../../assets/icons/close.png" alt="close">
     </div>
 
     <div class="menu" *ngIf="menuOn">
