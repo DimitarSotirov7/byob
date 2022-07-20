@@ -49,4 +49,4 @@ package-lock.json
 
 # Firebase
 .firebase
-/firebase-debug.log
+*.log
