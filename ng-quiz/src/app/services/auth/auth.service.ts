@@ -1,6 +1,6 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument, CollectionReference } from '@angular/fire/compat/firestore';
 import { IFormModel } from 'src/app/interfaces/form-model';
 import { IUserModel } from 'src/app/interfaces/user-model';
 import { environment } from 'src/environments/environment';
@@ -20,7 +20,6 @@ export class AuthService {
   constructor(private fireAuth: AngularFireAuth, private firestore: AngularFirestore) {
     this.user = {} as IUserModel;
     this.load();
-    // this.logout()
   }
 
   login(input: IFormModel): Promise<any> {
@@ -42,22 +41,34 @@ export class AuthService {
       return;
     }
     this.firestore.collection("users").doc(uid).set({
-      admin: email === environment.admin.email
+      admin: email === environment.admin.email,
+      email: email
     });
   }
 
   private load() {
     this.fireAuth.user.subscribe(authRes => {
+      if (!authRes) {
+        return;
+      }
       this.user = { uid: authRes?.uid, email: authRes?.email, admin: false };
       console.log(this.user?.uid)
-      this.firestore.collection("users").doc(authRes?.uid).get().subscribe(storeRes => {
-        (this.user as IUserModel).admin = (storeRes.data() as { admin: boolean })?.admin;
+      this.getUserFirestore(authRes?.uid).get().subscribe(storeRes => {
+        this.user.admin = (storeRes.data() as { admin: boolean })?.admin;
       });
     });
   }
 
   setUserFirestore(doc: string, isAdmin: Boolean): void {
     this.firestore.collection("users").doc(doc).update({ isAdmin: isAdmin });
+  }
+
+  getUserFirestore(uid: string) {
+    return this.firestore.collection("users").doc(uid);
+  }
+
+  getUsersFirestore() {
+    return this.firestore.collection("users");
   }
 
   setCookie(value: string, key: string | undefined = undefined) {

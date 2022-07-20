@@ -12,6 +12,7 @@ import { Base } from '../common/base';
 import { IAdminQuizModel } from '../interfaces/admin-quiz-model';
 import { IAdminCategoryModel } from '../interfaces/admin-category-model';
 import { TranslateService } from '../services/translate/translate.service';
+import { IResultModel } from '../interfaces/result-model';
 
 @Component({
   selector: 'app-admin',
@@ -26,7 +27,7 @@ export class AdminComponent extends Base {
   rotateCateg: boolean = false; rotateQuiz: boolean = false; rotateQuest: boolean = false; rotateRes: boolean = false;
   fullForm: boolean = true;
   editExpire: string | undefined;
-  results: { uid: string, points: number }[] | [] = [];
+  results: IResultModel[] | [] = [];
 
   constructor(
     router: Router,
@@ -266,7 +267,7 @@ export class AdminComponent extends Base {
         results?.forEach(r => {
           const result = this.results.find(x => x.uid === r.uid);
           if (!result) {
-            (this.results as { uid: string, points: number }[])
+            (this.results as IResultModel[])
               .push({ uid: r.uid, points: r.points });
           } else {
             this.results = this.results.map(y => {
@@ -278,9 +279,17 @@ export class AdminComponent extends Base {
           }
         });
       });
+
       this.results = this.results.filter(r => (quiz.users as string[]).some(u => u === r.uid))
         .sort((a, b) => b.points - a.points);
       this.rotateRes = false;
+
+      this.authService.getUsersFirestore().get().subscribe(userRes => {
+        this.results = this.results.map(u => {
+          u.email = (userRes.docs as any[]).find(ur => ur.id === u.uid)?.data().email;
+          return u;
+        });
+      });
     });
   }
 
