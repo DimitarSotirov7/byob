@@ -28,6 +28,7 @@ export class AdminComponent extends Base {
   fullForm: boolean = true;
   editExpire: string | undefined;
   results: IResultModel[] | [] = [];
+  winner: IResultModel | undefined;
 
   constructor(
     router: Router,
@@ -280,16 +281,32 @@ export class AdminComponent extends Base {
         });
       });
 
-      this.results = this.results.filter(r => (quiz.users as string[]).some(u => u === r.uid))
-        .sort((a, b) => b.points - a.points);
-      this.rotateRes = false;
-
       this.authService.getUsersFirestore().get().subscribe(userRes => {
         this.results = this.results.map(u => {
           u.email = (userRes.docs as any[]).find(ur => ur.id === u.uid)?.data().email;
           return u;
         });
       });
+
+      this.results = this.results.filter(r => (quiz.users as string[]).some(u => u === r.uid))
+        .sort((a, b) => b.points - a.points);
+      this.rotateRes = false;
+
+      const maxPointsUsers = [] as IResultModel[]
+      let highest = -1;
+      this.results.forEach(r => {
+        if (highest === -1) {
+          highest = r.points;
+        }
+
+        if (highest === r.points) {
+          maxPointsUsers.push(r);
+        } else {
+          return;
+        }
+      })
+
+      this.winner = this.randomize(maxPointsUsers)[0];
     });
   }
 
@@ -299,5 +316,18 @@ export class AdminComponent extends Base {
       return;
     }
     this.quizService.removeUser(quiz.id, uid);
+  }
+
+  randomize(items: any[]) {
+    const permItems = Array.from(items);
+    const tempItems = [] as any[];
+    const length = permItems.length;
+    for (let i = 0; i < length; i++) {
+      const random = Math.floor(Math.random()*permItems.length);
+      const item = permItems.splice(random, 1)[0];
+
+      tempItems.push(item);
+    }
+    return tempItems;
   }
 }

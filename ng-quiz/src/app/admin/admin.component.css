@@ -56,3 +56,12 @@ img {
     padding: 0.3rem;
     margin: 0 0.3rem;
 }
+
+.winner {
+    padding: 2rem;
+    text-align: center;
+    background-color: deepskyblue;
+    color: cornsilk;
+    font-size: x-large;
+    margin: 1rem 0;
+}
