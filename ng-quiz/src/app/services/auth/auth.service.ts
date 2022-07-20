@@ -46,9 +46,10 @@ export class AuthService {
     });
   }
 
-  private load() {
+  load() {
     this.fireAuth.user.subscribe(authRes => {
       if (!authRes) {
+        this.user = {} as IUserModel;
         return;
       }
       this.user = { uid: authRes?.uid, email: authRes?.email, admin: false };

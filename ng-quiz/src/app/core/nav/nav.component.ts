@@ -38,6 +38,7 @@ export class NavComponent extends Base {
     .then(res => {
       this.authService.authMsg.emit(this.messages.outSuccess);
       this.authService.removeCookie();
+      this.authService.load();
       this.navigate();
     })
     .catch(err => {
