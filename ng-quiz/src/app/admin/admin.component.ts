@@ -316,6 +316,7 @@ export class AdminComponent extends Base {
       return;
     }
     this.quizService.removeUser(quiz.id, uid);
+    this.sendMsg('user id: ' + uid + 'is deleted.');
   }
 
   randomize(items: any[]) {
