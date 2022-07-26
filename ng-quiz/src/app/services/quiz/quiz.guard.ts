@@ -33,12 +33,17 @@ export class QuizGuard extends Base implements CanActivate {
 
     const quiz = (this.quizService.data as any[])?.find(q => q.id === route.params.id);
     if (!quiz) {
-      throw 'incorrect';
+      this.router.navigateByUrl('/quizzes');
+    }
+    const expired = this.getTimestamp(quiz.expire, 1) <= new Date().getTime();
+    if (expired) {
+      this.router.navigateByUrl('/quizzes');
+      return false;
     }
 
-    const forbidden = this.lock(quiz);
+    const timeLeft = this.getTime(quiz);
 
-    if (!uid || forbidden) {
+    if (timeLeft <= 0) {
       this.router.navigateByUrl(this.url + `${route.params.id}`);
       return false;
     }

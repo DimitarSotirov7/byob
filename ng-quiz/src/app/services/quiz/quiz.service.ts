@@ -76,19 +76,6 @@ export class QuizService {
     return `${dateParts[1]} ${dateParts[2]}`;
   }
 
-  setTime(questions: any): ITimeModel | undefined {
-    if (!questions || questions?.length === 0) {
-      return undefined;
-    }
-
-    const count = questions?.length;
-    const time = count * this.SecPerQuest;
-    const minutes = Math.floor(time / 60);
-    const seconds = Math.floor(time % 60);
-
-    return { minutes, seconds };
-  }
-
   getTimer(time: ITimeModel | undefined): string {
     if (!time) {
       return '00:00';

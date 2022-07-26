@@ -11,6 +11,7 @@ export interface  IQuizModel {
     users: { uid: string, start: Date }[],
     points: number,
     expire: Date,
-    date: number;
-    time: ITimeModel | undefined;
+    date: number,
+    time: ITimeModel | undefined,
+    timeLeft: number,
 }

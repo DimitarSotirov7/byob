@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Timestamp } from 'rxjs';
 import { Base } from '../common/base';
 import { IQuestionModel } from '../interfaces/question-model';
 import { IQuizModel } from '../interfaces/quiz-model';
@@ -44,26 +43,13 @@ export class QuizzesComponent extends Base {
 
       this.quizzes = this.quizzes.map(q => {
         q.date = this.getDaysLeft(q.expire);
-        q.time = this.quizService.setTime(q.questions);
+        q.timeLeft = this.getTime(q);
+        q.time = this.getMinSec(q.timeLeft);
         return q;
       });
       this.calcPoints();
     });
   }
-
-  // lock(quizId: string): boolean {
-  //   const quiz = this.quizzes.find(q => q.id === quizId);
-  //   const enteredUser = quiz?.users?.find(u => u?.uid === this.authService.user?.uid);
-  //   if (!enteredUser) {
-  //     return false;
-  //   }
-
-  //   const time = (quiz?.questions.length as number) * this.quizService.SecPerQuest * 1000;
-  //   console.log(this.getSec(enteredUser.start));
-  //   console.log(time);
-  //   console.log(new Date().getTime())
-  //   return this.getSec(enteredUser.start) + time <= new Date().getTime();
-  // }
 
   calcPoints() {
     this.questionService.getAll().get().subscribe(res => {

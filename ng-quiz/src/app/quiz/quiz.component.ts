@@ -71,7 +71,9 @@ export class QuizComponent extends Base implements DoCheck, OnDestroy {
 
   load() {
     const quiz = this.route.snapshot.data.quiz;
-    this.time = this.setTime(quiz.data()?.questions);
+    const quizInfo = { questions: quiz.data()?.questions, users: quiz.data()?.users };
+    const timeLeft = this.getTime(quizInfo as IQuizModel);
+    this.time = this.getMinSec(timeLeft);
     this.quiz.name = quiz.data()?.name;
     const questions = quiz.data()?.questions;
 
@@ -183,9 +185,5 @@ export class QuizComponent extends Base implements DoCheck, OnDestroy {
 
   goBack() {
     this.navigate('/quizzes');
-  }
-
-  setTime(questions: any): ITimeModel | undefined {
-    return this.quizService.setTime(questions);
   }
 }
