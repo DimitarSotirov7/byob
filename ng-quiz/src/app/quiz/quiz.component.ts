@@ -43,6 +43,7 @@ export class QuizComponent extends Base implements DoCheck, OnDestroy {
 
   ngOnInit() {
     this.load();
+    this.addUser();
     this.setTimer();
   }
   
@@ -150,7 +151,6 @@ export class QuizComponent extends Base implements DoCheck, OnDestroy {
   }
 
   complete(success: boolean = true) {
-    this.addUser();
     if (success) {
       this.sendMsg(this.messages.quizCompleted);
     } else {

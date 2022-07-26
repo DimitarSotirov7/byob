@@ -51,10 +51,19 @@ export class QuizzesComponent extends Base {
     });
   }
 
-  lock(quizId: string): boolean {
-    return (this.quizzes.find(q => q.id === quizId)?.users as string[])
-      ?.includes(this.authService.user?.uid as string);
-  }
+  // lock(quizId: string): boolean {
+  //   const quiz = this.quizzes.find(q => q.id === quizId);
+  //   const enteredUser = quiz?.users?.find(u => u?.uid === this.authService.user?.uid);
+  //   if (!enteredUser) {
+  //     return false;
+  //   }
+
+  //   const time = (quiz?.questions.length as number) * this.quizService.SecPerQuest * 1000;
+  //   console.log(this.getSec(enteredUser.start));
+  //   console.log(time);
+  //   console.log(new Date().getTime())
+  //   return this.getSec(enteredUser.start) + time <= new Date().getTime();
+  // }
 
   calcPoints() {
     this.questionService.getAll().get().subscribe(res => {
@@ -71,7 +80,7 @@ export class QuizzesComponent extends Base {
           };
           counter++;
         });
-        quiz.points = correctCounter / counter;
+        quiz.points = Math.round(correctCounter / counter);
         return quiz;
       });
     })

@@ -3,6 +3,7 @@ import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument 
 import { Observable } from 'rxjs';
 import { IAnswerModel } from 'src/app/interfaces/answer-model';
 import { IQuestionModel } from 'src/app/interfaces/question-model';
+import { IQuizModel } from 'src/app/interfaces/quiz-model';
 import { ITimeModel } from 'src/app/interfaces/time-model';
 
 @Injectable({
@@ -12,6 +13,7 @@ export class QuizService {
 
   data: any;
   quizzesColl: string = 'quizzes';
+  SecPerQuest: number = 20;
 
   constructor(private firestore: AngularFirestore) {
     this.getAll().get().subscribe(res => {
@@ -42,10 +44,10 @@ export class QuizService {
 
   addUser(quizId: string, uid: string) {
     this.firestore.collection(this.quizzesColl).doc(quizId).get().subscribe(q => {
-      const quiz = q.data() as { users: string[] | undefined };
+      const quiz = q.data() as { users: { uid: string, start: Date }[] | undefined };
       const users = quiz?.users === undefined ? [] : quiz?.users;
-      if (!users.includes(uid)) {
-        users.push(uid);
+      if (!users.find(u => u.uid === uid)) {
+        users.push({ uid: uid, start: new Date()});
       }
       this.firestore.collection(this.quizzesColl).doc(quizId).update({ users });
     });
@@ -53,9 +55,9 @@ export class QuizService {
 
   removeUser(quizId: string, uid: string) {
     this.firestore.collection(this.quizzesColl).doc(quizId).get().subscribe(q => {
-      const quiz = q.data() as { users: string[] | undefined };
+      const quiz = q.data() as { users: { uid: string, start: Date }[] | undefined };
       const users = quiz?.users === undefined ? [] : quiz?.users;
-      const index = users.indexOf(uid)
+      const index = users.findIndex(u => u?.uid === uid);
       if (index >= 0) {
         users.splice(index, 1);
       }
@@ -80,8 +82,7 @@ export class QuizService {
     }
 
     const count = questions?.length;
-    const SecPerQuest = 20;
-    const time = count * SecPerQuest;
+    const time = count * this.SecPerQuest;
     const minutes = Math.floor(time / 60);
     const seconds = Math.floor(time % 60);
 

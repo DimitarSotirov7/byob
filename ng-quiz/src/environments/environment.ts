@@ -18,4 +18,7 @@ export const environment = {
   },
   translate: "bg",
   cookieName: "uid",
+  quizConfig: {
+    secPerQuest: 20,
+  },
 };

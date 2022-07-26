@@ -288,7 +288,7 @@ export class AdminComponent extends Base {
         });
       });
 
-      this.results = this.results.filter(r => (quiz.users as string[]).some(u => u === r.uid))
+      this.results = this.results.filter(r => (quiz.users as { uid: string, start: Date }[]).some(u => u.uid === r.uid))
         .sort((a, b) => b.points - a.points);
       this.rotateRes = false;
 

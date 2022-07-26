@@ -8,7 +8,7 @@ export interface  IQuizModel {
     category: string,
     questions: IQuestionModel[],
     currQuestion: IQuestionModel,
-    users: string[],
+    users: { uid: string, start: Date }[],
     points: number,
     expire: Date,
     date: number;
