@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
+import { IQuestionModel } from 'src/app/interfaces/question-model';
 
 @Injectable({
   providedIn: 'root'
@@ -44,6 +45,16 @@ export class QuestionService {
         });
       }
       this.firestore.collection(this.questionsColl).doc(questionId).update({ users });
+    });
+  }
+
+  removeUser(questions: string[], uid: string) {
+    this.firestore.collection(this.questionsColl).get().subscribe(q => {
+      const questionsFound = (q.docs as any[]).filter(x => questions.includes(x.id)).map(x => ({ id: x.id, users: x.data()?.users }));
+      Promise.all(questionsFound.map(x => {
+        const users = (x.users as { uid: string }[]).filter(u => u.uid !== uid);
+        this.firestore.collection(this.questionsColl).doc(x.id).update({ users })
+      }));
     });
   }
 

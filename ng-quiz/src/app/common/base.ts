@@ -42,6 +42,10 @@ export class Base {
       return time;
     }
 
+    if (entered.completed) {
+      return 0;
+    }
+
     const timeLeft = (this.getTimestamp(entered.start) + time) - new Date().getTime();
     return timeLeft;
   }

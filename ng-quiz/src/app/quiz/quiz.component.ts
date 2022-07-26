@@ -70,6 +70,7 @@ export class QuizComponent extends Base implements DoCheck, OnDestroy {
   }
 
   load() {
+    this.quiz.id = this.id;
     const quiz = this.route.snapshot.data.quiz;
     const quizInfo = { questions: quiz.data()?.questions, users: quiz.data()?.users };
     const timeLeft = this.getTime(quizInfo as IQuizModel);
@@ -153,6 +154,7 @@ export class QuizComponent extends Base implements DoCheck, OnDestroy {
   }
 
   complete(success: boolean = true) {
+    this.quizService.setCompleted(this.quiz.id, this.authService.user.uid as string);
     if (success) {
       this.sendMsg(this.messages.quizCompleted);
     } else {

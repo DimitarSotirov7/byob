@@ -55,7 +55,7 @@ export class QuizService {
 
   removeUser(quizId: string, uid: string) {
     this.firestore.collection(this.quizzesColl).doc(quizId).get().subscribe(q => {
-      const quiz = q.data() as { users: { uid: string, start: Date }[] | undefined };
+      const quiz = q.data() as { users: { uid: string, start: Date }[] | undefined, questions: string[] };
       const users = quiz?.users === undefined ? [] : quiz?.users;
       const index = users.findIndex(u => u?.uid === uid);
       if (index >= 0) {
@@ -67,6 +67,20 @@ export class QuizService {
 
   updateExpire(quizId: string, expire: Date) {
     this.firestore.collection(this.quizzesColl).doc(quizId).update({ expire });
+  }
+
+  setCompleted(quizId: string, uid: string) {
+    this.firestore.collection(this.quizzesColl).doc(quizId).get().subscribe(q => {
+      const quiz = q.data() as { users: { uid: string, start: Date, completed: boolean }[] | undefined };
+      let users = quiz?.users === undefined ? [] : quiz?.users;
+      users = users.map(u => {
+        if (u.uid === uid) {
+          u.completed = true;
+        }
+        return u;
+      })
+      this.firestore.collection(this.quizzesColl).doc(quizId).update({ users });
+    });
   }
 
   getDate(date: Date) {
