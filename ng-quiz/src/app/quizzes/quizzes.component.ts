@@ -48,6 +48,7 @@ export class QuizzesComponent extends Base {
         return q;
       });
       this.calcPoints();
+      console.log(this.quizzes)
     });
   }
 

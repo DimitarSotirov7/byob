@@ -179,7 +179,7 @@ export class QuizComponent extends Base implements DoCheck, OnDestroy {
         me.timer = '';
         me.complete(false);
       }
-      me.timer = `${(minutes as number) < 10 ? '0' + minutes : minutes}:${(seconds as number) < 10 ? '0' + seconds : seconds}`;
+      me.timer = me.quizService.getTimer({ minutes, seconds });
     }, 1000);
   }
 

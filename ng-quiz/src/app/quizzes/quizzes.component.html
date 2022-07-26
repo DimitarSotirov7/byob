@@ -4,7 +4,6 @@
     </header>
     <div class="items">
         <div *ngFor="let quiz of quizzes">
-            left: {{quiz.timeLeft}}
             <div *ngIf="quiz.date > 0" class="item" routerLink="/quiz/{{quiz.id}}">
                 <div class="start">
                     <div class="icon">
