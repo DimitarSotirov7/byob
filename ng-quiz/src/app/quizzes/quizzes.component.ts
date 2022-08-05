@@ -111,7 +111,7 @@ export class QuizzesComponent extends Base implements OnInit, DoCheck {
     const user = quiz.users.find(u => u.uid === this.authService.user?.uid);
     if (!user) {
       this.openQuizId = quiz.id;
-      this.alert.msg = 'След като потвърдите викторината, ще стартира незабавно и ще имате точно време за да я приключите.';
+      this.alert.msg = this.menu.alert;
     } else if (user?.completed) {
       this.navigate('result/' + quiz.id);
     } else {
