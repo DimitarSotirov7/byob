@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Base } from '../common/base';
 import { IAlertModel } from '../interfaces/alert-model';
@@ -10,7 +10,7 @@ import { TranslateService } from '../services/translate/translate.service';
   templateUrl: './alert.component.html',
   styleUrls: ['./alert.component.css']
 })
-export class AlertComponent extends Base implements OnInit {
+export class AlertComponent extends Base {
 
   @Input() alert: IAlertModel;
   menu: any = this._menu.alert;
@@ -24,14 +24,13 @@ export class AlertComponent extends Base implements OnInit {
     this.alert = {} as IAlertModel;
   }
 
-  ngOnInit(): void {
-  }
-
   click(option: boolean) {
     if (option) {
       this.alert.confirm = true;
+      this.alert.cancel = false;
     } else {
       this.alert.cancel = true;
+      this.alert.confirm = false;
     }
   }
 }

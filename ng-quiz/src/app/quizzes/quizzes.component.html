@@ -4,7 +4,7 @@
     </header>
     <div class="items">
         <div *ngFor="let quiz of quizzes">
-            <div class="item" (click)="open(quiz.id)">
+            <div class="item" (click)="open(quiz)">
                 <div class="start">
                     <div class="icon">
                         <img *ngIf="quiz.timeLeft <= 0" src="../../assets/icons/lock.png" alt="lock">

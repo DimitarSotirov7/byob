@@ -1,4 +1,4 @@
-import { Component, Output } from '@angular/core';
+import { Component, DoCheck, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Base } from '../common/base';
 import { IAlertModel } from '../interfaces/alert-model';
@@ -15,12 +15,13 @@ import { TranslateService } from '../services/translate/translate.service';
   templateUrl: './quizzes.component.html',
   styleUrls: ['./quizzes.component.css']
 })
-export class QuizzesComponent extends Base {
+export class QuizzesComponent extends Base implements OnInit, DoCheck {
 
   quizzes: IQuizModel[] = [];
   categoryId: string = this.route.snapshot.params.id;
   menu: any = this._menu.quizzes;
   @Output() alert: IAlertModel;
+  openQuizId: string | undefined = undefined;
 
   constructor(
     router: Router,
@@ -32,6 +33,17 @@ export class QuizzesComponent extends Base {
   ) {
     super(router, authService, translateService);
     this.alert = {} as IAlertModel;
+  }
+
+  ngDoCheck(): void {
+    if (this.alert?.confirm) {
+      this.navigate('quiz/' + this.openQuizId);
+      this.alert = {} as IAlertModel;
+      this.openQuizId = undefined;
+    } else if (this.alert?.cancel) {
+      this.alert = {} as IAlertModel;
+      this.openQuizId = undefined;
+    }
   }
 
   ngOnInit() {
@@ -95,8 +107,15 @@ export class QuizzesComponent extends Base {
     return this.quizService.getTimer(time);
   }
 
-  open(quizId: string) {
-    this.alert.msg = 'След като потвърдите викторината, ще стартира незабавно и ще имате точно време за да я приключите.';
-    console.log(quizId)
+  open(quiz: IQuizModel) {
+    const user = quiz.users.find(u => u.uid === this.authService.user?.uid);
+    if (!user) {
+      this.openQuizId = quiz.id;
+      this.alert.msg = 'След като потвърдите викторината, ще стартира незабавно и ще имате точно време за да я приключите.';
+    } else if (user?.completed) {
+      this.navigate('result/' + quiz.id);
+    } else {
+      this.navigate('quiz/' + quiz.id);
+    }
   }
 }
