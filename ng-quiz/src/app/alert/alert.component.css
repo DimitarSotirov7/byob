@@ -1,0 +1,30 @@
+.container {
+    background-color: cadetblue;
+    color: aliceblue;
+    width: calc(100% - 4rem);
+    height: max-content;
+    padding: 2rem;
+    margin: 0 auto;
+}
+
+.msg {
+    font-size: large;
+    text-align: center;
+}
+
+.actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin: 2rem 0 0;
+}
+
+.action {
+    padding: 1rem;
+    cursor: pointer;
+    background-color: rgb(70, 132, 134);
+    border-radius: 2rem;
+}
+
+
+

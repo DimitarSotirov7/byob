@@ -23,6 +23,7 @@ import { AdminComponent } from './admin/admin.component';
 import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { TranslateService } from './services/translate/translate.service';
 import { ResultComponent } from './result/result.component';
+import { AlertComponent } from './alert/alert.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { ResultComponent } from './result/result.component';
     QuizzesComponent,
     AdminComponent,
     ResultComponent,
+    AlertComponent,
   ],
   imports: [
     CoreModule,

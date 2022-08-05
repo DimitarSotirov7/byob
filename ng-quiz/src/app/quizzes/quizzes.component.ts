@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Base } from '../common/base';
+import { IAlertModel } from '../interfaces/alert-model';
 import { IQuestionModel } from '../interfaces/question-model';
 import { IQuizModel } from '../interfaces/quiz-model';
 import { ITimeModel } from '../interfaces/time-model';
@@ -19,6 +20,7 @@ export class QuizzesComponent extends Base {
   quizzes: IQuizModel[] = [];
   categoryId: string = this.route.snapshot.params.id;
   menu: any = this._menu.quizzes;
+  @Output() alert: IAlertModel;
 
   constructor(
     router: Router,
@@ -29,6 +31,7 @@ export class QuizzesComponent extends Base {
     private route: ActivatedRoute,
   ) {
     super(router, authService, translateService);
+    this.alert = {} as IAlertModel;
   }
 
   ngOnInit() {
@@ -46,7 +49,7 @@ export class QuizzesComponent extends Base {
         q.timeLeft = this.getTime(q);
         q.time = this.getMinSec(q.timeLeft);
         return q;
-      });
+      }).filter(q => q.date > 0);
       this.calcPoints();
     });
   }
@@ -90,5 +93,10 @@ export class QuizzesComponent extends Base {
 
   getTimer(time: ITimeModel | undefined): string {
     return this.quizService.getTimer(time);
+  }
+
+  open(quizId: string) {
+    this.alert.msg = 'След като потвърдите викторината, ще стартира незабавно и ще имате точно време за да я приключите.';
+    console.log(quizId)
   }
 }

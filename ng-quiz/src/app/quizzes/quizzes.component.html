@@ -4,7 +4,7 @@
     </header>
     <div class="items">
         <div *ngFor="let quiz of quizzes">
-            <div *ngIf="quiz.date > 0" class="item" routerLink="/quiz/{{quiz.id}}">
+            <div class="item" (click)="open(quiz.id)">
                 <div class="start">
                     <div class="icon">
                         <img *ngIf="quiz.timeLeft <= 0" src="../../assets/icons/lock.png" alt="lock">
@@ -39,4 +39,6 @@
     <div class="no-items" *ngIf="quizzes?.length === 0">
         No items
     </div>
+
+    <app-alert *ngIf="alert.msg" [alert]="alert"></app-alert>
 </div>

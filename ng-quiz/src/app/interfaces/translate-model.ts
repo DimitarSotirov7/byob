@@ -7,5 +7,6 @@ export interface ITranslateModel {
     messages: any,
     category: any,
     quizzes: any,
-    quiz: any
+    quiz: any,
+    alert: any
 }
