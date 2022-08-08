@@ -27,7 +27,7 @@ export class AdminComponent extends Base {
   rotateCateg: boolean = false; rotateQuiz: boolean = false; rotateQuest: boolean = false; rotateRes: boolean = false;
   fullForm: boolean = true;
   editExpire: string | undefined;
-  results: IResultModel[] | [] = [];
+  results: IResultModel[] | undefined;
   winner: IResultModel | undefined;
 
   constructor(
@@ -266,12 +266,12 @@ export class AdminComponent extends Base {
           return { uid: u.uid, points };
         });
         results?.forEach(r => {
-          const result = this.results.find(x => x.uid === r.uid);
+          const result = this.results?.find(x => x.uid === r.uid);
           if (!result) {
             (this.results as IResultModel[])
               .push({ uid: r.uid, points: r.points });
           } else {
-            this.results = this.results.map(y => {
+            this.results = this.results?.map(y => {
               if (y.uid === r.uid) {
                 y.points += r.points;
               }
@@ -282,19 +282,19 @@ export class AdminComponent extends Base {
       });
 
       this.authService.getUsersFirestore().get().subscribe(userRes => {
-        this.results = this.results.map(u => {
+        this.results = this.results?.map(u => {
           u.email = (userRes.docs as any[]).find(ur => ur.id === u.uid)?.data().email;
           return u;
         });
       });
 
-      this.results = this.results.filter(r => (quiz.users as { uid: string, start: Date }[]).some(u => u.uid === r.uid))
+      this.results = this.results?.filter(r => (quiz.users as { uid: string, start: Date }[]).some(u => u.uid === r.uid))
         .sort((a, b) => b.points - a.points);
       this.rotateRes = false;
 
       const maxPointsUsers = [] as IResultModel[]
       let highest = -1;
-      this.results.forEach(r => {
+      this.results?.forEach(r => {
         if (highest === -1) {
           highest = r.points;
         }

@@ -118,11 +118,16 @@
         <div class="items">
             <div *ngFor="let result of results" class="wrapper">
                 <div class="item">
-                    <div class="start">{{result.email}}</div>
+                    <div class="start">{{result.email ? result.email : result.uid}}</div>
                     <div class="middle">
                         <button (click)="removeUser(result.uid)" class="button">Re-play</button>
                     </div>
                     <div class="end">{{result.points === 1 ? result.points + ' point' : result.points + ' points'}}</div>
+                </div>
+            </div>
+            <div *ngIf="results?.length === 0">
+                <div class="item">
+                    No users
                 </div>
             </div>
         </div>
