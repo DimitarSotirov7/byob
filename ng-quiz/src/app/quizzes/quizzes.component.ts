@@ -81,7 +81,7 @@ export class QuizzesComponent extends Base implements OnInit, DoCheck {
           };
           counter++;
         });
-        quiz.points = Math.round(correctCounter / counter);
+        quiz.points = Number((correctCounter / counter).toFixed(2));
         return quiz;
       });
     })
