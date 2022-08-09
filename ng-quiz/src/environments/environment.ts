@@ -16,7 +16,7 @@ export const environment = {
   admin: {
     email: 'dimitarsotirov7@gmail.com'
   },
-  translate: "bg",
+  translate: [ 'bg', 'en' ],
   cookieName: "uid",
   quizConfig: {
     secPerQuest: 20,

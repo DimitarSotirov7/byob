@@ -1,0 +1,58 @@
+{
+    "language": "en",
+    "nav": {
+        "logo": "Quiz",
+        "join": "Join us",
+        "categories": "Category",
+        "language": "Language",
+        "quizzes": "Quizzes",
+        "logout": "Sign out"
+    },
+    "home": {},
+    "category": {
+        "title": "Category"
+    },
+    "quizzes": {
+        "title": "Quizzes",
+        "left": "left",
+        "leftOne": "left",
+        "days": "days",
+        "day": "day",
+        "alert": "Once confirmed, the quiz will be started immediately and you have to complete it within a certain time."
+    },
+    "quiz": {
+        "title": "Quizzes",
+        "category": "Category",
+        "previous": "Previous",
+        "next": "Next"
+    },
+    "join": {
+        "login": "Sign in",
+        "register": "Sign up",
+        "submit": "Submit",
+        "email": "Email",
+        "password": "Password"
+    },
+    "validations": {
+        "requiredEmail": "Email is required!",
+        "requiredPassword": "Password is required!",
+        "invalidEmail": "Email is invalid!",
+        "passwordLength": "Password must contain 6 characters at least!",
+        "userNotFound": "User not found!",
+        "userInUsed": "Email is in use!",
+        "badNetwork": "Bad network connection!"
+    },
+    "messages": {
+        "attention": "Attention",
+        "completedQuiz": "Quiz is already completed!",
+        "regSuccess": "Signed up successfully.",
+        "logSuccess": "Signed in successfully.",
+        "outSuccess": "Signed out successfully.",
+        "quizCompleted": "Congrats, you have completed it.",
+        "timeOver": "Sorry, time is up."
+    },
+    "alert": {
+        "confirm": "Confirm",
+        "cancel": "Cancel"
+    }
+}

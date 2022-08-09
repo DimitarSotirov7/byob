@@ -8,7 +8,7 @@ import { TranslateService } from "../services/translate/translate.service";
 
 export class Base {
   serverError: string | undefined;
-  _menu: ITranslateModel = this.translateService.get();
+  _menu: ITranslateModel = this.translateService.state;
   messages: any = this._menu.messages;
 
   constructor(
