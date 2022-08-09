@@ -1,11 +1,9 @@
 <div class="container">
-    <div class="form">
-        <div class="toggle">
-            <button [ngClass]="{'selected': fullForm}" class="toggle-button left"
-                (click)="fullForm = true">Expand</button>
-            <button [ngClass]="{'selected': !fullForm}" class="toggle-button right"
-                (click)="fullForm = false">Hide</button>
-        </div>
+    <div class="toggle">
+        <button [ngClass]="{'selected': displayForm}" class="toggle-button left" (click)="displayForm = true">Expand</button>
+        <button [ngClass]="{'selected': !displayForm}" class="toggle-button right" (click)="displayForm = false">Hide</button>
+    </div>
+    <div class="form" *ngIf="displayForm">
         <form #f="ngForm" (ngSubmit)="submit(f.value)">
             <div class="title">Creation</div>
             <div class="field">
@@ -33,7 +31,7 @@
                 </p>
             </div>
 
-            <div class="field" *ngIf="fullForm">
+            <div class="field">
                 <label>Answers</label>
                 <textarea #questionInput="ngModel" type="text" name="answers" ngModel minlength="4"></textarea>
                 <p class="validation" *ngIf="questionInput.errors?.minlength && questionInput.touched">
@@ -122,7 +120,8 @@
                     <div class="middle">
                         <button (click)="removeUser(result.uid)" class="button">Re-play</button>
                     </div>
-                    <div class="end">{{result.points === 1 ? result.points + ' point' : result.points + ' points'}}</div>
+                    <div class="end">{{result.points === 1 ? result.points + ' point' : result.points + ' points'}}
+                    </div>
                 </div>
             </div>
             <div *ngIf="results?.length === 0">
@@ -131,7 +130,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="winner" *ngIf="winner">Winner: {{winner?.email}} with {{winner?.points}} points</div>
     </div>
 </div>

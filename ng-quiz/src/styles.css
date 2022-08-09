@@ -123,6 +123,10 @@ p {
     background-color: rgb(71, 71, 71);
 }
 
+.toggle {
+    text-align: center;
+}
+
 .toggle-button {
     margin: 1rem 0;
     padding: 0.3rem 1rem;

@@ -25,7 +25,7 @@ export class AdminComponent extends Base {
   quizzes: IAdminQuizModel[] | undefined;
   questions: { text: string, id: string, selected: boolean, answers: string[] }[] | undefined;
   rotateCateg: boolean = false; rotateQuiz: boolean = false; rotateQuest: boolean = false; rotateRes: boolean = false;
-  fullForm: boolean = true;
+  displayForm: boolean = false;
   editExpire: string | undefined;
   results: IResultModel[] | undefined;
   winner: IResultModel | undefined;
