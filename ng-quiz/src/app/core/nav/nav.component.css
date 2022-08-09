@@ -6,6 +6,11 @@
     padding: 10px 20px;
 }
 
+.nav-right {
+    display: flex;
+    gap: 1rem;
+}
+
 .notify {
     background-color: rgb(243, 243, 183);
     padding: 4px 0;
@@ -52,4 +57,30 @@
 .menu-content {
     font-size: larger;
     align-self: center;
+}
+
+.language {
+    position: relative;
+}
+
+.language-menu {
+    position: absolute;
+    top: 3rem;
+    z-index: 1000;
+    background-color: rgb(255, 255, 255);
+    color: rgb(33, 76, 126);
+}
+
+.language-menu-option {
+    padding: 0.2rem 1.5rem;
+    cursor: pointer;
+}
+
+.language-menu-option:first-child {
+    margin-bottom: 0.3rem;
+}
+
+.language-menu-option:hover {
+    color: rgb(243, 243, 183);
+    background-color: rgb(33, 76, 126);
 }

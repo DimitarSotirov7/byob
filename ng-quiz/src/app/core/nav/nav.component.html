@@ -2,9 +2,18 @@
     <div class="normal-icon" (click)="_navigate('/')">
         <img src="../../../assets/icons/quiz-logo.png" alt="logo">
     </div>
-    <div class="normal-icon" (click)="menuOn = !menuOn">
-        <img *ngIf="!menuOn" src="../../../assets/icons/hamburger.png" alt="hamburger">
-        <img *ngIf="menuOn" src="../../../assets/icons/close.png" alt="close">
+    <div class="nav-right">
+        <div class="normal-icon language" (click)="langMenuOn = !langMenuOn">
+            <img src="../../../assets/icons/language.png" alt="language">
+            <div *ngIf="langMenuOn" class="language-menu">
+                <div (click)="setLang('bg')" class="language-menu-option">BG</div>
+                <div (click)="setLang('en')" class="language-menu-option">EN</div>
+            </div>
+        </div>
+        <div class="normal-icon" (click)="menuOn = !menuOn">
+            <img *ngIf="!menuOn" src="../../../assets/icons/hamburger.png" alt="hamburger">
+            <img *ngIf="menuOn" src="../../../assets/icons/close.png" alt="close">
+        </div>
     </div>
 
     <div class="menu" *ngIf="menuOn">
@@ -15,10 +24,6 @@
         <div class="menu-item" (click)="_navigate('/category')">
             <img class="menu-icon" src="../../../assets/icons/category.png" alt="category">
             <span class="menu-content">{{menu.categories}}</span>
-        </div>
-        <div class="menu-item" (click)="setLang()">
-            <img class="menu-icon" src="../../../assets/icons/language.png" alt="language">
-            <span class="menu-content">{{menu.language}}</span>
         </div>
         <div class="menu-item" (click)="_navigate('/user')" *ngIf="!authService.state">
             <img class="menu-icon" src="../../../assets/icons/join.png" alt="join">

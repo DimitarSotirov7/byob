@@ -18,6 +18,7 @@ export class NavComponent extends Base {
   email: string | null | undefined = this.authService.user?.email;
   menu: any = this._menu.nav;
   messages: any = this._menu.messages;
+  langMenuOn: boolean = false;
 
   constructor(
     router: Router,
@@ -46,8 +47,8 @@ export class NavComponent extends Base {
       });
   }
 
-  setLang() {
-    this.translateService.set();
+  setLang(lang: string) {
+    this.translateService.set(lang);
   }
 
   private subscriptionListener(): void {

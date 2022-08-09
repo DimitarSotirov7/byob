@@ -21,8 +21,12 @@ export class TranslateService extends BaseService {
   }
 
   set(language: string | undefined = undefined): void {
-    this.state.language === 'bg' ?
-    this.setCookie('en', this.cookieKey) :
-    this.setCookie('bg', this.cookieKey);
+    if (!language) {
+      this.state.language === 'bg' ?
+      this.setCookie('en', this.cookieKey) :
+      this.setCookie('bg', this.cookieKey);
+    } else {
+      this.setCookie(language, this.cookieKey)
+    }
   }
 }
