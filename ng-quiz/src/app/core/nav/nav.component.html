@@ -16,6 +16,10 @@
             <img class="menu-icon" src="../../../assets/icons/category.png" alt="category">
             <span class="menu-content">{{menu.categories}}</span>
         </div>
+        <div class="menu-item" (click)="setLang()">
+            <img class="menu-icon" src="../../../assets/icons/language.png" alt="language">
+            <span class="menu-content">{{menu.language}}</span>
+        </div>
         <div class="menu-item" (click)="_navigate('/user')" *ngIf="!authService.state">
             <img class="menu-icon" src="../../../assets/icons/join.png" alt="join">
             <span class="menu-content">{{menu.join}}</span>

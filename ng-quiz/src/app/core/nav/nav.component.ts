@@ -27,7 +27,7 @@ export class NavComponent extends Base {
     super(router, authService, translateService);
     this.subscriptionListener();
   }
-  
+
   _navigate(url: string = '/') {
     this.menuOn = false;
     this.navigate(url);
@@ -35,15 +35,19 @@ export class NavComponent extends Base {
 
   logout() {
     this.authService.logout()
-    .then(res => {
-      this.authService.authMsg.emit(this.messages.outSuccess);
-      this.authService.removeCookie();
-      this.authService.load();
-      this.navigate();
-    })
-    .catch(err => {
-      console.error(err);
-  });
+      .then(res => {
+        this.authService.authMsg.emit(this.messages.outSuccess);
+        this.authService.removeCookie();
+        this.authService.load();
+        this.navigate();
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  }
+
+  setLang() {
+    this.translateService.set();
   }
 
   private subscriptionListener(): void {

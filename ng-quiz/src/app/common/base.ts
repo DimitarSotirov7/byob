@@ -14,7 +14,7 @@ export class Base {
   constructor(
     public router: Router,
     public authService: AuthService,
-    private translateService: TranslateService
+    public translateService: TranslateService
   ) {
   }
 
