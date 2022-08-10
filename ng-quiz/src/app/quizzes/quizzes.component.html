@@ -28,9 +28,9 @@
                 <div class="end">
                     <div *ngIf="quiz.timeLeft <= 0">{{quiz.points * 100}}%</div>
                     <div *ngIf="quiz.timeLeft > 0">
-                        <span>{{quiz.date === 1 ? menu.leftOne : menu.left}} </span>
                         <span>{{quiz.date}} </span>
                         <span>{{quiz.date === 1 ? menu.day : menu.days}} </span>
+                        <span>{{quiz.date === 1 ? menu.leftOne : menu.left}} </span>
                     </div>
                 </div>
             </div>
