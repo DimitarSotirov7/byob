@@ -3,12 +3,8 @@
         <img src="../../../assets/icons/quiz-logo.png" alt="logo">
     </div>
     <div class="nav-right">
-        <div class="normal-icon language" (click)="langMenuOn = !langMenuOn">
-            <img src="../../../assets/icons/language.png" alt="language">
-            <div *ngIf="langMenuOn" class="language-menu">
-                <div (click)="setLang('bg')" class="language-menu-option">BG</div>
-                <div (click)="setLang('en')" class="language-menu-option">EN</div>
-            </div>
+        <div class="normal-icon language" (click)="setLang(_menu.language)">
+            <img [src]="'../../../assets/icons/' + _menu.language + '-language.png'" alt="language">
         </div>
         <div class="normal-icon" (click)="menuOn = !menuOn">
             <img *ngIf="!menuOn" src="../../../assets/icons/hamburger.png" alt="hamburger">
