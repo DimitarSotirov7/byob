@@ -24,6 +24,7 @@ export class CategoryComponent extends Base {
   ) {
     super(router, authService, translateService);
     this.getAll();
+    this.subscriptionListener();
   }
 
   getAll() {
@@ -34,5 +35,11 @@ export class CategoryComponent extends Base {
 
   addCateg() {
     this.categoryService.add({ name: 'asd' });
+  }
+
+  private subscriptionListener(): void {
+    this.event.push(this.translateService.onChange.subscribe(res => {
+      this.menu = this.translateService.state.category;
+    }));
   }
 }

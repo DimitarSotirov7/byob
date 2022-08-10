@@ -33,6 +33,7 @@ export class ResultComponent extends Base {
     super(router, authService, translateService);
     this.quiz = {} as IQuizModel;
     this.load();
+    this.subscriptionListener();
   }
 
   load() {
@@ -127,5 +128,11 @@ export class ResultComponent extends Base {
   getClassQuestion(questionId: string) {
     const question = this.evaluate?.find(q => q.questionId === questionId);
     return this.quiz.currQuestion?.id === questionId ? 'on' : question?.correct === question?.selected ? 'success' : 'fail';
+  }
+
+  private subscriptionListener(): void {
+    this.event.push(this.translateService.onChange.subscribe(res => {
+      this.menu = this.translateService.state.quiz;
+    }));
   }
 }

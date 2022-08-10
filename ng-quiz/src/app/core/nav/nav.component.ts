@@ -49,6 +49,7 @@ export class NavComponent extends Base {
   setLang(lang: string) {
     lang = lang === 'bg' ? 'en' : 'bg';
     this.translateService.set(lang);
+    this.translateService.onChange.emit(true);
   }
 
   private subscriptionListener(): void {
@@ -57,6 +58,9 @@ export class NavComponent extends Base {
       setTimeout(() => {
         this.notify = undefined;
       }, 2000);
+    }));
+    this.event.push(this.translateService.onChange.subscribe(res => {
+      this.menu = this.translateService.state.nav;
     }));
   }
 }

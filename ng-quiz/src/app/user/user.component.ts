@@ -23,6 +23,7 @@ export class UserComponent extends Base implements OnDestroy {
     private route: ActivatedRoute,
   ) {
     super(router, authService, menu);
+    this.subscriptionListener();
   }
 
   ngOnDestroy(): void {
@@ -68,5 +69,13 @@ export class UserComponent extends Base implements OnDestroy {
     msg.includes('auth/invalid-email') ? this.validation.invalidEmail : 
     msg.includes('auth/network-request-failed') ? this.validation.badNetwork : 
     msg.includes('auth/wrong-password') ? this.validation.userNotFound : msg;
+  }
+
+  private subscriptionListener(): void {
+    this.event.push(this.translateService.onChange.subscribe(res => {
+      this.menu = this.translateService.state.join;
+      this.validation = this.translateService.state.validations;
+      this.messages = this.translateService.state.messages;
+    }));
   }
 }

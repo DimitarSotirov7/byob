@@ -39,6 +39,7 @@ export class QuizComponent extends Base implements DoCheck, OnDestroy {
   ) {
     super(router, authService, menu);
     this.quiz = {} as IQuizModel;
+    this.subscriptionListener();
   }
 
   ngOnInit() {
@@ -187,5 +188,11 @@ export class QuizComponent extends Base implements DoCheck, OnDestroy {
 
   goBack() {
     this.navigate('/quizzes');
+  }
+
+  private subscriptionListener(): void {
+    this.event.push(this.translateService.onChange.subscribe(res => {
+      this.menu = this.translateService.state.quiz;
+    }));
   }
 }

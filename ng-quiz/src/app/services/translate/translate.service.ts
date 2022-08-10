@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { ITranslateModel } from 'src/app/interfaces/translate-model';
 import { environment } from 'src/environments/environment';
 import * as bg from "../../../assets/bg-translate.json";
@@ -15,6 +15,7 @@ export class TranslateService extends BaseService {
     const lang = this.getCookie(this.cookieKey) ?? environment.translate[0];
     return lang === 'bg' ? bg : en;
   }
+  onChange: EventEmitter<boolean> = new EventEmitter();
 
   constructor() {
     super();

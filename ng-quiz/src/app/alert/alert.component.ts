@@ -22,6 +22,7 @@ export class AlertComponent extends Base {
   ) {
     super(router, authService, menu);
     this.alert = {} as IAlertModel;
+    this.subscriptionListener();
   }
 
   click(option: boolean) {
@@ -32,5 +33,11 @@ export class AlertComponent extends Base {
       this.alert.cancel = true;
       this.alert.confirm = false;
     }
+  }
+
+  private subscriptionListener(): void {
+    this.event.push(this.translateService.onChange.subscribe(res => {
+      this.menu = this.translateService.state.alert;
+    }));
   }
 }

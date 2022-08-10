@@ -33,6 +33,7 @@ export class QuizzesComponent extends Base implements OnInit, DoCheck {
   ) {
     super(router, authService, translateService);
     this.alert = {} as IAlertModel;
+    this.subscriptionListener();
   }
 
   ngDoCheck(): void {
@@ -117,5 +118,11 @@ export class QuizzesComponent extends Base implements OnInit, DoCheck {
     } else {
       this.navigate('quiz/' + quiz.id);
     }
+  }
+
+  private subscriptionListener(): void {
+    this.event.push(this.translateService.onChange.subscribe(res => {
+      this.menu = this.translateService.state.quizzes;
+    }));
   }
 }

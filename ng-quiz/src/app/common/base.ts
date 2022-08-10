@@ -1,4 +1,5 @@
 import { Router } from "@angular/router";
+import { Subscription } from "rxjs";
 import { environment } from "src/environments/environment";
 import { IQuizModel } from "../interfaces/quiz-model";
 import { ITimeModel } from "../interfaces/time-model";
@@ -10,12 +11,16 @@ export class Base {
   serverError: string | undefined;
   _menu: ITranslateModel = this.translateService.state;
   messages: any = this._menu.messages;
+  event: Subscription[] = [];
 
   constructor(
     public router: Router,
     public authService: AuthService,
     public translateService: TranslateService
   ) {
+    this.event.push(this.translateService.onChange.subscribe(res => {
+      this._menu = this.translateService.state;
+    }));
   }
 
   navigate(url: string = '/') {
