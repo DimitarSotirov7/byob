@@ -55,7 +55,6 @@ const routes: Routes = [
     path: 'quizzes',
     pathMatch: 'full',
     component: QuizzesComponent,
-    resolve: { quiz: QuizResolverService },
   },
   {
     path: 'quizzes/:id',
