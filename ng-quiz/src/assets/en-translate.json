@@ -41,7 +41,8 @@
         "passwordLength": "Password must contain 6 characters at least!",
         "userNotFound": "User not found!",
         "userInUsed": "Email is in use!",
-        "badNetwork": "Bad network connection!"
+        "badNetwork": "Bad network connection!",
+        "tooManyRequests": "Attempts exceeded, your account has been temporarily blocked!"
     },
     "messages": {
         "attention": "Attention",

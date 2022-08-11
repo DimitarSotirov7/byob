@@ -68,6 +68,7 @@ export class UserComponent extends Base implements OnDestroy {
     msg.includes('auth/user-not-found') ? this.validation.userNotFound : 
     msg.includes('auth/invalid-email') ? this.validation.invalidEmail : 
     msg.includes('auth/network-request-failed') ? this.validation.badNetwork : 
+    msg.includes('auth/too-many-requests') ? this.validation.tooManyRequests : 
     msg.includes('auth/wrong-password') ? this.validation.userNotFound : msg;
   }
 
