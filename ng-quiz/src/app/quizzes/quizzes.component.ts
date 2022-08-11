@@ -112,6 +112,10 @@ export class QuizzesComponent extends Base implements OnInit, DoCheck {
   }
 
   open(quiz: IQuizModel) {
+    if (!this.authService.user?.uid) {
+      this.navigate('user');
+    }
+
     const user = quiz.users.find(u => u.uid === this.authService.user?.uid);
 
     if (!user) {

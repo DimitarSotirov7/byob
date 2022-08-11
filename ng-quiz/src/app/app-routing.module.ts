@@ -21,6 +21,10 @@ const routes: Routes = [
     path: 'category',
     pathMatch: 'full',
     component: CategoryComponent,
+    canActivate: [AuthGuard],
+    data: {
+      authRequired: true,
+    },
   },
   {
     path: 'quiz/:id',
@@ -59,7 +63,6 @@ const routes: Routes = [
   {
     path: 'quizzes/:id',
     component: QuizzesComponent,
-    resolve: { quiz: QuizResolverService },
   },
   {
     path: 'result/:id',
