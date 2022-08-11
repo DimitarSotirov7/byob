@@ -1,6 +1,5 @@
 {
   "hosting": {
-    "site": "quizo",
     "public": "dist",
     "ignore": [
       "firebase.json",
