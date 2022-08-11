@@ -8,5 +8,6 @@ export interface ITranslateModel {
     category: any,
     quizzes: any,
     quiz: any,
-    alert: any
+    alert: any,
+    notFound: any,
 }

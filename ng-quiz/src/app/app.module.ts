@@ -20,10 +20,10 @@ import { UserComponent } from './user/user.component';
 import { AuthService } from './services/auth/auth.service';
 import { QuizzesComponent } from './quizzes/quizzes.component';
 import { AdminComponent } from './admin/admin.component';
-import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { TranslateService } from './services/translate/translate.service';
 import { ResultComponent } from './result/result.component';
 import { AlertComponent } from './alert/alert.component';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -40,6 +40,7 @@ import { AlertComponent } from './alert/alert.component';
   ],
   imports: [
     CoreModule,
+    SharedModule,
     BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase.config),

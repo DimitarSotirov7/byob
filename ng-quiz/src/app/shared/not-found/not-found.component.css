@@ -1,0 +1,30 @@
+.container {
+    background-color: rgb(176, 233, 235);
+    color: darkslategrey;
+}
+
+.image {
+    display: flex;
+    justify-content: center;
+    padding: 20% 10%;
+}
+
+img {
+    width: 20%;
+    cursor: auto;
+}
+
+.msg {
+    text-align: center;
+    font-size: 200%;
+    margin: 0 10%;
+}
+
+.back {
+    text-align: center;
+    padding: 1rem;
+}
+
+.go-back {
+    cursor: pointer;
+}

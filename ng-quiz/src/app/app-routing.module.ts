@@ -8,6 +8,7 @@ import { ResultComponent } from './result/result.component';
 import { AuthGuard } from './services/auth/auth.guard';
 import { QuizResolverService } from './services/quiz/quiz-resolver.service';
 import { QuizGuard } from './services/quiz/quiz.guard';
+import { NotFoundComponent } from './shared/not-found/not-found.component';
 import { UserComponent } from './user/user.component';
 
 const routes: Routes = [
@@ -67,6 +68,10 @@ const routes: Routes = [
     component: ResultComponent,
     resolve: { quiz: QuizResolverService },
   },
+  {
+    path: '**',
+    component: NotFoundComponent
+  }
 ];
 
 export const AppRoutingModule = RouterModule.forRoot(routes);

@@ -55,5 +55,9 @@
     "alert": {
         "confirm": "Confirm",
         "cancel": "Cancel"
+    },
+    "notFound": {
+        "msg": "Page not found",
+        "back": "Back"
     }
 }
