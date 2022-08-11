@@ -161,6 +161,10 @@ export class QuizComponent extends Base implements DoCheck, OnDestroy {
     } else {
       this.sendMsg(this.messages.timeOver);
     }
+    if (!Array.isArray(this.quizService.completed)) {
+      this.quizService.completed = [];
+    }
+    this.quizService.completed.push(this.quiz.id);
     this.navigate('quizzes');
   }
 

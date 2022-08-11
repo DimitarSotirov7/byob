@@ -61,6 +61,9 @@ export class QuizzesComponent extends Base implements OnInit, DoCheck {
         q.date = this.getDaysLeft(q.expire);
         q.timeLeft = this.getTime(q);
         q.time = this.getMinSec(q.timeLeft);
+        if (this.quizService.completed?.includes(q.id)) {
+          q = this.justCompleted(q);
+        }
         return q;
       }).filter(q => q.date > 0);
       this.calcPoints();
@@ -110,6 +113,7 @@ export class QuizzesComponent extends Base implements OnInit, DoCheck {
 
   open(quiz: IQuizModel) {
     const user = quiz.users.find(u => u.uid === this.authService.user?.uid);
+
     if (!user) {
       this.openQuizId = quiz.id;
       this.alert.msg = this.menu.alert;
@@ -118,6 +122,17 @@ export class QuizzesComponent extends Base implements OnInit, DoCheck {
     } else {
       this.navigate('quiz/' + quiz.id);
     }
+  }
+
+  private justCompleted(quiz: IQuizModel) {
+    quiz.users = quiz.users.map(u => {
+      if (u.uid === this.authService.user?.uid) {
+        u.completed = true;
+        this.quizService.completed = this.quizService.completed?.filter(c => c !== quiz.id);
+      }
+      return u;
+    });
+    return quiz;
   }
 
   private subscriptionListener(): void {

@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
 import { IAnswerModel } from 'src/app/interfaces/answer-model';
 import { IQuestionModel } from 'src/app/interfaces/question-model';
-import { IQuizModel } from 'src/app/interfaces/quiz-model';
 import { ITimeModel } from 'src/app/interfaces/time-model';
 
 @Injectable({
@@ -14,6 +13,7 @@ export class QuizService {
   data: any;
   quizzesColl: string = 'quizzes';
   SecPerQuest: number = 20;
+  completed: string[] | undefined;
 
   constructor(private firestore: AngularFirestore) {
     this.getAll().get().subscribe(res => {
