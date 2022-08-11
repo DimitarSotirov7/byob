@@ -123,7 +123,6 @@ export class QuizzesComponent extends Base implements OnInit, DoCheck {
   private subscriptionListener(): void {
     this.event.push(this.translateService.onChange.subscribe(res => {
       this.menu = this.translateService.state.quizzes;
-      this.alert.msg = this.translateService.state.quizzes.alert;
     }));
   }
 }

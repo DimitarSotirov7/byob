@@ -53,7 +53,6 @@ export class AuthService {
         return;
       }
       this.user = { uid: authRes?.uid, email: authRes?.email, admin: false };
-      console.log(this.user?.uid)
       this.getUserFirestore(authRes?.uid).get().subscribe(storeRes => {
         this.user.admin = (storeRes.data() as { admin: boolean })?.admin;
       });

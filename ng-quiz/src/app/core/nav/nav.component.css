@@ -11,6 +11,12 @@
     gap: 1rem;
 }
 
+.welcome {
+    font-size: 150%;
+    font-weight: bolder;
+    margin: 1rem 0;
+}
+
 .notify {
     background-color: rgb(243, 243, 183);
     padding: 4px 0;

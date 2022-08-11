@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, DoCheck } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { Base } from 'src/app/common/base';
@@ -10,12 +10,12 @@ import { TranslateService } from 'src/app/services/translate/translate.service';
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.css']
 })
-export class NavComponent extends Base {
+export class NavComponent extends Base implements DoCheck {
 
   notify: string | undefined;
   event: Subscription[] = [];
   menuOn: boolean = false;
-  email: string | null | undefined = this.authService.user?.email;
+  user: string | undefined;
   menu: any = this._menu.nav;
   messages: any = this._menu.messages;
 
@@ -26,6 +26,15 @@ export class NavComponent extends Base {
   ) {
     super(router, authService, translateService);
     this.subscriptionListener();
+  }
+
+  ngDoCheck() {
+    if (this.authService.user?.email && !this.user) {
+      console.log(this.user);
+      const email = this.authService.user?.email;
+      const delimiter = email.indexOf('@');
+      this.user = email.substring(0, delimiter);
+    }
   }
 
   _navigate(url: string = '/') {

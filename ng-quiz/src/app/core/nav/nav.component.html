@@ -13,6 +13,9 @@
     </div>
 
     <div class="menu" *ngIf="menuOn">
+        <div class="welcome">
+            <div>{{menu.welcome}}, {{user}}</div>
+        </div>
         <div class="menu-item" (click)="_navigate('/quizzes')">
             <img class="menu-icon" src="../../../assets/icons/quiz.png" alt="quiz">
             <span class="menu-content">{{menu.quizzes}}</span>
