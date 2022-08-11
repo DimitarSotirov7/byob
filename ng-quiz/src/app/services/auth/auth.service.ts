@@ -47,7 +47,7 @@ export class AuthService {
   }
 
   load() {
-    this.fireAuth.user.subscribe(authRes => {
+    this.getUser().subscribe(authRes => {
       if (!authRes) {
         this.user = {} as IUserModel;
         return;
@@ -57,6 +57,10 @@ export class AuthService {
         this.user.admin = (storeRes.data() as { admin: boolean })?.admin;
       });
     });
+  }
+
+  getUser() {
+    return this.fireAuth.user;
   }
 
   setUserFirestore(doc: string, isAdmin: Boolean): void {

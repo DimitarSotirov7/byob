@@ -1,4 +1,4 @@
-import { Component, DoCheck } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { Base } from 'src/app/common/base';
@@ -10,7 +10,7 @@ import { TranslateService } from 'src/app/services/translate/translate.service';
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.css']
 })
-export class NavComponent extends Base implements DoCheck {
+export class NavComponent extends Base {
 
   notify: string | undefined;
   event: Subscription[] = [];
@@ -26,15 +26,7 @@ export class NavComponent extends Base implements DoCheck {
   ) {
     super(router, authService, translateService);
     this.subscriptionListener();
-  }
-
-  ngDoCheck() {
-    if (this.authService.user?.email && !this.user) {
-      console.log(this.user);
-      const email = this.authService.user?.email;
-      const delimiter = email.indexOf('@');
-      this.user = email.substring(0, delimiter);
-    }
+    this.getUser();
   }
 
   _navigate(url: string = '/') {
@@ -48,6 +40,7 @@ export class NavComponent extends Base implements DoCheck {
         this.authService.authMsg.emit(this.messages.outSuccess);
         this.authService.removeCookie();
         this.authService.load();
+        this.user = undefined;
         this.navigate();
       })
       .catch(err => {
@@ -59,6 +52,17 @@ export class NavComponent extends Base implements DoCheck {
     lang = lang === 'bg' ? 'en' : 'bg';
     this.translateService.set(lang);
     this.translateService.onChange.emit(true);
+  }
+
+  private getUser() {
+    this.authService.getUser().subscribe(res => {
+      const email = res?.email;
+      if (!email) {
+        return;
+      }
+      const delimiter = email.indexOf('@');
+      this.user = email.substring(0, delimiter);
+    });
   }
 
   private subscriptionListener(): void {
