@@ -1,0 +1,3 @@
+firebase deploy --only hosting:quizo
+npx ng build --configuration production
+firebase init hosting
