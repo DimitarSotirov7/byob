@@ -116,7 +116,7 @@ export class QuizzesComponent extends Base implements OnInit, DoCheck {
       this.navigate('user');
     }
 
-    const user = quiz.users.find(u => u.uid === this.authService.user?.uid);
+    const user = quiz.users?.find(u => u.uid === this.authService.user?.uid);
 
     if (!user) {
       this.openQuizId = quiz.id;
