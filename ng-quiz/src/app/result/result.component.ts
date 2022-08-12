@@ -75,7 +75,7 @@ export class ResultComponent extends Base {
             q.answers = q.answers.map(a => {
               return {
                 id: a.id,
-                text: answRes.docs.find(ar => ar.id === a.id)?.data().text
+                text: answRes.docs?.find(ar => ar.id === a.id)?.data().text
               } as IAnswerModel;
             });
           });
@@ -91,7 +91,7 @@ export class ResultComponent extends Base {
   }
 
   getQuestion(goto: number) {
-    const currIndex = this.quiz.questions.findIndex(q => q.id === this.quiz.currQuestion.id);
+    const currIndex = this.quiz.questions?.findIndex(q => q.id === this.quiz.currQuestion.id);
     if (currIndex === -1) {
       throw 'page is out of range!'
       this.quiz.currQuestion = this.quiz.questions[0];
