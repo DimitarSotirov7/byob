@@ -258,7 +258,7 @@ export class AdminComponent extends Base {
         .filter(q => quiz?.questions?.includes(q.id));
       questions?.forEach(q => {
         const correct = q.correct;
-        const results = q?.users.map(u => {
+        const results = q?.users?.map(u => {
           let points = 0;
           if (u.selected === correct) {
             points++;

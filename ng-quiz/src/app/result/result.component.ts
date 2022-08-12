@@ -48,7 +48,7 @@ export class ResultComponent extends Base {
         this.evaluate = [];
         questionsRes.forEach(q => {
           const selected = (q.data()?.users as { uid: string, selected: string }[])
-            .find(u => u.uid === this.authService.user?.uid)?.selected;
+            ?.find(u => u.uid === this.authService.user?.uid)?.selected;
             
           const record = { questionId: q.id, correct: q.data()?.correct, selected: selected as string };
           this.evaluate?.push(record);
