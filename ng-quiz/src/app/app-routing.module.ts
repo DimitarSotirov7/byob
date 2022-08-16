@@ -69,6 +69,10 @@ const routes: Routes = [
     pathMatch: 'full',
     component: ResultComponent,
     resolve: { quiz: QuizResolverService },
+    canActivate: [ AuthGuard ],
+    data: {
+      authRequired: true,
+    },
   },
   {
     path: '**',
