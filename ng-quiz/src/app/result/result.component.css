@@ -23,14 +23,16 @@
 
 .success {
     border-bottom: 5px solid rgb(161, 236, 161);
+    padding-bottom: 0.5rem;
 }
 
 .fail {
     border-bottom: 5px solid rgb(129, 26, 0);
+    padding-bottom: 0.5rem;
 }
 
 .on {
-    border-bottom: 5px solid rgb(190, 188, 20);
+    padding-bottom: 0;
 }
 
 .answer {

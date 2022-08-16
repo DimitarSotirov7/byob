@@ -127,7 +127,18 @@ export class ResultComponent extends Base {
 
   getClassQuestion(questionId: string) {
     const question = this.evaluate?.find(q => q.questionId === questionId);
-    return this.quiz.currQuestion?.id === questionId ? 'on' : question?.correct === question?.selected ? 'success' : 'fail';
+    let result = '';
+    if (this.quiz.currQuestion?.id === questionId) {
+      result += ' on'
+    }
+
+    if (question?.correct === question?.selected) {
+      result += ' success'
+    } else {
+      result += ' fail'
+    }
+
+    return result;
   }
 
   private subscriptionListener(): void {
