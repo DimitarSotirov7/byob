@@ -7,7 +7,7 @@
             <div>{{quiz.name}}</div>
         </header>
         <div class="timer-wrapper">
-            <img [ngClass]="{'shake': timer?.includes('5')}" src="../../assets/icons/timer.png" alt="timer" class="timer">
+            <img [class]="shake()" src="../../assets/icons/timer.png" alt="timer" class="timer">
             <span>{{timer}}</span>
         </div>
     </header>

@@ -194,6 +194,19 @@ export class QuizComponent extends Base implements DoCheck, OnDestroy {
     this.navigate('/quizzes');
   }
 
+  shake() {
+    const delimiter = this.timer.indexOf(':');
+    const minutes = Number(this.timer.slice(0, delimiter));
+    const seconds = Number(this.timer.slice(delimiter + 1));
+    if (minutes == 0 && seconds < 10) {
+      return 'shake-fast';
+    } else if (seconds % 5 === 0) {
+      return 'shake';
+    } else {
+      return '';
+    }
+  }
+
   private subscriptionListener(): void {
     this.event.push(this.translateService.onChange.subscribe(res => {
       this.menu = this.translateService.state.quiz;
