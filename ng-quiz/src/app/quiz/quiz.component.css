@@ -22,11 +22,11 @@
     width: 20px;
 }
 
-.completed-line {
+.completed {
     border-bottom: 5px solid rgb(1, 102, 1);
 }
 
-.line-on {
+.on {
     padding-bottom: 0;
 }
 

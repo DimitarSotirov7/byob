@@ -1,3 +1,4 @@
 firebase deploy --only hosting:quizo
 npx ng build --configuration production
 firebase init hosting
+set "NODE_TLS_REJECT_UNAUTHORIZED=0"

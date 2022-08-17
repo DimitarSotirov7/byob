@@ -14,7 +14,7 @@
 
     <div class="lines" *ngIf="quiz?.questions?.length !== 0">
         <div *ngFor="let question of quiz.questions">
-            <div class="line" [ngClass]="{'completed-line': question.selected != undefined}" [ngClass]="{'line-on': question.id === quiz.currQuestion.id}"></div>
+            <div [class]="line(question)"></div>
         </div>
     </div>
 

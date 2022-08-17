@@ -207,6 +207,18 @@ export class QuizComponent extends Base implements DoCheck, OnDestroy {
     }
   }
 
+  line(question: IQuestionModel) {
+    let result = 'line';
+    if (question.selected) {
+      result += ' completed';
+    }
+    if (question.id === this.quiz.currQuestion.id) {
+      result += ' on';
+    }
+
+    return result;
+  }
+
   private subscriptionListener(): void {
     this.event.push(this.translateService.onChange.subscribe(res => {
       this.menu = this.translateService.state.quiz;
