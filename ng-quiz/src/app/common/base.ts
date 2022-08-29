@@ -1,3 +1,4 @@
+import { Component, OnDestroy } from "@angular/core";
 import { Router } from "@angular/router";
 import { Subscription } from "rxjs";
 import { environment } from "src/environments/environment";
@@ -7,7 +8,10 @@ import { ITranslateModel } from "../interfaces/translate-model";
 import { AuthService } from "../services/auth/auth.service";
 import { TranslateService } from "../services/translate/translate.service";
 
-export class Base {
+@Component({
+  template: ''
+})
+export class Base implements OnDestroy {
   serverError: string | undefined;
   _menu: ITranslateModel = this.translateService.state;
   messages: any = this._menu.messages;
@@ -21,6 +25,10 @@ export class Base {
     this.event.push(this.translateService.onChange.subscribe(res => {
       this._menu = this.translateService.state;
     }));
+  }
+
+  ngOnDestroy(): void {
+    this.event.forEach(subs => subs.unsubscribe());
   }
 
   navigate(url: string = '/') {
